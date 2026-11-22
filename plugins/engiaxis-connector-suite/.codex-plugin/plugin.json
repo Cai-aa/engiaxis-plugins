@@ -1,0 +1,47 @@
+{
+  "name": "engiaxis-connector-suite",
+  "version": "1.0.0",
+  "description": "Complete engineering connector bundle unifying all 14 CAD, CAE, and EDA desktop software adapters.",
+  "author": {
+    "name": "EngiAxis"
+  },
+  "license": "Proprietary",
+  "keywords": [
+    "cad",
+    "cae",
+    "eda",
+    "engineering",
+    "solidworks",
+    "ansys",
+    "kicad",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "onboardingSkill": "./skills/connector-setup/SKILL.md"
+    }
+  },
+  "interface": {
+    "displayName": "EngiAxis Connector Suite",
+    "shortDescription": "Connect CAD, CAE & EDA tools",
+    "longDescription": "Complete engineering connector bundle unifying all 14 CAD, CAE, and EDA desktop software adapters.",
+    "developerName": "EngiAxis",
+    "category": "Engineering",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/logo.png",
+    "brandColor": "#0F766E",
+    "defaultPrompt": [
+      "Check my EngiAxis Connector license and detected engineering software.",
+      "Open the setup wizard to connect my CAD, CAE, and EDA desktop tools.",
+      "Test and verify my configured engineering software MCP adapters."
+    ]
+  }
+}

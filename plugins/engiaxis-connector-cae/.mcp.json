@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "engiaxis-connector-cae": {
+      "command": "node",
+      "args": [
+        "./runtime/connector.mjs",
+        "mcp",
+        "--edition",
+        "cae"
+      ],
+      "cwd": ".",
+      "env": {
+        "ENGIAXIS_BUNDLED_MCP_DIR": "./bundled-mcp",
+        "ENGIAXIS_PUBLIC_KEY_PATH": "./runtime/public-key.pem"
+      }
+    }
+  }
+}

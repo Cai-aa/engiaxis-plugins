@@ -1,0 +1,47 @@
+{
+  "name": "engiaxis-connector-cae",
+  "version": "1.0.0",
+  "description": "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, and CalculiX to AI desktop clients.",
+  "author": {
+    "name": "EngiAxis"
+  },
+  "license": "Proprietary",
+  "keywords": [
+    "cae",
+    "abaqus",
+    "ansys",
+    "comsol",
+    "cst",
+    "ansa",
+    "calculix",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "onboardingSkill": "./skills/connector-setup/SKILL.md"
+    }
+  },
+  "interface": {
+    "displayName": "EngiAxis CAE Connector",
+    "shortDescription": "Connect local CAE solvers",
+    "longDescription": "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, and CalculiX to AI desktop clients.",
+    "developerName": "EngiAxis",
+    "category": "Engineering",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/logo.png",
+    "brandColor": "#0F766E",
+    "defaultPrompt": [
+      "Check my EngiAxis CAE Connector license and detected CAE solvers.",
+      "Configure Abaqus, Ansys, COMSOL, CST, or ANSA using the setup wizard.",
+      "Verify my active CAE simulation adapter connection."
+    ]
+  }
+}

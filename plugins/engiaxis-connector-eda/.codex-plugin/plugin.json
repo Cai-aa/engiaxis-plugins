@@ -1,0 +1,46 @@
+{
+  "name": "engiaxis-connector-eda",
+  "version": "1.0.0",
+  "description": "Connect EasyEDA Pro (JLC EDA), KiCad, and Keysight ADS to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
+  "author": {
+    "name": "EngiAxis"
+  },
+  "license": "Proprietary",
+  "keywords": [
+    "eda",
+    "pcb",
+    "kicad",
+    "easyeda",
+    "keysight-ads",
+    "rf",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "onboardingSkill": "./skills/connector-setup/SKILL.md"
+    }
+  },
+  "interface": {
+    "displayName": "EngiAxis EDA Connector",
+    "shortDescription": "Connect local EDA tools",
+    "longDescription": "Connect EasyEDA Pro (JLC EDA), KiCad, and Keysight ADS to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
+    "developerName": "EngiAxis",
+    "category": "Engineering",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/logo.png",
+    "brandColor": "#0F766E",
+    "defaultPrompt": [
+      "Check my EngiAxis EDA Connector license and detected EDA tools.",
+      "Configure EasyEDA Pro, KiCad, or Keysight ADS using the setup wizard.",
+      "Verify my active EDA adapter connection."
+    ]
+  }
+}

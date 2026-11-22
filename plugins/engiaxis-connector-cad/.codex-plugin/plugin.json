@@ -1,0 +1,45 @@
+{
+  "name": "engiaxis-connector-cad",
+  "version": "1.0.0",
+  "description": "Connect SolidWorks, CATIA V5, and UG / Siemens NX to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
+  "author": {
+    "name": "EngiAxis"
+  },
+  "license": "Proprietary",
+  "keywords": [
+    "cad",
+    "solidworks",
+    "catia",
+    "siemens-nx",
+    "engineering",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "onboardingSkill": "./skills/connector-setup/SKILL.md"
+    }
+  },
+  "interface": {
+    "displayName": "EngiAxis CAD Connector",
+    "shortDescription": "Connect local CAD tools",
+    "longDescription": "Connect SolidWorks, CATIA V5, and UG / Siemens NX to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
+    "developerName": "EngiAxis",
+    "category": "Engineering",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/logo.png",
+    "brandColor": "#0F766E",
+    "defaultPrompt": [
+      "Check my EngiAxis CAD Connector license and detected CAD software.",
+      "Configure SolidWorks, CATIA V5, or Siemens NX using the setup wizard.",
+      "Verify my active CAD adapter connection."
+    ]
+  }
+}
