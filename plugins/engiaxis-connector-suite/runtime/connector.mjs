@@ -2237,29 +2237,70 @@ var MCP_APP_URIS = {
   thread: "ui://engiaxis-connector/thread-v1",
   widget: "ui://engiaxis-connector/widget-v1"
 };
-function buildSidebarSvg(stroke) {
+function buildEditionSidebarSvg(edition, stroke) {
+  if (edition === "cad") {
+    return [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">',
+      `<path d="M10 2.4L16.4 6.1V13.6L10 17.3L3.6 13.6V6.1L10 2.4Z" stroke="${stroke}" stroke-width="1.35" stroke-linejoin="round"/>`,
+      `<path d="M10 9.8V17.3M10 9.8L16.4 6.1M10 9.8L3.6 6.1" stroke="${stroke}" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>`,
+      `<path d="M10 2.4V0.9M16.4 13.6L17.9 14.5M3.6 13.6L2.1 14.5" stroke="${stroke}" stroke-width="1.4" stroke-linecap="round"/>`,
+      `<path d="M6.8 8.0V11.8L10 13.6" stroke="${stroke}" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>`,
+      "</svg>"
+    ].join("");
+  }
+  if (edition === "cae") {
+    return [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">',
+      `<path d="M10 2.3L16.6 6.1V13.8L10 17.6L3.4 13.8V6.1L10 2.3Z" stroke="${stroke}" stroke-width="1.35" stroke-linejoin="round"/>`,
+      `<path d="M10 2.3V17.6M3.4 6.1L16.6 13.8M16.6 6.1L3.4 13.8" stroke="${stroke}" stroke-width="1.15" stroke-linecap="round"/>`,
+      `<path d="M6.7 4.2L13.3 8.0M13.3 4.2L6.7 8.0" stroke="${stroke}" stroke-width="1.0" stroke-linecap="round"/>`,
+      `<circle cx="10" cy="9.95" r="1.3" fill="${stroke}"/>`,
+      "</svg>"
+    ].join("");
+  }
+  if (edition === "eda") {
+    return [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">',
+      `<rect x="5" y="5" width="10" height="10" rx="2" stroke="${stroke}" stroke-width="1.4"/>`,
+      `<path d="M10 7.1L12.7 10L10 12.9L7.3 10L10 7.1Z" stroke="${stroke}" stroke-width="1.2" stroke-linejoin="round"/>`,
+      `<path d="M7.6 5V2.3M12.4 5V2.3M7.6 17.7V15M12.4 17.7V15M5 7.6H2.3M5 12.4H2.3M17.7 7.6H15M17.7 12.4H15" stroke="${stroke}" stroke-width="1.35" stroke-linecap="round"/>`,
+      "</svg>"
+    ].join("");
+  }
   return [
     '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">',
-    `<path d="M10 2.5L16.2 6.1V13.3L10 16.9L3.8 13.3V6.1L10 2.5Z" stroke="${stroke}" stroke-width="1.35" stroke-linejoin="round"/>`,
-    `<path d="M10 9.7L16.2 6.1M10 9.7L3.8 6.1M10 9.7V16.9" stroke="${stroke}" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>`,
-    `<circle cx="10" cy="9.7" r="1.4" fill="${stroke}"/>`,
+    `<path d="M10 2.3L16.5 6.0V13.6L10 17.4L3.5 13.6V6.0L10 2.3Z" stroke="${stroke}" stroke-width="1.35" stroke-linejoin="round"/>`,
+    `<path d="M10 9.6L16.5 6.0M10 9.6L3.5 6.0M10 9.6V17.4" stroke="${stroke}" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>`,
+    `<path d="M10 4.6L12.6 6.1L10 7.6L7.4 6.1L10 4.6Z" fill="${stroke}"/>`,
+    `<circle cx="10" cy="2.3" r="1.15" fill="${stroke}"/>`,
+    `<circle cx="16.5" cy="13.6" r="1.15" fill="${stroke}"/>`,
+    `<circle cx="3.5" cy="13.6" r="1.15" fill="${stroke}"/>`,
     "</svg>"
   ].join("");
 }
-var ENTRYPOINT_ICONS = [
-  {
-    src: `data:image/svg+xml,${encodeURIComponent(buildSidebarSvg("#0D0D0D"))}`,
-    mimeType: "image/svg+xml",
-    sizes: ["any"],
-    theme: "light"
-  },
-  {
-    src: `data:image/svg+xml,${encodeURIComponent(buildSidebarSvg("#F5F5F5"))}`,
-    mimeType: "image/svg+xml",
-    sizes: ["any"],
-    theme: "dark"
-  }
-];
+function entrypointIconsForEdition(edition) {
+  return [
+    {
+      src: `data:image/svg+xml,${encodeURIComponent(buildEditionSidebarSvg(edition, "#0D0D0D"))}`,
+      mimeType: "image/svg+xml",
+      sizes: ["any"],
+      theme: "light"
+    },
+    {
+      src: `data:image/svg+xml,${encodeURIComponent(buildEditionSidebarSvg(edition, "#F5F5F5"))}`,
+      mimeType: "image/svg+xml",
+      sizes: ["any"],
+      theme: "dark"
+    }
+  ];
+}
+var ENTRYPOINT_ICONS = entrypointIconsForEdition("suite");
+var EDITION_ACCENT_PALETTE = {
+  cad: { light: "#0284C7", lightSoft: "rgba(14, 165, 233, 0.12)", dark: "#38BDF8", darkSoft: "rgba(56, 189, 248, 0.16)" },
+  cae: { light: "#EA580C", lightSoft: "rgba(234, 88, 12, 0.12)", dark: "#FB923C", darkSoft: "rgba(251, 146, 60, 0.16)" },
+  eda: { light: "#059669", lightSoft: "rgba(5, 150, 105, 0.12)", dark: "#34D399", darkSoft: "rgba(52, 211, 153, 0.16)" },
+  suite: { light: "#7C3AED", lightSoft: "rgba(124, 58, 237, 0.12)", dark: "#A78BFA", darkSoft: "rgba(167, 139, 250, 0.16)" }
+};
 var SIDEBAR_TITLE_BY_EDITION = {
   cad: "EngiAxis CAD",
   cae: "EngiAxis CAE",
@@ -2272,7 +2313,9 @@ function sidebarTitleForEdition(edition) {
 function renderMcpAppHtml(edition, surface) {
   const spec = EDITION_SPECS[edition];
   const title = sidebarTitleForEdition(edition);
-  const cacheKey = `engiaxis-connector:state:${edition}:v1`;
+  const accent = EDITION_ACCENT_PALETTE[edition];
+  const brandSvg = buildEditionSidebarSvg(edition, "currentColor");
+  const cacheKey = `engiaxis-connector:state:${edition}:v2`;
   return `<!doctype html>
 <html lang="zh-CN" data-surface="${surface}" data-edition="${edition}">
 <head>
@@ -2318,8 +2361,8 @@ function renderMcpAppHtml(edition, surface) {
       --ea-muted: var(--color-text-secondary, #9ca3af);
       --ea-primary: #f5f5f5;
       --ea-primary-fg: #0d0d0d;
-      --ea-accent: #2dd4bf;
-      --ea-accent-soft: rgba(45, 212, 191, 0.14);
+      --ea-accent: ${accent.dark};
+      --ea-accent-soft: ${accent.darkSoft};
       --ea-ok: #4ade80;
       --ea-ok-soft: rgba(74, 222, 128, 0.14);
       --ea-warn: #fbbf24;
@@ -2739,10 +2782,7 @@ function renderMcpAppHtml(edition, surface) {
     <div class="topbar">
       <div class="brand">
         <div class="brand-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2.5L16.2 6.1V13.3L10 16.9L3.8 13.3V6.1L10 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M10 9.7L16.2 6.1M10 9.7L3.8 6.1M10 9.7V16.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          ${brandSvg}
         </div>
         <div>
           <h1 id="pageTitle">${title}</h1>
@@ -3402,7 +3442,7 @@ var ConnectorMcpServer = class {
           properties: {},
           additionalProperties: false
         },
-        icons: ENTRYPOINT_ICONS,
+        icons: entrypointIconsForEdition(this.config.edition),
         annotations: readOnlyAnnotations,
         _meta: {
           ui: {
@@ -3424,7 +3464,7 @@ var ConnectorMcpServer = class {
           properties: {},
           additionalProperties: false
         },
-        icons: ENTRYPOINT_ICONS,
+        icons: entrypointIconsForEdition(this.config.edition),
         annotations: readOnlyAnnotations,
         _meta: {
           ui: {
@@ -3844,7 +3884,7 @@ var ConnectorMcpServer = class {
             name: `engiaxis-connector-${this.config.edition}`,
             title: sidebarTitleForEdition(this.config.edition),
             version: "1.0.0",
-            icons: ENTRYPOINT_ICONS
+            icons: entrypointIconsForEdition(this.config.edition)
           }
         }
       };

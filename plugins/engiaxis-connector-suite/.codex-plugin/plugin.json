@@ -37,7 +37,7 @@
     ],
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/logo.png",
-    "brandColor": "#0F766E",
+    "brandColor": "#7C3AED",
     "defaultPrompt": [
       "Check my EngiAxis Connector license and detected engineering software.",
       "Open the setup wizard to connect my CAD, CAE, and EDA desktop tools.",

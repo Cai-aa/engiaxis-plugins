@@ -36,7 +36,7 @@
     ],
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/logo.png",
-    "brandColor": "#0F766E",
+    "brandColor": "#059669",
     "defaultPrompt": [
       "Check my EngiAxis EDA Connector license and detected EDA tools.",
       "Configure EasyEDA Pro, KiCad, or Keysight ADS using the setup wizard.",

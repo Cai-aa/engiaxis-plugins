@@ -37,7 +37,7 @@
     ],
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/logo.png",
-    "brandColor": "#0F766E",
+    "brandColor": "#EA580C",
     "defaultPrompt": [
       "Check my EngiAxis CAE Connector license and detected CAE solvers.",
       "Configure Abaqus, Ansys, COMSOL, CST, or ANSA using the setup wizard.",
