@@ -16,3 +16,8 @@ Quick Start:
 
 Visual Configuration Wizard (anytime):
   node runtime\connector.mjs wizard --edition eda
+
+Trademark Notice:
+  EngiAxis Connector is an independent third-party integration tool and is not affiliated
+  with, endorsed by, or sponsored by any CAD/CAE/EDA software vendor. All product names
+  are referenced for compatibility only and remain the trademarks of their respective owners.

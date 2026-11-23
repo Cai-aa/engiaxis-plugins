@@ -26,3 +26,10 @@ Official plugin marketplace for **EngiAxis Connector**, bringing one-click local
 - Node.js 20+ installed locally (for running the local stdio MCP server).
 - Target desktop engineering software installed on Windows (macOS/Linux supported for cross-platform tools such as KiCad / CalculiX).
 - A valid EngiAxis Connector commercial license key or redeem code.
+
+
+## Independent Third-Party Notice / 免责声明
+
+EngiAxis Connector is an independent third-party tool and is not affiliated with, endorsed by, or a partner of any CAD, CAE, or EDA software vendor. Software names are referenced for compatibility information only; all trademarks belong to their respective owners.
+
+EngiAxis Connector 为独立第三方连接工具，与上述工程软件厂商无隶属、赞助或官方授权关系；相关软件名称仅用于说明兼容性，其商标归各自权利人所有。
