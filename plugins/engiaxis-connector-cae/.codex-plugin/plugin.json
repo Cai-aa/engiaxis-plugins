@@ -1,6 +1,6 @@
 {
   "name": "engiaxis-connector-cae",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, and CalculiX to AI desktop clients.",
   "author": {
     "name": "EngiAxis"

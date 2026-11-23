@@ -4389,7 +4389,7 @@ function renderMcpAppHtml(edition, surface) {
         try {
           const initRes = await rpcRequest('ui/initialize', {
             protocolVersion: PROTOCOL_VERSION,
-            appInfo: { name: 'engiaxis-connector-' + EDITION, version: '1.0.0' },
+            appInfo: { name: 'engiaxis-connector-' + EDITION, version: '1.0.1' },
             appCapabilities: { availableDisplayModes: ['fullscreen', 'inline'] },
           });
           hostConnected = true;
@@ -4890,7 +4890,7 @@ var ConnectorMcpServer = class {
           serverInfo: {
             name: `engiaxis-connector-${this.config.edition}`,
             title: sidebarTitleForEdition(this.config.edition),
-            version: "1.0.0",
+            version: "1.0.1",
             icons: entrypointIconsForEdition(this.config.edition)
           }
         }

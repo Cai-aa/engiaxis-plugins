@@ -1,6 +1,6 @@
 {
   "name": "engiaxis-connector-cad",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Connect SolidWorks, CATIA V5, and UG / Siemens NX to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
   "author": {
     "name": "EngiAxis"
