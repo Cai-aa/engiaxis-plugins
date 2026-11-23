@@ -1,7 +1,7 @@
 {
   "name": "engiaxis-connector-eda",
-  "version": "1.0.1",
-  "description": "Connect EasyEDA Pro (JLC EDA), KiCad, and Keysight ADS to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
+  "version": "1.0.2",
+  "description": "Connect EasyEDA Pro (JLC EDA), KiCad, Keysight ADS, and planned Altium Designer to AI desktop clients.",
   "author": {
     "name": "EngiAxis"
   },
@@ -26,7 +26,7 @@
   "interface": {
     "displayName": "EngiAxis EDA Connector",
     "shortDescription": "Connect local EDA tools",
-    "longDescription": "Connect EasyEDA Pro (JLC EDA), KiCad, and Keysight ADS to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
+    "longDescription": "Connect EasyEDA Pro (JLC EDA), KiCad, Keysight ADS, and planned Altium Designer to AI desktop clients.",
     "developerName": "EngiAxis",
     "category": "Engineering",
     "capabilities": [

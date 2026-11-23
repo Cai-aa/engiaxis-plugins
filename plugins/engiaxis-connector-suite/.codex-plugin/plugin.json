@@ -1,7 +1,7 @@
 {
   "name": "engiaxis-connector-suite",
-  "version": "1.0.1",
-  "description": "Complete engineering connector bundle unifying all 14 CAD, CAE, and EDA desktop software adapters.",
+  "version": "1.0.2",
+  "description": "Complete engineering connector bundle synchronized with EngiAxis across all 25 CAD, CAE, and EDA desktop software entries.",
   "author": {
     "name": "EngiAxis"
   },
@@ -27,7 +27,7 @@
   "interface": {
     "displayName": "EngiAxis Connector Suite",
     "shortDescription": "Connect CAD, CAE & EDA tools",
-    "longDescription": "Complete engineering connector bundle unifying all 14 CAD, CAE, and EDA desktop software adapters.",
+    "longDescription": "Complete engineering connector bundle synchronized with EngiAxis across all 25 CAD, CAE, and EDA desktop software entries.",
     "developerName": "EngiAxis",
     "category": "Engineering",
     "capabilities": [

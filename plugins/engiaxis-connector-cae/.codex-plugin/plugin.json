@@ -1,7 +1,7 @@
 {
   "name": "engiaxis-connector-cae",
-  "version": "1.0.1",
-  "description": "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, and CalculiX to AI desktop clients.",
+  "version": "1.0.2",
+  "description": "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, HyperWorks, Adams, CalculiX, and planned CAE solvers (STAR-CCM+, FloTHERM, FLAC3D).",
   "author": {
     "name": "EngiAxis"
   },
@@ -27,7 +27,7 @@
   "interface": {
     "displayName": "EngiAxis CAE Connector",
     "shortDescription": "Connect local CAE solvers",
-    "longDescription": "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, and CalculiX to AI desktop clients.",
+    "longDescription": "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, HyperWorks, Adams, CalculiX, and planned CAE solvers (STAR-CCM+, FloTHERM, FLAC3D).",
     "developerName": "EngiAxis",
     "category": "Engineering",
     "capabilities": [

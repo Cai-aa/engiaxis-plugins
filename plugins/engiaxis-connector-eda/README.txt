@@ -1,12 +1,13 @@
 ====================================================================
 EngiAxis Connector — EDA Edition
 EngiAxis 工程连接器 · EDA 版
-SKU: EA-CONN-EDA | Version: v1.0.1 | Target: chatgpt-desktop
+SKU: EA-CONN-EDA | Version: v1.0.2 | Target: chatgpt-desktop
 ====================================================================
 
 Included Engineering Software Adapters:
   - EasyEDA Pro (JLC EDA) (嘉立创EDA 专业版 (EasyEDA Pro)) [easyeda-pro]
   - KiCad (KiCad) [kicad]
+  - Altium Designer (Altium Designer) [altium-designer]
   - Keysight ADS (Keysight ADS (先进设计系统)) [ads]
 
 Quick Start:

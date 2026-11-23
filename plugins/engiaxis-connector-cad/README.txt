@@ -1,13 +1,18 @@
 ====================================================================
 EngiAxis Connector — CAD Edition
 EngiAxis 工程连接器 · CAD 版
-SKU: EA-CONN-CAD | Version: v1.0.1 | Target: chatgpt-desktop
+SKU: EA-CONN-CAD | Version: v1.0.2 | Target: chatgpt-desktop
 ====================================================================
 
 Included Engineering Software Adapters:
   - SolidWorks (SolidWorks) [solidworks]
   - CATIA V5 (CATIA V5) [catia]
   - UG / Siemens NX (UG / Siemens NX) [nx]
+  - Creo Parametric (Creo Parametric) [creo]
+  - Inventor (Inventor) [inventor]
+  - AutoCAD (AutoCAD) [autocad]
+  - Autodesk Fusion (Autodesk Fusion) [fusion]
+  - EPLAN (EPLAN) [eplan]
 
 Quick Start:
   1. Import this zip/folder in ChatGPT Desktop -> Plugins, OR run .\Install-ChatGPT-Desktop.ps1 -OpenWizard

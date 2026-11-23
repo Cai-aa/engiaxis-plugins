@@ -1,7 +1,7 @@
 {
   "name": "engiaxis-connector-cad",
-  "version": "1.0.1",
-  "description": "Connect SolidWorks, CATIA V5, and UG / Siemens NX to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
+  "version": "1.0.2",
+  "description": "Connect SolidWorks, CATIA V5, UG / Siemens NX, EPLAN, and planned CAD tools (Creo, Inventor, AutoCAD, Fusion) to AI desktop clients.",
   "author": {
     "name": "EngiAxis"
   },
@@ -25,7 +25,7 @@
   "interface": {
     "displayName": "EngiAxis CAD Connector",
     "shortDescription": "Connect local CAD tools",
-    "longDescription": "Connect SolidWorks, CATIA V5, and UG / Siemens NX to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
+    "longDescription": "Connect SolidWorks, CATIA V5, UG / Siemens NX, EPLAN, and planned CAD tools (Creo, Inventor, AutoCAD, Fusion) to AI desktop clients.",
     "developerName": "EngiAxis",
     "category": "Engineering",
     "capabilities": [

@@ -9,8 +9,8 @@ var EDITION_SPECS = {
     nameEn: "EngiAxis Connector \u2014 CAD Edition",
     nameZh: "EngiAxis \u5DE5\u7A0B\u8FDE\u63A5\u5668 \xB7 CAD \u7248",
     shortLabel: "CAD",
-    descriptionEn: "Connect SolidWorks, CATIA V5, and UG / Siemens NX to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
-    descriptionZh: "\u5C06 SolidWorks\u3001CATIA V5 \u4E0E UG / Siemens NX \u4E00\u952E\u63A5\u5165 ChatGPT \u684C\u9762\u7AEF\u3001WorkBuddy \u684C\u9762\u7AEF\u4E0E DeepSeek Harness\u3002",
+    descriptionEn: "Connect SolidWorks, CATIA V5, UG / Siemens NX, EPLAN, and planned CAD tools (Creo, Inventor, AutoCAD, Fusion) to AI desktop clients.",
+    descriptionZh: "\u8986\u76D6 SolidWorks\u3001CATIA V5\u3001UG / Siemens NX\u3001EPLAN \u53CA\u89C4\u5212\u4E2D\u7684 Creo\u3001Inventor\u3001AutoCAD\u3001Fusion \u7B49 8 \u6B3E CAD \u5DE5\u7A0B\u8F6F\u4EF6\u3002",
     categories: ["cad"]
   },
   cae: {
@@ -20,8 +20,8 @@ var EDITION_SPECS = {
     nameEn: "EngiAxis Connector \u2014 CAE Edition",
     nameZh: "EngiAxis \u5DE5\u7A0B\u8FDE\u63A5\u5668 \xB7 CAE \u7248",
     shortLabel: "CAE",
-    descriptionEn: "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, and CalculiX to AI desktop clients.",
-    descriptionZh: "\u5C06 Abaqus\u3001Ansys\uFF08Workbench / Fluent / AEDT\uFF09\u3001COMSOL\u3001CST\u3001ANSA \u4E0E CalculiX \u4E00\u952E\u63A5\u5165 AI \u684C\u9762\u7AEF\u3002",
+    descriptionEn: "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, HyperWorks, Adams, CalculiX, and planned CAE solvers (STAR-CCM+, FloTHERM, FLAC3D).",
+    descriptionZh: "\u8986\u76D6 Abaqus\u3001Ansys\uFF08Workbench / Fluent / AEDT\uFF09\u3001COMSOL\u3001CST\u3001ANSA\u3001HyperWorks\u3001Adams\u3001CalculiX \u53CA\u89C4\u5212\u4E2D\u7684 STAR-CCM+\u3001FloTHERM\u3001FLAC3D \u7B49 13 \u6B3E CAE \u4EFF\u771F\u8F6F\u4EF6\u3002",
     categories: ["cae"]
   },
   eda: {
@@ -31,8 +31,8 @@ var EDITION_SPECS = {
     nameEn: "EngiAxis Connector \u2014 EDA Edition",
     nameZh: "EngiAxis \u5DE5\u7A0B\u8FDE\u63A5\u5668 \xB7 EDA \u7248",
     shortLabel: "EDA",
-    descriptionEn: "Connect EasyEDA Pro (JLC EDA), KiCad, and Keysight ADS to ChatGPT Desktop, WorkBuddy Desktop, and DeepSeek Harness.",
-    descriptionZh: "\u5C06\u5609\u7ACB\u521BEDA\uFF08EasyEDA Pro\uFF09\u3001KiCad \u4E0E Keysight ADS \u4E00\u952E\u63A5\u5165 AI \u684C\u9762\u7AEF\u3002",
+    descriptionEn: "Connect EasyEDA Pro (JLC EDA), KiCad, Keysight ADS, and planned Altium Designer to AI desktop clients.",
+    descriptionZh: "\u8986\u76D6\u5609\u7ACB\u521BEDA\uFF08EasyEDA Pro\uFF09\u3001KiCad\u3001Keysight ADS \u53CA\u89C4\u5212\u4E2D\u7684 Altium Designer \u7B49 4 \u6B3E EDA \u7535\u8DEF\u8F6F\u4EF6\u3002",
     categories: ["eda"]
   },
   suite: {
@@ -42,8 +42,8 @@ var EDITION_SPECS = {
     nameEn: "EngiAxis Connector \u2014 All-in-One Suite (CAD + CAE + EDA)",
     nameZh: "EngiAxis \u5DE5\u7A0B\u8FDE\u63A5\u5668 \xB7 \u5168\u80FD\u7248\uFF08CAD + CAE + EDA\uFF09",
     shortLabel: "CAD + CAE + EDA",
-    descriptionEn: "Complete engineering connector bundle unifying all 14 CAD, CAE, and EDA desktop software adapters.",
-    descriptionZh: "\u4E09\u5408\u4E00\u5DE5\u7A0B\u8F6F\u4EF6\u8FDE\u63A5\u5168\u80FD\u7248\uFF0C\u5B8C\u6574\u8986\u76D6 CAD\u3001CAE \u4E0E EDA \u5168\u90E8 14 \u6B3E\u5DE5\u7A0B\u8F6F\u4EF6\u9002\u914D\u5668\u3002",
+    descriptionEn: "Complete engineering connector bundle synchronized with EngiAxis across all 25 CAD, CAE, and EDA desktop software entries.",
+    descriptionZh: "\u4E09\u5408\u4E00\u5DE5\u7A0B\u8F6F\u4EF6\u8FDE\u63A5\u5168\u80FD\u7248\uFF0C\u5B8C\u6574\u540C\u6B65 EngiAxis \u5168\u90E8 25 \u6B3E CAD\u3001CAE \u4E0E EDA \u5DE5\u7A0B\u8F6F\u4EF6\u5217\u8868\u3002",
     categories: ["cad", "cae", "eda"]
   }
 };
@@ -82,19 +82,28 @@ function adsRootFromExecutable(executable) {
   const binDir = dirname(executable);
   return /[\\/]bin$/iu.test(binDir) ? dirname(binDir) : binDir;
 }
+function hyperworksRootFromExecutable(executable) {
+  const match = executable.match(/^(.+?)[\\/]hwdesktop[\\/]/iu);
+  return match?.[1] ?? dirname(executable);
+}
+function adamsRootFromExecutable(executable) {
+  const dir = dirname(executable);
+  return /[\\/]common$/iu.test(dir) ? dirname(dir) : dir;
+}
 var SOFTWARE_CATALOG = [
-  // ── CAD Edition (3) ───────────────────────────────────────────────────────
+  // ── CAD Edition (8) ───────────────────────────────────────────────────────
   {
     id: "solidworks",
     title: "SolidWorks",
     titleZh: "SolidWorks",
     category: "cad",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: true,
     sourceUrl: `${CAD_REPO}/Solidworks`,
-    prerequisitesEn: "Licensed Windows SolidWorks attached via COM automation under the same Windows user and integrity level.",
+    prerequisitesEn: "Licensed Windows SolidWorks running under the same user and integrity level (COM automation).",
     prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Windows SolidWorks\uFF0C\u5E76\u4EE5\u76F8\u540C\u7528\u6237\u6743\u9650\u901A\u8FC7 COM \u63A5\u53E3\u9644\u7740\u5230\u8FD0\u884C\u5B9E\u4F8B\u3002",
-    capabilities: ["Part & Assembly Modeling", "Sketch / Extrude / Fillet / Chamfer", "STEP / STL Export", "Mass Properties"],
+    capabilities: ["Part modeling", "Assemblies", "Drawings", "STEP / STL / PDF export", "Mass properties"],
     iconFile: "solidworks.png",
     source: {
       repo: "CAD-Agent-Hub",
@@ -108,10 +117,9 @@ var SOFTWARE_CATALOG = [
       checkFile: "src/solidworks_mcp/server.py",
       pythonPathSubdir: "src"
     },
-    buildEnv: ({ homeDir }) => ({
-      PYTHONUNBUFFERED: "1",
+    buildEnv: () => ({
       SOLIDWORKS_INTERACTIVE_MODE: "true",
-      SOLIDWORKS_MCP_WORKSPACE: join(homeDir, "workspaces", "solidworks")
+      PYTHONUNBUFFERED: "1"
     })
   },
   {
@@ -119,12 +127,13 @@ var SOFTWARE_CATALOG = [
     title: "CATIA V5",
     titleZh: "CATIA V5",
     category: "cad",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: true,
     sourceUrl: `${CAD_REPO}/CATIA`,
-    prerequisitesEn: "Licensed Windows CATIA V5 with COM automation enabled under the same user session.",
+    prerequisitesEn: "Licensed Windows CATIA V5 with COM automation enabled.",
     prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Windows CATIA V5 \u5E76\u542F\u7528 COM \u81EA\u52A8\u5316\u63A5\u53E3\u3002",
-    capabilities: ["PartDesign & Generative Shape Design", "Parameter Editing", "STEP / IGES Export"],
+    capabilities: ["PartDesign & Sketcher", "Product assemblies", "Drafting", "Parameters & STEP export"],
     iconFile: "catia.png",
     source: {
       repo: "CAD-Agent-Hub",
@@ -133,14 +142,11 @@ var SOFTWARE_CATALOG = [
       bundledDir: "catia"
     },
     launch: {
-      kind: "python-module",
-      module: "catia_mcp.server",
-      checkFile: "src/catia_mcp/server.py",
-      pythonPathSubdir: "src"
+      kind: "python-script",
+      scripts: ["server.py", "mcp_server.py"]
     },
-    buildEnv: ({ homeDir }) => ({
-      PYTHONUNBUFFERED: "1",
-      CATIA_MCP_WORKSPACE: join(homeDir, "workspaces", "catia")
+    buildEnv: () => ({
+      PYTHONUNBUFFERED: "1"
     })
   },
   {
@@ -148,13 +154,14 @@ var SOFTWARE_CATALOG = [
     title: "UG / Siemens NX",
     titleZh: "UG / Siemens NX",
     category: "cad",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: true,
     sourceUrl: `${CAD_REPO}/UG`,
     bridgePort: 48161,
-    prerequisitesEn: "Licensed Siemens NX with the NXOpen remoting bridge running inside NX on 127.0.0.1:48161. Keeps NX_MCP_ALLOW_EXECUTE=0 by default.",
-    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Siemens NX \u5E76\u5728 NX \u5185\u542F\u52A8 NXOpen Remoting \u6865\u63A5\uFF08\u7AEF\u53E3 48161\uFF09\uFF1B\u9ED8\u8BA4\u5173\u95ED\u4EFB\u610F\u4EE3\u7801\u6267\u884C\uFF08NX_MCP_ALLOW_EXECUTE=0\uFF09\u3002",
-    capabilities: ["NXOpen Remoting Session", "Feature Inspection & Modeling", "STEP / Parasolid Export"],
+    prerequisitesEn: "Licensed Siemens NX with the NXOpen Remoting bridge running on loopback port 48161 (NX_MCP_ALLOW_EXECUTE defaults to 0).",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Siemens NX \u5E76\u5728 NX \u5185\u542F\u52A8 NXOpen Remoting \u6865\u63A5\uFF08\u7AEF\u53E3 48161\uFF09\uFF1B\u9ED8\u8BA4\u5173\u95ED\u4EFB\u610F\u4EE3\u7801\u6267\u884C\u3002",
+    capabilities: ["NXOpen modeling", "Assemblies", "Expressions & features", "STEP / JT export"],
     iconFile: "nx.png",
     source: {
       repo: "CAD-Agent-Hub",
@@ -167,27 +174,115 @@ var SOFTWARE_CATALOG = [
       scripts: ["server.py", "mcp_server.py"]
     },
     buildEnv: () => ({
-      PYTHONUNBUFFERED: "1",
-      NX_MCP_ALLOW_EXECUTE: "0",
-      NX_MCP_TRANSPORT: "remoting",
       NX_MCP_HOST: "127.0.0.1",
-      NX_MCP_REMOTING_PORT: "48161",
-      NX_MCP_TIMEOUT: "120"
+      NX_MCP_PORT: "48161",
+      NX_MCP_ALLOW_EXECUTE: "0",
+      PYTHONUNBUFFERED: "1"
     })
   },
-  // ── CAE Edition (8) ───────────────────────────────────────────────────────
+  {
+    id: "creo",
+    title: "Creo Parametric",
+    titleZh: "Creo Parametric",
+    category: "cad",
+    integration: "planned",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: "https://www.ptc.com/en/products/creo/parametric",
+    prerequisitesEn: "Planned CAD integration. Local Creo Parametric installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 CAD \u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A Creo Parametric \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
+    capabilities: ["Parametric parts", "Assemblies", "Drawings"],
+    iconFile: null,
+    buildEnv: () => ({})
+  },
+  {
+    id: "inventor",
+    title: "Inventor",
+    titleZh: "Inventor",
+    category: "cad",
+    integration: "planned",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: "https://www.autodesk.com/products/inventor",
+    prerequisitesEn: "Planned CAD integration. Local Autodesk Inventor installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 CAD \u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A Autodesk Inventor \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
+    capabilities: ["Mechanical parts", "Assemblies", "iLogic & drawings"],
+    iconFile: null,
+    buildEnv: () => ({})
+  },
+  {
+    id: "autocad",
+    title: "AutoCAD",
+    titleZh: "AutoCAD",
+    category: "cad",
+    integration: "planned",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: "https://www.autodesk.com/products/autocad",
+    prerequisitesEn: "Planned CAD integration. Local AutoCAD installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 CAD \u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A AutoCAD \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
+    capabilities: ["2D drafting", "DWG / DXF", "Blocks & layers"],
+    iconFile: null,
+    buildEnv: () => ({})
+  },
+  {
+    id: "fusion",
+    title: "Autodesk Fusion",
+    titleZh: "Autodesk Fusion",
+    category: "cad",
+    integration: "planned",
+    runtime: "python",
+    platformWindowsOnly: false,
+    sourceUrl: "https://www.autodesk.com/products/fusion-360",
+    prerequisitesEn: "Planned CAD integration. Local Autodesk Fusion installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 CAD \u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A Autodesk Fusion \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
+    capabilities: ["Cloud CAD", "Parametric & surface modeling", "CAM"],
+    iconFile: null,
+    buildEnv: () => ({})
+  },
+  {
+    id: "eplan",
+    title: "EPLAN",
+    titleZh: "EPLAN",
+    category: "cad",
+    integration: "source",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: `${CAD_REPO}/EPLAN`,
+    prerequisitesEn: "Licensed Windows EPLAN Electric P8 (2.9 baseline) with the local named-pipe C# Add-in when native project inspection is required; defaults to read-only review profile.",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Windows EPLAN Electric P8\uFF082.9 \u57FA\u7EBF\uFF09\u53CA\u672C\u5730\u547D\u540D\u7BA1\u9053 C# Add-in\uFF1B\u9ED8\u8BA4\u542F\u7528\u53EA\u8BFB\u5BA1\u67E5\u6A21\u5F0F\u3002",
+    capabilities: ["Electrical schematics", "BOM & terminal strips", "Three-phase & rule audit", "Local help search"],
+    iconFile: null,
+    source: {
+      repo: "CAD-Agent-Hub",
+      localRepoAliases: ["CAD-Agent-HUb"],
+      repoSubpath: "MCP/EPLAN",
+      bundledDir: "eplan"
+    },
+    launch: {
+      kind: "python-script",
+      scripts: ["server.py"]
+    },
+    buildEnv: ({ discoveredExecutable }) => ({
+      ...executableEnv("EPLAN_EXE", discoveredExecutable),
+      PYTHONUTF8: "1",
+      PYTHONUNBUFFERED: "1"
+    })
+  },
+  // ── CAE Edition (13) ──────────────────────────────────────────────────────
   {
     id: "abaqus",
     title: "Abaqus",
     titleZh: "Abaqus",
     category: "cae",
+    integration: "source",
     runtime: "python",
-    platformWindowsOnly: true,
+    platformWindowsOnly: false,
     sourceUrl: `${CAE_REPO}/Abaqus`,
     bridgePort: 48152,
-    prerequisitesEn: "Licensed Abaqus/CAE with the Abaqus MCP GUI plugin or kernel bridge listening on 127.0.0.1:48152.",
+    prerequisitesEn: "Licensed Abaqus/CAE with the Abaqus MCP GUI plugin or kernel bridge listening on loopback TCP 48152.",
     prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Abaqus/CAE \u5E76\u52A0\u8F7D Abaqus MCP \u63D2\u4EF6/\u5185\u6838\u6865\u63A5\uFF08\u9ED8\u8BA4\u7AEF\u53E3 48152\uFF09\u3002",
-    capabilities: ["CAE Pre-processing & Meshing", "Job Submission & Monitoring", "ODB Field Extraction"],
+    capabilities: ["Geometry & mesh", "Materials & BCs", "Job submission", "ODB field/history extraction"],
     iconFile: "abaqus.png",
     source: {
       repo: "CAE-Agent-Hub",
@@ -196,17 +291,14 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "python-script",
-      scripts: ["mcp_server.py"]
+      scripts: ["mcp_server.py", "server.py"]
     },
-    buildEnv: ({ homeDir, sourceDir }) => ({
-      PYTHONUNBUFFERED: "1",
+    buildEnv: ({ homeDir }) => ({
       ABAQUS_MCP_HOST: "127.0.0.1",
       ABAQUS_MCP_PORT: "48152",
       ABAQUS_MCP_TIMEOUT: "60",
-      ABAQUS_MCP_HOME: sourceDir,
-      ABAQUS_CAE_HOST: "127.0.0.1",
-      ABAQUS_CAE_PORT: "54321",
-      ABAQUS_WORK_DIR: join(homeDir, "results", "abaqus")
+      ABAQUS_MCP_HOME: join(homeDir, "workspaces", "abaqus"),
+      PYTHONUNBUFFERED: "1"
     })
   },
   {
@@ -214,13 +306,14 @@ var SOFTWARE_CATALOG = [
     title: "Ansys Workbench",
     titleZh: "Ansys Workbench",
     category: "cae",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: true,
     sourceUrl: `${CAE_REPO}/Ansys/Workbench%20MCP`,
     bridgePort: 9885,
-    prerequisitesEn: "Licensed Ansys Workbench/Mechanical with the ACT or Workbench bridge running on 127.0.0.1:9885.",
+    prerequisitesEn: "Licensed Ansys Workbench/Mechanical with the ACT/Workbench bridge running on loopback TCP 9885.",
     prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Ansys Workbench/Mechanical \u5E76\u542F\u52A8 ACT/Workbench \u6865\u63A5\uFF08\u9ED8\u8BA4\u7AEF\u53E3 9885\uFF09\u3002",
-    capabilities: ["Workbench Project Orchestration", "Mechanical Static/Modal Setup", "Result Mesh Export"],
+    capabilities: ["Project schematic", "Mechanical mesh & loads", "Static/modal/thermal solve", "Result probes"],
     iconFile: "ansys-workbench.png",
     source: {
       repo: "CAE-Agent-Hub",
@@ -229,17 +322,14 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "python-script",
-      scripts: ["server.py"]
+      scripts: ["server.py", "mcp_server.py"]
     },
-    buildEnv: ({ homeDir, sourceDir }) => ({
-      PYTHONUNBUFFERED: "1",
-      WORKBENCH_MCP_ROOT: sourceDir,
-      WORKBENCH_MCP_QUEUE_ROOT: join(homeDir, "results", "ansys-workbench", "queue"),
+    buildEnv: ({ homeDir }) => ({
+      WORKBENCH_MCP_ROOT: join(homeDir, "workspaces", "ansys-workbench"),
+      WORKBENCH_MCP_QUEUE_ROOT: join(homeDir, "workspaces", "ansys-workbench", "queue"),
       WORKBENCH_MCP_HOST: "127.0.0.1",
       WORKBENCH_MCP_PORT: "9885",
-      MECHANICAL_HOST: "127.0.0.1",
-      MECHANICAL_PORT: "18765",
-      ANSYS_MCP_JOBS_DIR: join(homeDir, "results", "ansys-workbench")
+      PYTHONUNBUFFERED: "1"
     })
   },
   {
@@ -247,12 +337,13 @@ var SOFTWARE_CATALOG = [
     title: "Ansys Fluent",
     titleZh: "Ansys Fluent",
     category: "cae",
+    integration: "source",
     runtime: "python",
-    platformWindowsOnly: true,
+    platformWindowsOnly: false,
     sourceUrl: `${CAE_REPO}/Ansys/Fluent%20MCP`,
-    prerequisitesEn: "Licensed Ansys Fluent with PyFluent connectivity.",
+    prerequisitesEn: "Licensed Ansys Fluent with a compatible PyFluent session or launch environment.",
     prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Ansys Fluent \u5E76\u652F\u6301 PyFluent \u8FDE\u63A5\u3002",
-    capabilities: ["CFD Meshing & Solver Setup", "Boundary Conditions", "Residual & Report Monitoring"],
+    capabilities: ["CFD mesh & case setup", "Turbulence & boundary conditions", "Solver control", "Field & report post-processing"],
     iconFile: "ansys-fluent.png",
     source: {
       repo: "CAE-Agent-Hub",
@@ -261,12 +352,10 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "python-script",
-      scripts: ["server.py"]
+      scripts: ["server.py", "mcp_server.py"]
     },
-    buildEnv: ({ homeDir, discoveredExecutable }) => ({
-      PYTHONUNBUFFERED: "1",
-      FLUENT_MCP_JOBS_DIR: join(homeDir, "results", "ansys-fluent"),
-      ...executableEnv("FLUENT_EXE", discoveredExecutable)
+    buildEnv: () => ({
+      PYTHONUNBUFFERED: "1"
     })
   },
   {
@@ -274,12 +363,13 @@ var SOFTWARE_CATALOG = [
     title: "Ansys Electronics Desktop",
     titleZh: "Ansys Electronics Desktop (AEDT)",
     category: "cae",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: true,
     sourceUrl: `${CAE_REPO}/Ansys/AEDT%20MCP`,
-    prerequisitesEn: "Licensed Ansys Electronics Desktop (HFSS / Maxwell / Icepak / Q3D) with PyAEDT support.",
+    prerequisitesEn: "Licensed Ansys Electronics Desktop (HFSS / Maxwell / Icepak) with PyAEDT.",
     prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Ansys Electronics Desktop\uFF08HFSS / Maxwell / Icepak \u7B49\uFF09\u53CA PyAEDT \u517C\u5BB9\u73AF\u5883\u3002",
-    capabilities: ["HFSS / Maxwell / Icepak Automation", "S-Parameter & Field Sweeps", "Project Inspection"],
+    capabilities: ["HFSS / Maxwell / Icepak", "3D EM geometry", "Excitations & sweeps", "S-parameters & fields"],
     iconFile: "ansys-aedt.png",
     source: {
       repo: "CAE-Agent-Hub",
@@ -288,13 +378,10 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "python-script",
-      scripts: ["mcp_server.py"]
+      scripts: ["server.py", "mcp_server.py"]
     },
-    buildEnv: ({ discoveredExecutable }) => ({
-      PYTHONUNBUFFERED: "1",
-      AEDT_WORKER_TIMEOUT: "60",
-      AEDT_LAUNCH_TIMEOUT: "120",
-      ...executableEnv("AEDT_INSTALL_DIR", discoveredExecutable, dirname)
+    buildEnv: () => ({
+      PYTHONUNBUFFERED: "1"
     })
   },
   {
@@ -302,12 +389,13 @@ var SOFTWARE_CATALOG = [
     title: "COMSOL Multiphysics",
     titleZh: "COMSOL Multiphysics",
     category: "cae",
+    integration: "source",
     runtime: "python",
-    platformWindowsOnly: true,
+    platformWindowsOnly: false,
     sourceUrl: `${CAE_REPO}/COMSOL`,
-    prerequisitesEn: "Licensed COMSOL Multiphysics with Java / MPh server bridge available.",
+    prerequisitesEn: "Licensed COMSOL Multiphysics installation with compatible Java/MPh desktop bridge.",
     prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 COMSOL Multiphysics \u53CA\u5BF9\u5E94\u7684 Java/MPh \u6865\u63A5\u73AF\u5883\u3002",
-    capabilities: ["Multiphysics Geometry & Physics Setup", "Study Execution", "Field & Table Export"],
+    capabilities: ["Multiphysics geometry", "Materials & physics nodes", "Studies & sweeps", "Derived values & plots"],
     iconFile: "comsol.png",
     source: {
       repo: "CAE-Agent-Hub",
@@ -316,12 +404,11 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "python-script",
-      scripts: ["mcp_server.py"]
+      scripts: ["server.py", "mcp_server.py"]
     },
-    buildEnv: ({ homeDir, discoveredExecutable }) => ({
-      PYTHONUNBUFFERED: "1",
-      COMSOL_MCP_RUNS_DIR: join(homeDir, "results", "comsol"),
-      ...executableEnv("COMSOL_ROOT", discoveredExecutable, comsolRootFromExecutable)
+    buildEnv: ({ discoveredExecutable }) => ({
+      ...executableEnv("COMSOL_ROOT", discoveredExecutable, comsolRootFromExecutable),
+      PYTHONUNBUFFERED: "1"
     })
   },
   {
@@ -329,12 +416,13 @@ var SOFTWARE_CATALOG = [
     title: "CST Studio Suite",
     titleZh: "CST Studio Suite",
     category: "cae",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: true,
     sourceUrl: `${CAE_REPO}/CST`,
-    prerequisitesEn: "Licensed CST Studio Suite on Windows with compatible Python automation bridge.",
+    prerequisitesEn: "Licensed Windows CST Studio Suite with a compatible Python automation environment.",
     prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Windows CST Studio Suite \u4E0E\u517C\u5BB9\u7684 Python \u81EA\u52A8\u5316\u73AF\u5883\u3002",
-    capabilities: ["Antenna & EM Structure Modeling", "Time/Frequency Domain Solver", "S-Parameter & Farfield Results"],
+    capabilities: ["RF / antenna modeling", "Ports & materials", "Time/frequency solvers", "S-parameter & far-field export"],
     iconFile: "cst.png",
     source: {
       repo: "CAE-Agent-Hub",
@@ -343,11 +431,10 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "python-script",
-      scripts: ["mcp_server.py"]
+      scripts: ["server.py", "mcp_server.py"]
     },
-    buildEnv: ({ discoveredExecutable }) => ({
-      PYTHONUNBUFFERED: "1",
-      ...executableEnv("CST_DESIGN_ENVIRONMENT_EXE", discoveredExecutable)
+    buildEnv: () => ({
+      PYTHONUNBUFFERED: "1"
     })
   },
   {
@@ -355,12 +442,13 @@ var SOFTWARE_CATALOG = [
     title: "BETA CAE ANSA",
     titleZh: "BETA CAE ANSA",
     category: "cae",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: false,
     sourceUrl: `${CAE_REPO}/ANSA`,
-    prerequisitesEn: "Licensed BETA CAE ANSA with compatible ANSA plugin/bridge.",
-    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 BETA CAE ANSA \u53CA\u5BF9\u5E94\u7248\u672C\u7684 ANSA \u6865\u63A5\u63D2\u4EF6\u3002",
-    capabilities: ["CAD Cleanup & Mid-Surfacing", "Shell / Volume Meshing", "Solver Deck Export"],
+    prerequisitesEn: "Licensed BETA CAE ANSA installation and the documented ANSA bridge.",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 BETA CAE ANSA \u53CA\u5BF9\u5E94\u7684 ANSA \u6865\u63A5\u63D2\u4EF6\u3002",
+    capabilities: ["CAD cleanup & topology", "Surface/volume meshing", "Solver deck export"],
     iconFile: "ansa.png",
     source: {
       repo: "CAE-Agent-Hub",
@@ -368,27 +456,131 @@ var SOFTWARE_CATALOG = [
       bundledDir: "ansa"
     },
     launch: {
+      kind: "python-script",
+      scripts: ["server.py", "mcp_server.py"]
+    },
+    buildEnv: ({ discoveredExecutable }) => ({
+      ...executableEnv("ANSA_EXECUTABLE", discoveredExecutable),
+      PYTHONUNBUFFERED: "1"
+    })
+  },
+  {
+    id: "hyperworks",
+    title: "HyperWorks",
+    titleZh: "HyperWorks",
+    category: "cae",
+    integration: "source",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: `${CAE_REPO}/HyperWorks`,
+    prerequisitesEn: "Licensed Altair HyperWorks/HyperMesh and optional OptiStruct/Radioss solvers; configure HYPERWORKS_HOME and enable the HyperWorks MCP Bridge extension for live GUI operations.",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Altair HyperWorks/HyperMesh\uFF08\u53EF\u9009 OptiStruct/Radioss \u6C42\u89E3\u5668\uFF09\uFF0C\u914D\u7F6E HYPERWORKS_HOME \u5E76\u542F\u7528 HyperWorks MCP Bridge \u6269\u5C55\u3002",
+    capabilities: ["HyperMesh pre-processing", "OptiStruct / Radioss", "HyperView post-processing", "Live GUI bridge"],
+    iconFile: null,
+    source: {
+      repo: "CAE-Agent-Hub",
+      repoSubpath: "MCP/HyperWorks",
+      bundledDir: "hyperworks"
+    },
+    launch: {
+      kind: "python-script",
+      scripts: ["server.py"]
+    },
+    buildEnv: ({ homeDir, discoveredExecutable }) => ({
+      ...executableEnv("HYPERWORKS_HOME", discoveredExecutable, hyperworksRootFromExecutable),
+      HYPERWORKS_MCP_WORKSPACE: join(homeDir, "workspaces", "hyperworks"),
+      PYTHONUTF8: "1",
+      PYTHONUNBUFFERED: "1"
+    })
+  },
+  {
+    id: "star-ccm",
+    title: "STAR-CCM+",
+    titleZh: "STAR-CCM+",
+    category: "cae",
+    integration: "planned",
+    runtime: "python",
+    platformWindowsOnly: false,
+    sourceUrl: "https://plm.sw.siemens.com/en-US/simcenter/fluids-thermal-simulation/star-ccm/",
+    prerequisitesEn: "Planned CFD integration. Local Simcenter STAR-CCM+ installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 CFD \u4EFF\u771F\u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A Simcenter STAR-CCM+ \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
+    capabilities: ["Multiphase CFD", "Polyhedral meshing", "Thermal & aero simulation"],
+    iconFile: null,
+    buildEnv: () => ({})
+  },
+  {
+    id: "flotherm",
+    title: "FloTHERM",
+    titleZh: "FloTHERM",
+    category: "cae",
+    integration: "planned",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: "https://eda.sw.siemens.com/en-US/ic-packaging/flotherm/",
+    prerequisitesEn: "Planned electronics thermal simulation integration. Local Simcenter FloTHERM installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684\u7535\u5B50\u6563\u70ED\u4EFF\u771F\u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A Simcenter FloTHERM \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
+    capabilities: ["Electronics cooling", "Thermal impedance", "Heatsink optimization"],
+    iconFile: null,
+    buildEnv: () => ({})
+  },
+  {
+    id: "adams",
+    title: "Adams",
+    titleZh: "Adams",
+    category: "cae",
+    integration: "source",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: `${CAE_REPO}/Adams`,
+    prerequisitesEn: "Licensed Windows Hexagon Adams/View (2024.1 baseline, Python >= 3.11) with ADAMS_ROOT or ADAMS_LAUNCHER configured; start the localhost Command Server when live queries are needed.",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Windows Hexagon Adams/View\uFF082024.1 \u57FA\u7EBF\uFF0CPython >= 3.11\uFF09\u5E76\u914D\u7F6E ADAMS_ROOT / ADAMS_LAUNCHER\uFF1B\u5B9E\u65F6\u67E5\u8BE2\u9700\u542F\u52A8\u672C\u5730 Command Server\u3002",
+    capabilities: ["Multibody dynamics", "Joints & constraints", "Kinematic / dynamic simulation", "Result curves"],
+    iconFile: null,
+    source: {
+      repo: "CAE-Agent-Hub",
+      repoSubpath: "MCP/Adams",
+      bundledDir: "adams"
+    },
+    launch: {
       kind: "python-module",
-      module: "ansa_mcp",
-      checkFile: "src/ansa_mcp/__main__.py",
+      module: "adams_mcp.server",
+      checkFile: "src/adams_mcp/server.py",
       pythonPathSubdir: "src"
     },
     buildEnv: ({ discoveredExecutable }) => ({
-      PYTHONUNBUFFERED: "1",
-      ...executableEnv("ANSA_EXECUTABLE", discoveredExecutable)
+      ...executableEnv("ADAMS_LAUNCHER", discoveredExecutable),
+      ...executableEnv("ADAMS_ROOT", discoveredExecutable, adamsRootFromExecutable),
+      PYTHONUTF8: "1",
+      PYTHONUNBUFFERED: "1"
     })
+  },
+  {
+    id: "flac3d",
+    title: "FLAC3D",
+    titleZh: "FLAC3D",
+    category: "cae",
+    integration: "planned",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: "https://www.itascacg.com/software/flac3d",
+    prerequisitesEn: "Planned geomechanical CAE integration. Local Itasca FLAC3D installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684\u5CA9\u571F\u529B\u5B66\u4EFF\u771F\u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A Itasca FLAC3D \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
+    capabilities: ["Geomechanics", "Slope stability", "Tunnel & foundation modeling"],
+    iconFile: null,
+    buildEnv: () => ({})
   },
   {
     id: "calculix",
     title: "CalculiX",
     titleZh: "CalculiX (\u5F00\u6E90\u6709\u9650\u5143)",
     category: "cae",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: false,
     sourceUrl: `${CAE_REPO}/CalculiX`,
-    prerequisitesEn: "Installed CalculiX solver binary (ccx / ccx.exe) on PATH or configured via CCX_EXE.",
-    prerequisitesZh: "\u9700\u5B89\u88C5\u5F00\u6E90 CalculiX \u6C42\u89E3\u5668\uFF08ccx / ccx.exe\uFF09\u5E76\u52A0\u5165 PATH \u6216\u914D\u7F6E CCX_EXE\u3002",
-    capabilities: ["Abaqus-Compatible .inp Solving", "Static / Modal / Thermal Analysis", "FRD Result Parsing"],
+    prerequisitesEn: "Working CalculiX solver (ccx) installed locally or specified via CCX_EXE.",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u5F00\u6E90 CalculiX (ccx) \u6C42\u89E3\u5668\u6216\u914D\u7F6E CCX_EXE \u8DEF\u5F84\u3002",
+    capabilities: ["INP deck authoring", "Static/modal/thermal FEA", "FRD/DAT post-processing"],
     iconFile: null,
     source: {
       repo: "CAE-Agent-Hub",
@@ -397,25 +589,26 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "python-script",
-      scripts: ["mcp_server.py"]
+      scripts: ["server.py", "mcp_server.py"]
     },
     buildEnv: ({ discoveredExecutable }) => ({
-      PYTHONUNBUFFERED: "1",
-      ...executableEnv("CCX_EXE", discoveredExecutable)
+      ...executableEnv("CCX_EXE", discoveredExecutable),
+      PYTHONUNBUFFERED: "1"
     })
   },
-  // ── EDA Edition (3) ───────────────────────────────────────────────────────
+  // ── EDA Edition (4) ───────────────────────────────────────────────────────
   {
     id: "easyeda-pro",
     title: "EasyEDA Pro (JLC EDA)",
     titleZh: "\u5609\u7ACB\u521BEDA \u4E13\u4E1A\u7248 (EasyEDA Pro)",
     category: "eda",
+    integration: "source",
     runtime: "node",
     platformWindowsOnly: false,
     sourceUrl: `${EDA_REPO}/easyeda-agent`,
-    prerequisitesEn: "EasyEDA Pro desktop client and the easyeda bridge CLI (on PATH or configured via EASYEDA_BIN).",
-    prerequisitesZh: "\u9700\u5B89\u88C5\u5609\u7ACB\u521BEDA \u4E13\u4E1A\u7248\u684C\u9762\u7AEF\u53CA easyeda CLI \u6865\u63A5\u7A0B\u5E8F\uFF08\u5728 PATH \u6216\u901A\u8FC7 EASYEDA_BIN \u6307\u5B9A\uFF09\u3002",
-    capabilities: ["Schematic & PCB Reading/Editing", "Component Placement & Netlist", "BOM / Gerber Workflow"],
+    prerequisitesEn: "EasyEDA Pro desktop client with the EasyEDA Agent WebSocket bridge extension enabled.",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u5609\u7ACB\u521BEDA \u4E13\u4E1A\u7248\u5E76\u542F\u7528 EasyEDA Agent \u6865\u63A5\u6269\u5C55\uFF08Node.js \u8FD0\u884C\u65F6\uFF09\u3002",
+    capabilities: ["Schematic capture", "PCB placement & routing", "BOM & DRC checks", "JLCPCB library lookup"],
     iconFile: "easyeda-pro.png",
     source: {
       repo: "EDA-Agent-Hub",
@@ -424,52 +617,67 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "node-script",
-      entryScript: "mcp/src/server.mjs",
-      packageDir: "mcp"
+      packageDir: "packages/mcp-server",
+      entryScript: "packages/mcp-server/dist/index.js",
+      buildCommand: ["npm", "run", "build"]
     },
-    buildEnv: () => ({
-      EASYEDA_BIN: process.env.EASYEDA_BIN || "easyeda"
-    })
+    buildEnv: () => ({})
   },
   {
     id: "kicad",
     title: "KiCad",
     titleZh: "KiCad",
     category: "eda",
-    runtime: "node",
+    integration: "source",
+    runtime: "python",
     platformWindowsOnly: false,
-    sourceUrl: `${CAE_REPO}/KiCAD-MCP-Server`,
-    prerequisitesEn: "KiCad 8/9 installation with bundled Python pcbnew module and Node.js >= 20.",
-    prerequisitesZh: "\u9700\u5B89\u88C5 KiCad 8/9\uFF08\u542B\u5185\u7F6E Python pcbnew \u6A21\u5757\uFF09\u4E0E Node.js >= 20\u3002",
-    capabilities: ["PCB Layout & Routing Automation", "Footprint & JLCPCB Library Search", "DRC & Fabrication Export"],
+    sourceUrl: `${EDA_REPO}/KiCAD-MCP-Server`,
+    prerequisitesEn: "KiCad 8/9 installed locally with kicad-cli available in PATH or standard installation folder.",
+    prerequisitesZh: "\u9700\u5B89\u88C5 KiCad 8/9\uFF0C\u5E76\u786E\u4FDD kicad-cli \u5728\u7CFB\u7EDF PATH \u6216\u6807\u51C6\u5B89\u88C5\u76EE\u5F55\u4E2D\u53EF\u7528\u3002",
+    capabilities: ["Schematic & PCB editing", "ERC / DRC verification", "Gerber / Drill / 3D export"],
     iconFile: "kicad.png",
     source: {
-      repo: "CAE-Agent-Hub",
+      repo: "EDA-Agent-Hub",
       repoSubpath: "MCP/KiCAD-MCP-Server",
       bundledDir: "kicad"
     },
     launch: {
-      kind: "node-script",
-      entryScript: "dist/index.js",
-      buildCommand: ["npm", "run", "build"]
+      kind: "python-script",
+      scripts: ["python/kicad_interface.py", "server.py", "mcp_server.py"]
     },
-    buildEnv: ({ discoveredExecutable }) => ({
-      ...executableEnv("KICAD_EXE", discoveredExecutable)
+    buildEnv: () => ({
+      PYTHONUNBUFFERED: "1"
     })
+  },
+  {
+    id: "altium-designer",
+    title: "Altium Designer",
+    titleZh: "Altium Designer",
+    category: "eda",
+    integration: "planned",
+    runtime: "python",
+    platformWindowsOnly: true,
+    sourceUrl: "https://www.altium.com/altium-designer",
+    prerequisitesEn: "Planned EDA integration. Local Altium Designer installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 EDA \u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A Altium Designer \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
+    capabilities: ["Multi-layer PCB", "High-speed routing", "Schematic & BOM"],
+    iconFile: null,
+    buildEnv: () => ({})
   },
   {
     id: "ads",
     title: "Keysight ADS",
     titleZh: "Keysight ADS (\u5148\u8FDB\u8BBE\u8BA1\u7CFB\u7EDF)",
     category: "eda",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: true,
     sourceUrl: `${EDA_REPO}/ADS`,
     bridgePort: 48326,
     requiresBridgeTokenConfig: true,
-    prerequisitesEn: "Licensed Keysight Advanced Design System (ADS) with the ADS MCP Addon reading the shared bridge_config.json token on 127.0.0.1:48326.",
-    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Keysight ADS \u5E76\u52A0\u8F7D ADS Addon \u63D2\u4EF6\uFF0C\u4E0E\u672C\u8FDE\u63A5\u5668\u5171\u4EAB bridge_config.json \u4EE4\u724C\uFF08\u7AEF\u53E3 48326\uFF09\u3002",
-    capabilities: ["RF/Microwave Schematic & Layout", "S-Parameter / Harmonic Balance / Momentum", "Workspace & Dataset Inspection"],
+    prerequisitesEn: "Licensed Keysight ADS (HPEESOF_DIR) with the ADS MCP loopback token bridge running on TCP 48326.",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Keysight ADS\uFF08\u914D\u7F6E HPEESOF_DIR\uFF09\u5E76\u542F\u52A8\u672C\u5730 ADS MCP \u4EE4\u724C\u6865\u63A5\uFF08\u7AEF\u53E3 48326\uFF09\u3002",
+    capabilities: ["RF / Microwave schematic", "Harmonic balance & S-param", "Layout & EM co-simulation"],
     iconFile: null,
     source: {
       repo: "EDA-Agent-Hub",
@@ -478,15 +686,14 @@ var SOFTWARE_CATALOG = [
     },
     launch: {
       kind: "python-module",
-      module: "ads_mcp",
+      module: "ads_mcp.server",
       checkFile: "src/ads_mcp/server.py",
       pythonPathSubdir: "src"
     },
-    buildEnv: ({ homeDir, discoveredExecutable, runtimeConfigPath }) => ({
-      PYTHONUNBUFFERED: "1",
-      PYTHONUTF8: "1",
-      ...executableEnv("ADS_INSTALL_ROOT", discoveredExecutable, adsRootFromExecutable),
-      ...runtimeConfigPath ? { ADS_MCP_BRIDGE_CONFIG: runtimeConfigPath } : { ADS_MCP_BRIDGE_CONFIG: join(homeDir, "runtimes", "ads", "bridge_config.json") }
+    buildEnv: ({ discoveredExecutable, runtimeConfigPath }) => ({
+      ...executableEnv("HPEESOF_DIR", discoveredExecutable, adsRootFromExecutable),
+      ...runtimeConfigPath ? { ADS_MCP_CONFIG: runtimeConfigPath } : {},
+      PYTHONUNBUFFERED: "1"
     })
   }
 ];
@@ -498,38 +705,46 @@ function adaptersForEdition(edition) {
 }
 function isAdapterInEdition(id, edition) {
   const spec = adapterById(id);
-  if (!spec)
-    return false;
-  return editionCoversCategory(edition, spec.category);
+  return spec ? editionCoversCategory(edition, spec.category) : false;
 }
 
 // packages/core/dist/detect.js
+import { execFile } from "node:child_process";
 import { existsSync, readdirSync, statSync } from "node:fs";
 import { createConnection } from "node:net";
 import { win32 } from "node:path";
-import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 var execFileAsync = promisify(execFile);
-function isFile(filePath) {
-  try {
-    return statSync(filePath).isFile();
-  } catch {
-    return false;
-  }
-}
-function subdirectories(dirPath) {
-  try {
-    return readdirSync(dirPath, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => win32.join(dirPath, entry.name));
-  } catch {
-    return [];
-  }
-}
 var ENV_DISCOVERY_RULES = {
-  nx: {
-    directKeys: [],
-    rootKeys: ["UGII_BASE_DIR", "UGII_ROOT_DIR"],
+  solidworks: {
+    directKeys: ["SOLIDWORKS_EXE"],
+    rootKeys: ["SOLIDWORKS_ROOT"],
     rootPatterns: [],
-    relativePaths: [win32.join("NXBIN", "ugraf.exe"), "ugraf.exe"]
+    relativePaths: ["SLDWORKS.exe", win32.join("SOLIDWORKS", "SLDWORKS.exe")]
+  },
+  catia: {
+    directKeys: ["CATIA_EXE"],
+    rootKeys: ["CATIA_ROOT"],
+    rootPatterns: [],
+    relativePaths: [win32.join("win_b64", "code", "bin", "CNEXT.exe")]
+  },
+  nx: {
+    directKeys: ["NX_EXE"],
+    rootKeys: ["UGII_BASE_DIR"],
+    rootPatterns: [],
+    relativePaths: [win32.join("NXBIN", "ugraf.exe"), win32.join("UGII", "ugraf.exe")]
+  },
+  eplan: {
+    directKeys: ["EPLAN_EXE"],
+    rootKeys: [],
+    rootPatterns: [],
+    relativePaths: []
+  },
+  abaqus: {
+    directKeys: ["ABAQUS_CMD", "ABAQUS_BAT"],
+    rootKeys: ["SIMULIA_ROOT", "ABAQUS_ROOT"],
+    rootPatterns: [],
+    relativePaths: [win32.join("Commands", "abaqus.bat"), "abaqus.bat"]
   },
   "ansys-workbench": {
     directKeys: [],
@@ -572,6 +787,21 @@ var ENV_DISCOVERY_RULES = {
     rootPatterns: [],
     relativePaths: ["ansa64.bat", "ansa64.exe", "ansa.bat"]
   },
+  hyperworks: {
+    directKeys: ["HYPERWORKS_EXE"],
+    rootKeys: ["HYPERWORKS_HOME", "ALTAIR_HOME"],
+    rootPatterns: [],
+    relativePaths: [
+      win32.join("hwdesktop", "hwx", "bin", "win64", "runhwx.exe"),
+      win32.join("hwdesktop", "hm", "bin", "win64", "hmbatch.exe")
+    ]
+  },
+  adams: {
+    directKeys: ["ADAMS_LAUNCHER"],
+    rootKeys: ["ADAMS_ROOT"],
+    rootPatterns: [],
+    relativePaths: [win32.join("common", "mdi.bat"), "mdi.bat"]
+  },
   calculix: {
     directKeys: ["CCX_EXE"],
     rootKeys: ["CALCULIX_ROOT"],
@@ -594,24 +824,27 @@ var ENV_DISCOVERY_RULES = {
     directKeys: ["ADS_EXE"],
     rootKeys: ["ADS_INSTALL_ROOT", "HPEESOF_DIR"],
     rootPatterns: [],
-    relativePaths: [win32.join("bin", "ads.exe"), win32.join("bin", "hpeesofde.exe")]
+    relativePaths: [win32.join("bin", "ads.exe"), win32.join("bin", "hpeesofde.exe"), "ads.exe"]
   }
 };
-function environmentCandidates(id, env) {
-  const rule = ENV_DISCOVERY_RULES[id];
-  if (!rule)
+function isFile(filePath) {
+  try {
+    return statSync(filePath).isFile();
+  } catch {
+    return false;
+  }
+}
+function subdirectories(root) {
+  if (!existsSync(root))
     return [];
-  const direct = rule.directKeys.flatMap((key) => {
-    const value = env[key];
-    return value ? [value] : [];
-  });
-  const patternRoots = Object.entries(env).filter(([key]) => rule.rootPatterns.some((pattern) => pattern.test(key))).map(([, value]) => value);
-  const roots = [...rule.rootKeys.map((key) => env[key]), ...patternRoots];
-  const expanded = roots.flatMap((root) => root ? rule.relativePaths.map((rel) => win32.join(root, rel)) : []);
-  return [...direct, ...expanded];
+  try {
+    return readdirSync(root, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => win32.join(root, entry.name));
+  } catch {
+    return [];
+  }
 }
 function defaultWindowsDrives() {
-  return Array.from({ length: 24 }, (_, i) => `${String.fromCharCode(67 + i)}:\\`).filter(existsSync);
+  return Array.from({ length: 24 }, (_, idx) => `${String.fromCharCode(67 + idx)}:\\`).filter(existsSync);
 }
 function ansysVersionRoots(drive) {
   const parents = [
@@ -620,6 +853,16 @@ function ansysVersionRoots(drive) {
     ...subdirectories(drive).filter((dir) => /[\\/]ansys[^\\/]*$/i.test(dir)).map((dir) => win32.join(dir, "ANSYS Inc"))
   ];
   return parents.flatMap(subdirectories);
+}
+function environmentCandidates(id, env) {
+  const rule = ENV_DISCOVERY_RULES[id];
+  if (!rule)
+    return [];
+  const direct = rule.directKeys.flatMap((key) => env[key] ? [env[key]] : []);
+  const patternRoots = Object.entries(env).filter(([key]) => rule.rootPatterns.some((pattern) => pattern.test(key))).map(([, val]) => val);
+  const roots = [...rule.rootKeys.map((key) => env[key]), ...patternRoots];
+  const expanded = roots.flatMap((root) => root ? rule.relativePaths.map((rel) => win32.join(root, rel)) : []);
+  return [...direct, ...expanded];
 }
 function standardWindowsCandidates(id, drives = defaultWindowsDrives()) {
   return drives.flatMap((drive) => {
@@ -631,6 +874,16 @@ function standardWindowsCandidates(id, drives = defaultWindowsDrives()) {
         return subdirectories(win32.join(programs, "Dassault Systemes")).map((root) => win32.join(root, "win_b64", "code", "bin", "CNEXT.exe"));
       case "nx":
         return subdirectories(win32.join(programs, "Siemens")).map((root) => win32.join(root, "NXBIN", "ugraf.exe"));
+      case "creo":
+        return subdirectories(win32.join(programs, "PTC")).map((root) => win32.join(root, "Parametric", "bin", "parametric.exe"));
+      case "inventor":
+        return subdirectories(win32.join(programs, "Autodesk")).filter((dir) => /inventor/i.test(dir)).map((root) => win32.join(root, "Bin", "Inventor.exe"));
+      case "autocad":
+        return subdirectories(win32.join(programs, "Autodesk")).filter((dir) => /autocad/i.test(dir)).map((root) => win32.join(root, "acad.exe"));
+      case "fusion":
+        return subdirectories(win32.join(drive, "Users")).flatMap((userDir) => subdirectories(win32.join(userDir, "AppData", "Local", "Autodesk", "webdeploy", "production"))).map((prod) => win32.join(prod, "Fusion360.exe"));
+      case "eplan":
+        return subdirectories(win32.join(programs, "EPLAN", "Platform")).flatMap((ver) => [win32.join(ver, "Bin", "W3u.exe"), win32.join(ver, "Bin", "EPLAN.exe")]);
       case "abaqus":
         return [win32.join(drive, "SIMULIA", "Commands", "abaqus.bat")];
       case "ansys-workbench":
@@ -655,6 +908,23 @@ function standardWindowsCandidates(id, drives = defaultWindowsDrives()) {
         ]);
       case "ansa":
         return [win32.join(programs, "BETA_CAE_Systems"), win32.join(drive, "BETA_CAE_Systems")].flatMap(subdirectories).flatMap((root) => [win32.join(root, "ansa64.bat"), win32.join(root, "ansa64.exe")]);
+      case "hyperworks":
+        return [
+          ...subdirectories(win32.join(programs, "Altair")),
+          ...subdirectories(drive).filter((dir) => /[\\/]altair[^\\/]*$/i.test(dir))
+        ].map((root) => win32.join(root, "hwdesktop", "hwx", "bin", "win64", "runhwx.exe"));
+      case "star-ccm":
+        return subdirectories(win32.join(programs, "Siemens")).flatMap(subdirectories).filter((dir) => /star-ccm/i.test(dir)).map((root) => win32.join(root, "star", "bin", "starccm+.exe"));
+      case "flotherm":
+        return [win32.join(programs, "Siemens"), win32.join(programs, "Mentor Graphics")].flatMap(subdirectories).filter((dir) => /flotherm/i.test(dir)).map((root) => win32.join(root, "flosuite", "bin", "flotherm.exe"));
+      case "adams":
+        return [win32.join(programs, "MSC.Software", "Adams"), win32.join(programs, "Hexagon", "Adams")].flatMap(subdirectories).map((ver) => win32.join(ver, "common", "mdi.bat"));
+      case "flac3d":
+        return subdirectories(win32.join(programs, "Itasca")).filter((dir) => /flac3d/i.test(dir)).flatMap((root) => [
+          win32.join(root, "exe64", "flac3d900_gui.exe"),
+          win32.join(root, "exe64", "flac3d800_gui.exe"),
+          win32.join(root, "exe64", "flac3d700_gui.exe")
+        ]);
       case "calculix":
         return [
           win32.join(drive, "CalculiX", "ccx.exe"),
@@ -668,6 +938,8 @@ function standardWindowsCandidates(id, drives = defaultWindowsDrives()) {
           win32.join(programs, "lceda-pro", "lceda-pro.exe"),
           win32.join(programs, "EasyEDA Pro", "lceda-pro.exe")
         ];
+      case "altium-designer":
+        return subdirectories(win32.join(programs, "Altium")).map((root) => win32.join(root, "X2.EXE"));
       case "ads":
         return [win32.join(programs, "Keysight"), win32.join(drive, "Keysight")].flatMap(subdirectories).filter((dir) => /ads/i.test(dir)).flatMap((root) => [win32.join(root, "bin", "ads.exe"), win32.join(root, "bin", "hpeesofde.exe")]);
     }
@@ -677,6 +949,11 @@ var PATH_COMMANDS = {
   solidworks: "SLDWORKS.exe",
   catia: "CNEXT.exe",
   nx: "ugraf.exe",
+  creo: "parametric.exe",
+  inventor: "Inventor.exe",
+  autocad: "acad.exe",
+  fusion: "Fusion360.exe",
+  eplan: "W3u.exe",
   abaqus: "abaqus",
   "ansys-workbench": "RunWB2.exe",
   "ansys-fluent": "fluent.exe",
@@ -684,9 +961,15 @@ var PATH_COMMANDS = {
   comsol: "comsol.exe",
   cst: "CST DESIGN ENVIRONMENT_AMD64.exe",
   ansa: "ansa64.bat",
+  hyperworks: "runhwx.exe",
+  "star-ccm": "starccm+.exe",
+  flotherm: "flotherm.exe",
+  adams: "adams2024_1",
+  flac3d: "flac3d900_gui.exe",
   calculix: "ccx",
   kicad: "kicad.exe",
   "easyeda-pro": "lceda-pro.exe",
+  "altium-designer": "X2.EXE",
   ads: "ads.exe"
 };
 async function detectSoftwareExecutable(id, explicitPath, timeoutMs = 5e3) {
@@ -1660,6 +1943,8 @@ function runSubprocess(argv, cwd, timeoutMs, signal) {
 }
 function validateSourceDir(dir, spec) {
   const launch = spec.launch;
+  if (!launch)
+    return { checkOk: false, launchArgs: [] };
   if (launch.kind === "python-module") {
     const ok2 = existsSync5(join5(dir, "pyproject.toml")) && existsSync5(join5(dir, ...launch.checkFile.split("/")));
     return {
@@ -1762,6 +2047,7 @@ var ConnectorProvisioner = class {
       title: spec.title,
       titleZh: spec.titleZh,
       category: spec.category,
+      integration: spec.integration,
       runtime: spec.runtime,
       sourceUrl: spec.sourceUrl,
       prerequisitesEn: spec.prerequisitesEn,
@@ -1788,6 +2074,15 @@ var ConnectorProvisioner = class {
     const spec = adapterById(id);
     if (!spec) {
       return { ok: false, id, stage: "license", code: "unknown-software", detail: `Unknown software adapter: ${id}` };
+    }
+    if (spec.integration === "planned" || !spec.source || !spec.launch) {
+      return {
+        ok: false,
+        id,
+        stage: "source",
+        code: "adapter-planned",
+        detail: `${spec.title} integration is planned and will be enabled in a future release.`
+      };
     }
     options.onStage?.("license");
     const activeKey = options.licenseKey ?? resolveActiveLicenseKey(this.config.homeDir);
@@ -1864,11 +2159,15 @@ var ConnectorProvisioner = class {
     return { ok: true, id, record, probe };
   }
   async resolveSource(spec, signal) {
-    const repoNames = [spec.source.repo, ...spec.source.localRepoAliases ?? []];
+    const source = spec.source;
+    if (!source) {
+      return { ok: false, detail: `${spec.title} does not have an automated MCP source package yet.` };
+    }
+    const repoNames = [source.repo, ...source.localRepoAliases ?? []];
     for (const root of this.config.hubRoots) {
       const candidates = [
-        join5(root, ...spec.source.repoSubpath.split("/")),
-        ...repoNames.map((repo) => join5(root, repo, ...spec.source.repoSubpath.split("/")))
+        join5(root, ...source.repoSubpath.split("/")),
+        ...repoNames.map((repo) => join5(root, repo, ...source.repoSubpath.split("/")))
       ];
       for (const candidate of candidates) {
         const checked = validateSourceDir(candidate, spec);
@@ -1955,7 +2254,7 @@ var ConnectorProvisioner = class {
     await mkdir2(runtimeDir, { recursive: true });
     if (spec.runtime === "node") {
       const launch = spec.launch;
-      if (launch.kind !== "node-script") {
+      if (!launch || launch.kind !== "node-script") {
         return { ok: false, code: "invalid-recipe", detail: "Node runtime requires a node-script launch spec." };
       }
       const pkgDir = launch.packageDir ? join5(sourceDir, launch.packageDir) : sourceDir;
@@ -2232,19 +2531,30 @@ import { createInterface as createInterface2 } from "node:readline";
 
 // packages/mcp-server/src/software-icons.ts
 var SOFTWARE_ICON_DATA_URIS = {
-  "solidworks": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX3NvbGlkd29ya3MiIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRBMTIxOSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzIxMDcwQiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9zb2xpZHdvcmtzIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfc29saWR3b3JrcykiIHN0cm9rZT0icmdiYSgyNTEsMTEzLDEzMywwLjM4KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfc29saWR3b3JrcykiLz48cG9seWdvbiBwb2ludHM9IjQwLDEyIDU4LDIxIDQ5LDI1LjUgMzEsMTYuNSIgZmlsbD0iI0ZCNzE4NSIvPjxwb2x5Z29uIHBvaW50cz0iMzEsMTYuNSA0OSwyNS41IDQ5LDM1LjUgNTgsMzEgNTgsNDMgNDAsNTIgMjIsNDMgMjIsMjEiIGZpbGw9IiNFMTFENDgiIGZpbGwtb3BhY2l0eT0iMC4zNSIvPjxwb2x5Z29uIHBvaW50cz0iMjIsMjEgNDAsMzAgNDAsNTIgMjIsNDMiIGZpbGw9IiNGNDNGNUUiLz48cG9seWdvbiBwb2ludHM9IjQwLDMwIDQ5LDI1LjUgNDksMzUuNSA1OCwzMSA1OCw0MyA0MCw1MiIgZmlsbD0iIzlGMTIzOSIvPjxwb2x5Z29uIHBvaW50cz0iNDksMjUuNSA1OCwyMSA1OCwzMSA0OSwzNS41IiBmaWxsPSIjQkUxMjNDIi8+PHBhdGggZD0iTTQwLDEyIEw1OCwyMSBMNTgsNDMgTDQwLDUyIEwyMiw0MyBMMjIsMjEgWiIgc3Ryb2tlPSIjRkZFNEU2IiBzdHJva2Utb3BhY2l0eT0iMC43IiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yMiwyMSBMNDAsMzAgTDQwLDUyIE00MCwzMCBMNDksMjUuNSIgc3Ryb2tlPSIjRkZFNEU2IiBzdHJva2Utb3BhY2l0eT0iMC44NSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjx0ZXh0IHg9IjQwIiB5PSI3MC41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkRBNEFGIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsJ1NlZ29lIFVJJyxzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMS41IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMS4xIj5TVzwvdGV4dD48L3N2Zz4=",
-  "catia": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2NhdGlhIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxMDJBNTQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwODE1MkIiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfY2F0aWEiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19jYXRpYSkiIHN0cm9rZT0icmdiYSg5NiwxNjUsMjUwLDAuNCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+PHBhdGggZD0iTTE5IDJINjFDNzAuNCAyIDc4IDkuNiA3OCAxOVYyOEM2MiAzNCAxOCAzNCAyIDI4VjE5QzIgOS42IDkuNiAyIDE5IDJaIiBmaWxsPSJ1cmwoI2hpX2NhdGlhKSIvPjxwYXRoIGQ9Ik0xNiw0MiBDMjQsMjAgNDQsMTQgNjQsMjIgQzU4LDQyIDM4LDUyIDE2LDQyIFoiIGZpbGw9IiMyNTYzRUIiIGZpbGwtb3BhY2l0eT0iMC40NSIgc3Ryb2tlPSIjOTNDNUZEIiBzdHJva2Utd2lkdGg9IjEuOCIvPjxwYXRoIGQ9Ik0yMCwzNSBDMzAsMjIgNDYsMjAgNjAsMjciIHN0cm9rZT0iI0RCRUFGRSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yNiw0NCBDMzQsMzEgNDgsMjYgNTcsMzMiIHN0cm9rZT0iIzYwQTVGQSIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zMSwyMSBDMzQsMzEgMzMsMzkgMjksNDYiIHN0cm9rZT0iIzkzQzVGRCIgc3Ryb2tlLW9wYWNpdHk9IjAuODUiIHN0cm9rZS13aWR0aD0iMS4zNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTQ2LDE4IEM0OCwyOCA0NiwzOCA0MSw0NyIgc3Ryb2tlPSIjOTNDNUZEIiBzdHJva2Utb3BhY2l0eT0iMC44NSIgc3Ryb2tlLXdpZHRoPSIxLjM1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjIxIiByPSIyLjMiIGZpbGw9IiNFRkY2RkYiLz48Y2lyY2xlIGN4PSI0NiIgY3k9IjE4IiByPSIyLjMiIGZpbGw9IiNFRkY2RkYiLz48Y2lyY2xlIGN4PSI2NCIgY3k9IjIyIiByPSIyLjMiIGZpbGw9IiM2MEE1RkEiLz48dGV4dCB4PSI0MCIgeT0iNzAuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzkzQzVGRCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsc3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEuNSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMSI+VjU8L3RleHQ+PC9zdmc+",
+  "solidworks": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX3NvbGlkd29ya3MiIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRBMTIxOSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzIxMDcwQiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9zb2xpZHdvcmtzIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfc29saWR3b3JrcykiIHN0cm9rZT0icmdiYSgyNTEsMTEzLDEzMywwLjM4KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfc29saWR3b3JrcykiLz48cG9seWdvbiBwb2ludHM9IjQwLDEyIDU4LDIxIDQ5LDI1LjUgMzEsMTYuNSIgZmlsbD0iI0ZCNzE4NSIvPjxwb2x5Z29uIHBvaW50cz0iMjIsMjEgNDAsMzAgNDAsNTIgMjIsNDMiIGZpbGw9IiNGNDNGNUUiLz48cG9seWdvbiBwb2ludHM9IjQwLDMwIDQ5LDI1LjUgNDksMzUuNSA1OCwzMSA1OCw0MyA0MCw1MiIgZmlsbD0iIzlGMTIzOSIvPjxwb2x5Z29uIHBvaW50cz0iNDksMjUuNSA1OCwyMSA1OCwzMSA0OSwzNS41IiBmaWxsPSIjQkUxMjNDIi8+PHBhdGggZD0iTTQwLDEyIEw1OCwyMSBMNTgsNDMgTDQwLDUyIEwyMiw0MyBMMjIsMjEgWiIgc3Ryb2tlPSIjRkZFNEU2IiBzdHJva2Utb3BhY2l0eT0iMC43IiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yMiwyMSBMNDAsMzAgTDQwLDUyIE00MCwzMCBMNDksMjUuNSIgc3Ryb2tlPSIjRkZFNEU2IiBzdHJva2Utb3BhY2l0eT0iMC44NSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjx0ZXh0IHg9IjQwIiB5PSI3MC41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkRBNEFGIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsJ1NlZ29lIFVJJyxzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMS41IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMS4xIj5TVzwvdGV4dD48L3N2Zz4=",
+  "catia": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2NhdGlhIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxMDJBNTQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwODE1MkIiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfY2F0aWEiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19jYXRpYSkiIHN0cm9rZT0icmdiYSg5NiwxNjUsMjUwLDAuNCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+PHBhdGggZD0iTTE5IDJINjFDNzAuNCAyIDc4IDkuNiA3OCAxOVYyOEM2MiAzNCAxOCAzNCAyIDI4VjE5QzIgOS42IDkuNiAyIDE5IDJaIiBmaWxsPSJ1cmwoI2hpX2NhdGlhKSIvPjxwYXRoIGQ9Ik0xNiw0MiBDMjQsMjAgNDQsMTQgNjQsMjIgQzU4LDQyIDM4LDUyIDE2LDQyIFoiIGZpbGw9IiMyNTYzRUIiIGZpbGwtb3BhY2l0eT0iMC40NSIgc3Ryb2tlPSIjOTNDNUZEIiBzdHJva2Utd2lkdGg9IjEuOCIvPjxwYXRoIGQ9Ik0yMCwzNSBDMzAsMjIgNDYsMjAgNjAsMjciIHN0cm9rZT0iI0RCRUFGRSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yNiw0NCBDMzQsMzEgNDgsMjYgNTcsMzMiIHN0cm9rZT0iIzYwQTVGQSIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zMSwyMSBDMzQsMzEgMzMsMzkgMjksNDYgTTQ2LDE4IEM0OCwyOCA0NiwzOCA0MSw0NyIgc3Ryb2tlPSIjOTNDNUZEIiBzdHJva2Utb3BhY2l0eT0iMC44NSIgc3Ryb2tlLXdpZHRoPSIxLjM1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjIxIiByPSIyLjMiIGZpbGw9IiNFRkY2RkYiLz48Y2lyY2xlIGN4PSI0NiIgY3k9IjE4IiByPSIyLjMiIGZpbGw9IiNFRkY2RkYiLz48dGV4dCB4PSI0MCIgeT0iNzAuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzkzQzVGRCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsc3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEuNSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMSI+VjU8L3RleHQ+PC9zdmc+",
   "nx": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX254IiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwRTNBM0UiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwNjFCMUUiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfbngiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19ueCkiIHN0cm9rZT0icmdiYSg0NSwyMTIsMTkxLDAuNCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+PHBhdGggZD0iTTE5IDJINjFDNzAuNCAyIDc4IDkuNiA3OCAxOVYyOEM2MiAzNCAxOCAzNCAyIDI4VjE5QzIgOS42IDkuNiAyIDE5IDJaIiBmaWxsPSJ1cmwoI2hpX254KSIvPjxwb2x5Z29uIHBvaW50cz0iNDAsMTUgNTUsMjMuNSA0MCwzMiAyNSwyMy41IiBmaWxsPSIjMkRENEJGIiBmaWxsLW9wYWNpdHk9IjAuOSIvPjxwb2x5Z29uIHBvaW50cz0iMjUsMjMuNSA0MCwzMiA0MCw0OSAyNSw0MC41IiBmaWxsPSIjMEQ5NDg4Ii8+PHBvbHlnb24gcG9pbnRzPSI0MCwzMiA1NSwyMy41IDU1LDQwLjUgNDAsNDkiIGZpbGw9IiMxMTVFNTkiLz48cGF0aCBkPSJNNDAsMTUgVjkgTTU1LDQwLjUgTDYyLDQ0LjUgTTI1LDQwLjUgTDE4LDQ0LjUiIHN0cm9rZT0iIzk5RjZFNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjMyIiByPSIyLjYiIGZpbGw9IiNGMEZERkEiLz48cGF0aCBkPSJNNDAsMTUgTDU1LDIzLjUgVjQwLjUgTDQwLDQ5IEwyNSw0MC41IFYyMy41IFoiIHN0cm9rZT0iI0NDRkJGMSIgc3Ryb2tlLW9wYWNpdHk9IjAuNjUiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1RUVBRDQiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPk5YPC90ZXh0Pjwvc3ZnPg==",
+  "creo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2NyZW8iIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzEzM0EyMiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA4MUIxMCIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9jcmVvIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfY3JlbykiIHN0cm9rZT0icmdiYSg3NCwyMjIsMTI4LDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9jcmVvKSIvPjxwb2x5Z29uIHBvaW50cz0iNDAsMTMgNTgsMjMgNDAsMzMgMjIsMjMiIGZpbGw9IiM0QURFODAiIGZpbGwtb3BhY2l0eT0iMC45Ii8+PHBvbHlnb24gcG9pbnRzPSIyMiwyMyA0MCwzMyA0MCw1MSAyMiw0MSIgZmlsbD0iIzE2QTM0QSIvPjxwb2x5Z29uIHBvaW50cz0iNDAsMzMgNTgsMjMgNTgsNDEgNDAsNTEiIGZpbGw9IiMxNjY1MzQiLz48cGF0aCBkPSJNMjIsMTcgSDU4IE0yMiwxNCBWMjAgTTU4LDE0IFYyMCIgc3Ryb2tlPSIjQkJGN0QwIiBzdHJva2Utb3BhY2l0eT0iMC43IiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTQwLDEzIEw1OCwyMyBWNDEgTDQwLDUxIEwyMiw0MSBWMjMgWiIgc3Ryb2tlPSIjRENGQ0U3IiBzdHJva2Utb3BhY2l0eT0iMC43NSIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48dGV4dCB4PSI0MCIgeT0iNzAuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzg2RUZBQyIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsc3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIwLjUiPkNSRU88L3RleHQ+PC9zdmc+",
+  "inventor": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2ludmVudG9yIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0NTMxMEIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxRjE1MDUiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfaW52ZW50b3IiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19pbnZlbnRvcikiIHN0cm9rZT0icmdiYSgyNTAsMjA0LDIxLDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9pbnZlbnRvcikiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjMzIiByPSIxNCIgZmlsbD0iI0NBOEEwNCIgZmlsbC1vcGFjaXR5PSIwLjQ1IiBzdHJva2U9IiNGQUNDMTUiIHN0cm9rZS13aWR0aD0iMi4yIi8+PGNpcmNsZSBjeD0iNDAiIGN5PSIzMyIgcj0iNiIgZmlsbD0iI0ZFRjA4QSIgc3Ryb2tlPSIjNzEzRjEyIiBzdHJva2Utd2lkdGg9IjEuNiIvPjxwYXRoIGQ9Ik00MCwxMyBWMTkgTTQwLDQ3IFY1MyBNMjAsMzMgSDI2IE01NCwzMyBINjAgTTI2LDE5IEwzMCwyMyBNNTAsNDMgTDU0LDQ3IE01NCwxOSBMNTAsMjMgTTMwLDQzIEwyNiw0NyIgc3Ryb2tlPSIjRkRFMDQ3IiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGREUwNDciIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPklOVjwvdGV4dD48L3N2Zz4=",
+  "autocad": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2F1dG9jYWQiIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRCMTYyMCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzIxMDkwRSIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9hdXRvY2FkIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfYXV0b2NhZCkiIHN0cm9rZT0icmdiYSgyNDgsMTEzLDExMywwLjQyKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfYXV0b2NhZCkiLz48cmVjdCB4PSIxOCIgeT0iMTYiIHdpZHRoPSI0NCIgaGVpZ2h0PSIzNCIgcng9IjQiIGZpbGw9IiM5OTFCMUIiIGZpbGwtb3BhY2l0eT0iMC4zNSIgc3Ryb2tlPSIjRkNBNUE1IiBzdHJva2Utd2lkdGg9IjEuNiIvPjxwYXRoIGQ9Ik0yNCw0MyBMNDAsMjEgTDU2LDQzIE0zMCwzNiBINTAiIHN0cm9rZT0iI0ZFRjJGMiIgc3Ryb2tlLXdpZHRoPSIyLjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xOCwyNCBIMjMgTTE4LDMyIEgyMyBNMTgsNDAgSDIzIiBzdHJva2U9IiNGODcxNzEiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48dGV4dCB4PSI0MCIgeT0iNzAuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZDQTVBNSIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsc3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIwLjUiPkFDQUQ8L3RleHQ+PC9zdmc+",
+  "fusion": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Z1c2lvbiIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNEIyMzBCIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMjIwRjA1Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2Z1c2lvbiIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2Z1c2lvbikiIHN0cm9rZT0icmdiYSgyNTEsMTQ2LDYwLDAuNDQpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9mdXNpb24pIi8+PHBhdGggZD0iTTIyLDI1IEMyOCwxNCA1MiwxNCA1OCwyNSBDNjIsMzQgNTIsNTAgNDAsNTAgQzI4LDUwIDE4LDM0IDIyLDI1IFoiIGZpbGw9IiNFQTU4MEMiIGZpbGwtb3BhY2l0eT0iMC41NSIgc3Ryb2tlPSIjRkVEN0FBIiBzdHJva2Utd2lkdGg9IjEuOCIvPjxwYXRoIGQ9Ik0yMywyOSBDMzIsMjIgNDgsMjIgNTcsMjkgTTI2LDM4IEMzNSwzMiA0NSwzMiA1NCwzOCIgc3Ryb2tlPSIjRkZFREQ1IiBzdHJva2Utb3BhY2l0eT0iMC44IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNDAiIGN5PSIyNyIgcj0iMyIgZmlsbD0iI0ZGRjdFRCIvPjx0ZXh0IHg9IjQwIiB5PSI3MC41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkRCQTc0IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsJ1NlZ29lIFVJJyxzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMS41IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMS4xIj5GVVM8L3RleHQ+PC9zdmc+",
+  "eplan": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2VwbGFuIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0QjEwMkEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyMTA2MTIiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfZXBsYW4iIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19lcGxhbikiIHN0cm9rZT0icmdiYSgyNDQsMTE0LDE4MiwwLjQ0KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfZXBsYW4pIi8+PHBhdGggZD0iTTIyLDE2IFYyOCBMMjgsMzkgVjUwIE00MCwxNiBWMjggTDQ2LDM5IFY1MCBNNTgsMTYgVjI4IEw2NCwzOSBWNTAiIHN0cm9rZT0iI0Y0NzJCNiIgc3Ryb2tlLXdpZHRoPSIyLjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xOSwzMyBINjEiIHN0cm9rZT0iI0ZDRTdGMyIgc3Ryb2tlLWRhc2hhcnJheT0iMyAzIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iMjIiIGN5PSIyOCIgcj0iMi4yIiBmaWxsPSIjRkRGMkY4Ii8+PGNpcmNsZSBjeD0iNDAiIGN5PSIyOCIgcj0iMi4yIiBmaWxsPSIjRkRGMkY4Ii8+PGNpcmNsZSBjeD0iNTgiIGN5PSIyOCIgcj0iMi4yIiBmaWxsPSIjRkRGMkY4Ii8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGOUE4RDQiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPkVQTDwvdGV4dD48L3N2Zz4=",
   "abaqus": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2FiYXF1cyIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjkxRDU0Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTMwRDJCIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2FiYXF1cyIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2FiYXF1cykiIHN0cm9rZT0icmdiYSgxNjcsMTM5LDI1MCwwLjQyKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfYWJhcXVzKSIvPjxwb2x5Z29uIHBvaW50cz0iNDAsMTIgNTgsMjIgNDAsMzIgMjIsMjIiIGZpbGw9IiNBNzhCRkEiLz48cG9seWdvbiBwb2ludHM9IjIyLDIyIDQwLDMyIDQwLDUxIDIyLDQxIiBmaWxsPSIjN0MzQUVEIi8+PHBvbHlnb24gcG9pbnRzPSI0MCwzMiA1OCwyMiA1OCw0MSA0MCw1MSIgZmlsbD0iIzRDMUQ5NSIvPjxwYXRoIGQ9Ik0zMSwxNyBMNDksMjcgTTQ5LDE3IEwzMSwyNyBNMzEsMjcgVjQ2IE00OSwyNyBWNDYgTTIyLDMxLjUgTDQwLDQxLjUgTDU4LDMxLjUiIHN0cm9rZT0iI0VERTlGRSIgc3Ryb2tlLW9wYWNpdHk9IjAuOCIgc3Ryb2tlLXdpZHRoPSIxLjM1Ii8+PGNpcmNsZSBjeD0iNDAiIGN5PSIzMiIgcj0iMi44IiBmaWxsPSIjRkRFMDQ3Ii8+PHBhdGggZD0iTTQwLDEyIEw1OCwyMiBWNDEgTDQwLDUxIEwyMiw0MSBWMjIgWiIgc3Ryb2tlPSIjRERENkZFIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjx0ZXh0IHg9IjQwIiB5PSI3MC41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjQzRCNUZEIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsJ1NlZ29lIFVJJyxzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMS41IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMS4xIj5BQlE8L3RleHQ+PC9zdmc+",
   "ansys-workbench": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Fuc3lzd29ya2JlbmNoIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzMzI4MTAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxNzEyMDgiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfYW5zeXN3b3JrYmVuY2giIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19hbnN5c3dvcmtiZW5jaCkiIHN0cm9rZT0icmdiYSgyNTAsMjA0LDIxLDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9hbnN5c3dvcmtiZW5jaCkiLz48cGF0aCBkPSJNMjYsMjQgSDU0IE0yNiwyNCBMNDAsNDIgTTU0LDI0IEw0MCw0MiIgc3Ryb2tlPSIjRkFDQzE1IiBzdHJva2Utb3BhY2l0eT0iMC43IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxyZWN0IHg9IjE2IiB5PSIxNSIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0VBQjMwOCIgc3Ryb2tlPSIjRkVGOUMzIiBzdHJva2Utd2lkdGg9IjEuNCIvPjxyZWN0IHg9IjQ2IiB5PSIxNSIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0NBOEEwNCIgc3Ryb2tlPSIjRkVGMDhBIiBzdHJva2Utd2lkdGg9IjEuNCIvPjxyZWN0IHg9IjMxIiB5PSIzNiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0Y1OUUwQiIgc3Ryb2tlPSIjRkVGOUMzIiBzdHJva2Utd2lkdGg9IjEuNCIvPjxwYXRoIGQ9Ik0yMSwyMyBIMjkgTTUxLDIzIEg1OSBNMzYsNDQgSDQ0IiBzdHJva2U9IiMxQzE5MTciIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGREUwNDciIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPldCPC90ZXh0Pjwvc3ZnPg==",
   "ansys-fluent": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Fuc3lzZmx1ZW50IiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwRTJENDUiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwNzE1MjIiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfYW5zeXNmbHVlbnQiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19hbnN5c2ZsdWVudCkiIHN0cm9rZT0icmdiYSg1NiwxODksMjQ4LDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9hbnN5c2ZsdWVudCkiLz48cGF0aCBkPSJNMTQsMjIgQzI2LDE2IDM4LDE0IDUyLDIwIEM1OCwyMiA2MywyMSA2NiwxOCIgc3Ryb2tlPSIjRkJCRjI0IiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE0LDMyIEMyNCwyNiAzNiwyNCA1MCwzMCBDNTcsMzMgNjMsMzEgNjYsMjgiIHN0cm9rZT0iIzM4QkRGOCIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNCw0MiBDMjYsNDYgNDAsNDcgNTQsNDAgQzYwLDM3IDY0LDM5IDY2LDQyIiBzdHJva2U9IiMwRUE1RTkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNMjgsMzMgQzM2LDI3IDQ4LDI4IDUzLDMzIEM0NywzOCAzNSwzOCAyOCwzMyBaIiBmaWxsPSIjRkRFNjhBIiBzdHJva2U9IiNGRUYzQzciIHN0cm9rZS13aWR0aD0iMS4yIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3REQzRkMiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPkZMVTwvdGV4dD48L3N2Zz4=",
-  "ansys-aedt": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Fuc3lzYWVkdCIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMzYyMTBCIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTgwRTA1Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2Fuc3lzYWVkdCIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2Fuc3lzYWVkdCkiIHN0cm9rZT0icmdiYSgyNTEsMTQ2LDYwLDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9hbnN5c2FlZHQpIi8+PHBhdGggZD0iTTI0LDIwIEMxNywyNyAxNywzOSAyNCw0NiIgc3Ryb2tlPSIjRkI5MjNDIiBzdHJva2Utb3BhY2l0eT0iMC41NSIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik01NiwyMCBDNjMsMjcgNjMsMzkgNTYsNDYiIHN0cm9rZT0iI0ZCOTIzQyIgc3Ryb2tlLW9wYWNpdHk9IjAuNTUiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNMzAsMjQgQzI1LDI5IDI1LDM3IDMwLDQyIiBzdHJva2U9IiNGQkJGMjQiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNNTAsMjQgQzU1LDI5IDU1LDM3IDUwLDQyIiBzdHJva2U9IiNGQkJGMjQiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjMzIiByPSI2IiBmaWxsPSIjRjk3MzE2IiBzdHJva2U9IiNGRUYzQzciIHN0cm9rZS13aWR0aD0iMS44Ii8+PHBhdGggZD0iTTQwLDM5IFY1MSBNMzQsNTEgSDQ2IiBzdHJva2U9IiNGREJBNzQiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGREJBNzQiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIwLjYiPkFFRFQ8L3RleHQ+PC9zdmc+",
-  "comsol": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2NvbXNvbCIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMTMzMTYzIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDkxOTM2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2NvbXNvbCIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2NvbXNvbCkiIHN0cm9rZT0icmdiYSg5NiwxNjUsMjUwLDAuNDUpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9jb21zb2wpIi8+PGNpcmNsZSBjeD0iNDAiIGN5PSIzMyIgcj0iMTgiIGZpbGw9IiMyNTYzRUIiIGZpbGwtb3BhY2l0eT0iMC41NSIgc3Ryb2tlPSIjOTNDNUZEIiBzdHJva2Utd2lkdGg9IjEuOCIvPjxlbGxpcHNlIGN4PSI0MCIgY3k9IjMzIiByeD0iMTgiIHJ5PSI3LjUiIHRyYW5zZm9ybT0icm90YXRlKC0yNCA0MCAzMykiIHN0cm9rZT0iI0UwRjJGRSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48ZWxsaXBzZSBjeD0iNDAiIGN5PSIzMyIgcng9IjE4IiByeT0iNy41IiB0cmFuc2Zvcm09InJvdGF0ZSgzMiA0MCAzMykiIHN0cm9rZT0iIzM4QkRGOCIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48Y2lyY2xlIGN4PSIzNSIgY3k9IjI4IiByPSI1IiBmaWxsPSIjOTNDNUZEIiBmaWxsLW9wYWNpdHk9IjAuNDUiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjMzIiByPSIzIiBmaWxsPSIjRjhGQUZDIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNCRkRCRkUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPkNPTTwvdGV4dD48L3N2Zz4=",
+  "ansys-aedt": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Fuc3lzYWVkdCIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMzYyMTBCIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTgwRTA1Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2Fuc3lzYWVkdCIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2Fuc3lzYWVkdCkiIHN0cm9rZT0icmdiYSgyNTEsMTQ2LDYwLDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9hbnN5c2FlZHQpIi8+PHBhdGggZD0iTTI0LDIwIEMxNywyNyAxNywzOSAyNCw0NiBNNTYsMjAgQzYzLDI3IDYzLDM5IDU2LDQ2IiBzdHJva2U9IiNGQjkyM0MiIHN0cm9rZS1vcGFjaXR5PSIwLjU1IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTMwLDI0IEMyNSwyOSAyNSwzNyAzMCw0MiBNNTAsMjQgQzU1LDI5IDU1LDM3IDUwLDQyIiBzdHJva2U9IiNGQkJGMjQiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjMzIiByPSI2IiBmaWxsPSIjRjk3MzE2IiBzdHJva2U9IiNGRUYzQzciIHN0cm9rZS13aWR0aD0iMS44Ii8+PHBhdGggZD0iTTQwLDM5IFY1MSBNMzQsNTEgSDQ2IiBzdHJva2U9IiNGREJBNzQiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGREJBNzQiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMC41Ij5BRURUPC90ZXh0Pjwvc3ZnPg==",
+  "comsol": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2NvbXNvbCIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMTMzMTYzIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDkxOTM2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2NvbXNvbCIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2NvbXNvbCkiIHN0cm9rZT0icmdiYSg5NiwxNjUsMjUwLDAuNDUpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9jb21zb2wpIi8+PGNpcmNsZSBjeD0iNDAiIGN5PSIzMyIgcj0iMTgiIGZpbGw9IiMyNTYzRUIiIGZpbGwtb3BhY2l0eT0iMC41NSIgc3Ryb2tlPSIjOTNDNUZEIiBzdHJva2Utd2lkdGg9IjEuOCIvPjxlbGxpcHNlIGN4PSI0MCIgY3k9IjMzIiByeD0iMTgiIHJ5PSI3LjUiIHRyYW5zZm9ybT0icm90YXRlKC0yNCA0MCAzMykiIHN0cm9rZT0iI0UwRjJGRSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48ZWxsaXBzZSBjeD0iNDAiIGN5PSIzMyIgcng9IjE4IiByeT0iNy41IiB0cmFuc2Zvcm09InJvdGF0ZSgzMiA0MCAzMykiIHN0cm9rZT0iIzM4QkRGOCIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjMzIiByPSIzIiBmaWxsPSIjRjhGQUZDIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNCRkRCRkUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPkNPTTwvdGV4dD48L3N2Zz4=",
   "cst": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2NzdCIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMTYyNDUyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMEExMTI4Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2NzdCIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2NzdCkiIHN0cm9rZT0icmdiYSgxMjksMTQwLDI0OCwwLjQyKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfY3N0KSIvPjxwb2x5Z29uIHBvaW50cz0iNDAsMTMgNTksMjMgNDAsMzMgMjEsMjMiIGZpbGw9IiM0RjQ2RTUiIGZpbGwtb3BhY2l0eT0iMC42NSIgc3Ryb2tlPSIjQzdEMkZFIiBzdHJva2Utd2lkdGg9IjEuNCIvPjxwb2x5Z29uIHBvaW50cz0iMjEsMjMgNDAsMzMgNDAsNTEgMjEsNDEiIGZpbGw9IiMzNzMwQTMiIGZpbGwtb3BhY2l0eT0iMC43IiBzdHJva2U9IiM4MThDRjgiIHN0cm9rZS13aWR0aD0iMS4zIi8+PHBvbHlnb24gcG9pbnRzPSI0MCwzMyA1OSwyMyA1OSw0MSA0MCw1MSIgZmlsbD0iIzMxMkU4MSIgZmlsbC1vcGFjaXR5PSIwLjg1IiBzdHJva2U9IiM4MThDRjgiIHN0cm9rZS13aWR0aD0iMS4zIi8+PHBhdGggZD0iTTIyLDMzIFEyOCwyMyAzNCwzMyBUNDYsMzMgVDU4LDMzIiBzdHJva2U9IiMzOEJERjgiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48dGV4dCB4PSI0MCIgeT0iNzAuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0E1QjRGQyIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsc3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEuNSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMSI+Q1NUPC90ZXh0Pjwvc3ZnPg==",
-  "ansa": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Fuc2EiIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzBFMzc2NCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA3MUIzMyIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9hbnNhIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfYW5zYSkiIHN0cm9rZT0icmdiYSg1NiwxODksMjQ4LDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9hbnNhKSIvPjxwb2x5Z29uIHBvaW50cz0iNDAsMTMgNjAsMjUgNTMsNDggMjcsNDggMjAsMjUiIGZpbGw9IiMwMjg0QzciIGZpbGwtb3BhY2l0eT0iMC40NSIgc3Ryb2tlPSIjN0REM0ZDIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MCwxMyBMNDAsMzMgTDYwLDI1IE00MCwzMyBMMjAsMjUgTTQwLDMzIEw1Myw0OCBNNDAsMzMgTDI3LDQ4IE0yMCwyNSBMNTMsNDgiIHN0cm9rZT0iI0UwRjJGRSIgc3Ryb2tlLW9wYWNpdHk9IjAuOCIgc3Ryb2tlLXdpZHRoPSIxLjM1Ii8+PGNpcmNsZSBjeD0iNDAiIGN5PSIzMyIgcj0iMi44IiBmaWxsPSIjMzhCREY4Ii8+PGNpcmNsZSBjeD0iNDAiIGN5PSIxMyIgcj0iMi4xIiBmaWxsPSIjRTBGMkZFIi8+PGNpcmNsZSBjeD0iNjAiIGN5PSIyNSIgcj0iMi4xIiBmaWxsPSIjRTBGMkZFIi8+PGNpcmNsZSBjeD0iMjAiIGN5PSIyNSIgcj0iMi4xIiBmaWxsPSIjRTBGMkZFIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3REQzRkMiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIwLjYiPkFOU0E8L3RleHQ+PC9zdmc+",
+  "ansa": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Fuc2EiIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzBFMzc2NCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA3MUIzMyIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9hbnNhIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfYW5zYSkiIHN0cm9rZT0icmdiYSg1NiwxODksMjQ4LDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9hbnNhKSIvPjxwb2x5Z29uIHBvaW50cz0iNDAsMTMgNjAsMjUgNTMsNDggMjcsNDggMjAsMjUiIGZpbGw9IiMwMjg0QzciIGZpbGwtb3BhY2l0eT0iMC40NSIgc3Ryb2tlPSIjN0REM0ZDIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MCwxMyBMNDAsMzMgTDYwLDI1IE00MCwzMyBMMjAsMjUgTTQwLDMzIEw1Myw0OCBNNDAsMzMgTDI3LDQ4IE0yMCwyNSBMNTMsNDgiIHN0cm9rZT0iI0UwRjJGRSIgc3Ryb2tlLW9wYWNpdHk9IjAuOCIgc3Ryb2tlLXdpZHRoPSIxLjM1Ii8+PGNpcmNsZSBjeD0iNDAiIGN5PSIzMyIgcj0iMi44IiBmaWxsPSIjMzhCREY4Ii8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3REQzRkMiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMC41Ij5BTlNBPC90ZXh0Pjwvc3ZnPg==",
+  "hyperworks": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2h5cGVyd29ya3MiIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ3MUMxMCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzIxMEIwNiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9oeXBlcndvcmtzIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfaHlwZXJ3b3JrcykiIHN0cm9rZT0icmdiYSgyNTEsMTQ2LDYwLDAuNDQpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9oeXBlcndvcmtzKSIvPjxwYXRoIGQ9Ik0xOCw0NiBMMjYsMjAgSDU0IEw2Miw0NiBaIiBmaWxsPSIjRUE1ODBDIiBmaWxsLW9wYWNpdHk9IjAuMzUiIHN0cm9rZT0iI0ZEQkE3NCIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjYsMjAgTDQwLDQ2IEw1NCwyMCBNMjEsMzQgSDU5IiBzdHJva2U9IiNGRUQ3QUEiIHN0cm9rZS13aWR0aD0iMS42IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjQ2IiByPSIzIiBmaWxsPSIjRkI5MjNDIi8+PGNpcmNsZSBjeD0iMjYiIGN5PSIyMCIgcj0iMi41IiBmaWxsPSIjRkVGM0M3Ii8+PGNpcmNsZSBjeD0iNTQiIGN5PSIyMCIgcj0iMi41IiBmaWxsPSIjRkVGM0M3Ii8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGREJBNzQiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPkhXPC90ZXh0Pjwvc3ZnPg==",
+  "star-ccm": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX3N0YXJjY20iIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzBFMzc0NyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA2MUEyMiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9zdGFyY2NtIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfc3RhcmNjbSkiIHN0cm9rZT0icmdiYSgzNCwyMTEsMjM4LDAuNDQpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9zdGFyY2NtKSIvPjxjaXJjbGUgY3g9IjQwIiBjeT0iMzMiIHI9IjE2IiBzdHJva2U9IiMyMkQzRUUiIHN0cm9rZS1vcGFjaXR5PSIwLjQ1IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+PHBhdGggZD0iTTQwLDMzIEM0MCwyMSA1MSwxOSA1NCwyNiBNNDAsMzMgQzUyLDMzIDU0LDQ0IDQ3LDQ3IE00MCwzMyBDNDAsNDUgMjksNDcgMjYsNDAgTTQwLDMzIEMyOCwzMyAyNiwyMiAzMywxOSIgc3Ryb2tlPSIjNjdFOEY5IiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNDAiIGN5PSIzMyIgcj0iNCIgZmlsbD0iI0NGRkFGRSIvPjx0ZXh0IHg9IjQwIiB5PSI3MC41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjdFOEY5IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsJ1NlZ29lIFVJJyxzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMS41IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMS4xIj5DQ008L3RleHQ+PC9zdmc+",
+  "flotherm": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Zsb3RoZXJtIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0QTE5MEUiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyMjBBMDUiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfZmxvdGhlcm0iIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19mbG90aGVybSkiIHN0cm9rZT0icmdiYSgyNDgsMTEzLDExMywwLjQ0KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfZmxvdGhlcm0pIi8+PHBhdGggZD0iTTI0LDI1IEMyMSwyMCAyNywxNyAyNCwxMiBNNDAsMjUgQzM3LDIwIDQzLDE3IDQwLDEyIE01NiwyNSBDNTMsMjAgNTksMTcgNTYsMTIiIHN0cm9rZT0iI0Y5NzMxNiIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxyZWN0IHg9IjE4IiB5PSI0NSIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSIjRUY0NDQ0Ii8+PHBhdGggZD0iTTIyLDQ1IFYzMCBNMzEsNDUgVjMwIE00MCw0NSBWMzAgTTQ5LDQ1IFYzMCBNNTgsNDUgVjMwIiBzdHJva2U9IiNGREUwNDciIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGQ0E1QTUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPkZMTzwvdGV4dD48L3N2Zz4=",
+  "adams": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2FkYW1zIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyNDFFNTQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxMDBEMkIiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfYWRhbXMiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19hZGFtcykiIHN0cm9rZT0icmdiYSgxMjksMTQwLDI0OCwwLjQ0KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfYWRhbXMpIi8+PHBhdGggZD0iTTIwLDQ2IEwyOSwyMiBMNTMsMjcgTDYwLDQ2IiBzdHJva2U9IiM4MThDRjgiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjksMjIgTDQ2LDQyIiBzdHJva2U9IiMzOEJERjgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSIzIDMiLz48Y2lyY2xlIGN4PSIyMCIgY3k9IjQ2IiByPSI0IiBmaWxsPSIjRTBFN0ZGIiBzdHJva2U9IiM0MzM4Q0EiIHN0cm9rZS13aWR0aD0iMS42Ii8+PGNpcmNsZSBjeD0iMjkiIGN5PSIyMiIgcj0iNCIgZmlsbD0iI0ZERTA0NyIgc3Ryb2tlPSIjNDMzOENBIiBzdHJva2Utd2lkdGg9IjEuNiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMjciIHI9IjQiIGZpbGw9IiMzOEJERjgiIHN0cm9rZT0iIzQzMzhDQSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjQ2IiByPSI0IiBmaWxsPSIjRTBFN0ZGIiBzdHJva2U9IiM0MzM4Q0EiIHN0cm9rZS13aWR0aD0iMS42Ii8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNDN0QyRkUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPkFETTwvdGV4dD48L3N2Zz4=",
+  "flac3d": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2ZsYWMzZCIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjM0QyQjEyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMUMxMzA3Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2ZsYWMzZCIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2ZsYWMzZCkiIHN0cm9rZT0icmdiYSgyNTEsMTkxLDM2LDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9mbGFjM2QpIi8+PHBvbHlnb24gcG9pbnRzPSIxOCwyMiA0NCwxOCA2MiwyOCA2Miw0OCAxOCw0OCIgZmlsbD0iI0I0NTMwOSIgZmlsbC1vcGFjaXR5PSIwLjQ1IiBzdHJva2U9IiNGQ0QzNEQiIHN0cm9rZS13aWR0aD0iMS42IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE4LDMxIFEzOCwyNyA2MiwzNiBNMTgsNDAgUTQwLDM3IDYyLDQzIE0zMywyMCBWNDggTTQ4LDIxIFY0OCIgc3Ryb2tlPSIjRkRFNjhBIiBzdHJva2Utb3BhY2l0eT0iMC44IiBzdHJva2Utd2lkdGg9IjEuNCIvPjx0ZXh0IHg9IjQwIiB5PSI3MC41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkRFNjhBIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsJ1NlZ29lIFVJJyxzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjAuNSI+RkxBQzwvdGV4dD48L3N2Zz4=",
   "calculix": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2NhbGN1bGl4IiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxMjNBMzIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwODFCMTgiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfY2FsY3VsaXgiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19jYWxjdWxpeCkiIHN0cm9rZT0icmdiYSg0NSwyMTIsMTkxLDAuNDIpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9jYWxjdWxpeCkiLz48cG9seWdvbiBwb2ludHM9IjQwLDEzIDU5LDI0IDU5LDQ0IDQwLDU1IDIxLDQ0IDIxLDI0IiBmaWxsPSIjMEY3NjZFIiBmaWxsLW9wYWNpdHk9IjAuNDUiIHN0cm9rZT0iIzJERDRCRiIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNDAsMTMgVjU1IE0yMSwyNCBMNTksNDQgTTU5LDI0IEwyMSw0NCIgc3Ryb2tlPSIjNUVFQUQ0IiBzdHJva2Utb3BhY2l0eT0iMC42NSIgc3Ryb2tlLXdpZHRoPSIxLjciLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjM0IiByPSI0LjUiIGZpbGw9IiMyREQ0QkYiIHN0cm9rZT0iI0YwRkRGQSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48dGV4dCB4PSI0MCIgeT0iNzAuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk5RjZFNCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsc3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEuNSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMSI+Q0NYPC90ZXh0Pjwvc3ZnPg==",
   "easyeda-pro": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2Vhc3llZGFwcm8iIHgxPSIxMiIgeTE9IjYiIHgyPSI2OCIgeTI9Ijc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzBFMzU2MyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA3MUIzNiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaV9lYXN5ZWRhcHJvIiB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMC4xOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiByeD0iMTgiIGZpbGw9InVybCgjYmdfZWFzeWVkYXBybykiIHN0cm9rZT0icmdiYSg1NiwxODksMjQ4LDAuNDQpIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0xOSAySDYxQzcwLjQgMiA3OCA5LjYgNzggMTlWMjhDNjIgMzQgMTggMzQgMiAyOFYxOUMyIDkuNiA5LjYgMiAxOSAyWiIgZmlsbD0idXJsKCNoaV9lYXN5ZWRhcHJvKSIvPjxwYXRoIGQ9Ik0xNiwyMyBIMjggTDM1LDMwIEg0OCBMNTQsMjQgSDY0IiBzdHJva2U9IiMzOEJERjgiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTYsMzUgSDI1IEwzMiw0MiBINDggTDU1LDM1IEg2NCIgc3Ryb2tlPSIjMjJEM0VFIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTI0LDQ4IEg0MiBMNDgsNDIiIHN0cm9rZT0iIzYwQTVGQSIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMjMiIHI9IjMuNCIgZmlsbD0iI0ZBQ0MxNSIgc3Ryb2tlPSIjMDgyRjQ5IiBzdHJva2Utd2lkdGg9IjEuNSIvPjxjaXJjbGUgY3g9IjY0IiBjeT0iMjQiIHI9IjMuNCIgZmlsbD0iI0ZBQ0MxNSIgc3Ryb2tlPSIjMDgyRjQ5IiBzdHJva2Utd2lkdGg9IjEuNSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMzUiIHI9IjMuNCIgZmlsbD0iIzM0RDM5OSIgc3Ryb2tlPSIjMDgyRjQ5IiBzdHJva2Utd2lkdGg9IjEuNSIvPjxjaXJjbGUgY3g9IjY0IiBjeT0iMzUiIHI9IjMuNCIgZmlsbD0iIzM0RDM5OSIgc3Ryb2tlPSIjMDgyRjQ5IiBzdHJva2Utd2lkdGg9IjEuNSIvPjxyZWN0IHg9IjM2IiB5PSIyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIgcng9IjIiIGZpbGw9IiNFMEYyRkUiLz48dGV4dCB4PSI0MCIgeT0iNzAuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzdERDNGQyIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsc3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEuNSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMSI+RURBPC90ZXh0Pjwvc3ZnPg==",
   "kicad": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2tpY2FkIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxQTJENkIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwRDE3M0EiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfa2ljYWQiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19raWNhZCkiIHN0cm9rZT0icmdiYSgxMjksMTQwLDI0OCwwLjQ0KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfa2ljYWQpIi8+PHJlY3QgeD0iMjUiIHk9IjE4IiB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHJ4PSI2IiBmaWxsPSIjMzEyRTgxIiBzdHJva2U9IiNBNUI0RkMiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0zMiwxOCBWMTIgTTQwLDE4IFYxMiBNNDgsMTggVjEyIE0zMiw1NCBWNDggTTQwLDU0IFY0OCBNNDgsNTQgVjQ4IE0yNSwyNSBIMTggTTI1LDMzIEgxOCBNMjUsNDEgSDE4IE02MiwyNSBINTUgTTYyLDMzIEg1NSBNNjIsNDEgSDU1IiBzdHJva2U9IiNGQkJGMjQiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSIzMiIgY3k9IjI1IiByPSIyLjQiIGZpbGw9IiMzNEQzOTkiLz48cGF0aCBkPSJNMzMsMzkgTDQwLDI5IEw0NywzOSIgc3Ryb2tlPSIjRTBFN0ZGIiBzdHJva2Utd2lkdGg9IjIuMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNDN0QyRkUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPktpPC90ZXh0Pjwvc3ZnPg==",
+  "altium-designer": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2FsdGl1bWRlc2lnbmVyIiB4MT0iMTIiIHkxPSI2IiB4Mj0iNjgiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzNjJGMTQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxOTE2MDgiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaGlfYWx0aXVtZGVzaWduZXIiIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjM0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjE4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ19hbHRpdW1kZXNpZ25lcikiIHN0cm9rZT0icmdiYSgyMTcsMTk5LDExNywwLjQ1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfYWx0aXVtZGVzaWduZXIpIi8+PHJlY3QgeD0iMjQiIHk9IjE4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzAiIHJ4PSI1IiBmaWxsPSIjNzEzRjEyIiBmaWxsLW9wYWNpdHk9IjAuNTUiIHN0cm9rZT0iI0ZERTA0NyIgc3Ryb2tlLXdpZHRoPSIxLjgiLz48Y2lyY2xlIGN4PSIzMiIgY3k9IjI2IiByPSIyLjMiIGZpbGw9IiNGREUwNDciLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjI2IiByPSIyLjMiIGZpbGw9IiNGREUwNDciLz48Y2lyY2xlIGN4PSI0OCIgY3k9IjI2IiByPSIyLjMiIGZpbGw9IiNGREUwNDciLz48Y2lyY2xlIGN4PSIzMiIgY3k9IjM0IiByPSIyLjMiIGZpbGw9IiNGREUwNDciLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjM0IiByPSIyLjMiIGZpbGw9IiMzNEQzOTkiLz48Y2lyY2xlIGN4PSI0OCIgY3k9IjM0IiByPSIyLjMiIGZpbGw9IiNGREUwNDciLz48Y2lyY2xlIGN4PSIzMiIgY3k9IjQyIiByPSIyLjMiIGZpbGw9IiNGREUwNDciLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjQyIiByPSIyLjMiIGZpbGw9IiNGREUwNDciLz48Y2lyY2xlIGN4PSI0OCIgY3k9IjQyIiByPSIyLjMiIGZpbGw9IiNGREUwNDciLz48cGF0aCBkPSJNMTYsMjYgSDI0IE01NiwyNiBINjQgTTE2LDQyIEgyNCBNNTYsNDIgSDY0IiBzdHJva2U9IiNGQUNDMTUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjcwLjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRUYwOEEiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjEiPkFEPC90ZXh0Pjwvc3ZnPg==",
   "ads": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiBmaWxsPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnX2FkcyIgeDE9IjEyIiB5MT0iNiIgeDI9IjY4IiB5Mj0iNzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNDUxMjIxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMUUwODEwIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImhpX2FkcyIgeDE9IjQwIiB5MT0iMCIgeDI9IjQwIiB5Mj0iMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkZGRkZGIiBzdG9wLW9wYWNpdHk9IjAuMTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkZGRkYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI3OCIgaGVpZ2h0PSI3OCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JnX2FkcykiIHN0cm9rZT0icmdiYSgyNTEsMTEzLDEzMywwLjQ0KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMTkgMkg2MUM3MC40IDIgNzggOS42IDc4IDE5VjI4QzYyIDM0IDE4IDM0IDIgMjhWMTlDMiA5LjYgOS42IDIgMTkgMloiIGZpbGw9InVybCgjaGlfYWRzKSIvPjxjaXJjbGUgY3g9IjQwIiBjeT0iMzMiIHI9IjE3IiBzdHJva2U9IiNGQjcxODUiIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBzdHJva2Utd2lkdGg9IjEuNSIvPjxwYXRoIGQ9Ik0yNywyMSBBMTQsMTQgMCAwIDEgNTMsNDUiIHN0cm9rZT0iI0ZEQTRBRiIgc3Ryb2tlLW9wYWNpdHk9IjAuNDUiIHN0cm9rZS13aWR0aD0iMS4zIi8+PHBhdGggZD0iTTEzLDM0IEgyMiBMMjgsMTkgTDM1LDQ4IEw0MiwxNSBMNDksNDUgTDU1LDI5IEw2MCwzNCBINjciIHN0cm9rZT0iI0ZCNzE4NSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjx0ZXh0IHg9IjQwIiB5PSI3MC41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkVDREQzIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsJ1NlZ29lIFVJJyxzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMS41IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMS4xIj5BRFM8L3RleHQ+PC9zdmc+"
 };
 function softwareIconsForEdition(edition) {
@@ -3567,6 +3877,7 @@ function renderMcpAppHtml(edition, surface) {
           mcpConnected: 'MCP \u5DF2\u8FDE\u63A5',
           installedLocal: '\u672C\u673A\u5DF2\u5B89\u88C5',
           notConnected: '\u5F85\u63A5\u5165',
+          plannedSoon: '\u5373\u5C06\u652F\u6301',
           bridgeOffline: '\u6865\u63A5\u672A\u542F\u52A8',
           bridgeOnline: '\u6865\u63A5\u5728\u7EBF',
           toolsUnit: '\u4E2A\u5DE5\u5177',
@@ -3626,6 +3937,7 @@ function renderMcpAppHtml(edition, surface) {
           mcpConnected: 'MCP Connected',
           installedLocal: 'Installed locally',
           notConnected: 'Not connected',
+          plannedSoon: 'Coming soon',
           bridgeOffline: 'Bridge offline',
           bridgeOnline: 'Bridge online',
           toolsUnit: 'tools',
@@ -3921,6 +4233,7 @@ function renderMcpAppHtml(edition, surface) {
         el.innerHTML = list.map(function (a) {
           const name = isZh ? (a.titleZh || a.title || a.id) : (a.title || a.id);
           const busy = busyIds.has(a.id);
+          const isPlanned = a.integration === 'planned';
           return [
             '<div class="sb-item">',
             '  <button type="button" class="sb-item-main" data-open-detail="' + esc(a.id) + '" title="' + esc(name) + '">',
@@ -3928,7 +4241,7 @@ function renderMcpAppHtml(edition, surface) {
             '    <span class="sb-item-name">' + esc(name) + '</span>',
             '  </button>',
             '  <button type="button" class="sb-gear" data-open-detail="' + esc(a.id) + '" title="' + esc(name) + '">' + iconSvg('gear') + '</button>',
-            '  <button type="button" class="toggle ' + (a.provisioned ? 'on' : '') + '" data-toggle-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + ' aria-pressed="' + (a.provisioned ? 'true' : 'false') + '" title="' + esc(a.provisioned ? t('btnProbe') : t('btnSetup')) + '"></button>',
+            '  <button type="button" class="toggle ' + (a.provisioned ? 'on' : '') + '" data-toggle-id="' + esc(a.id) + '" ' + ((busy || isPlanned) ? 'disabled' : '') + ' aria-pressed="' + (a.provisioned ? 'true' : 'false') + '" title="' + esc(isPlanned ? t('plannedSoon') : (a.provisioned ? t('btnProbe') : t('btnSetup'))) + '"></button>',
             '</div>',
           ].join('');
         }).join('');
@@ -4002,6 +4315,7 @@ function renderMcpAppHtml(edition, surface) {
               ? a.toolCount
               : (Array.isArray(a.toolNames) ? a.toolNames.length : 0);
 
+            const isPlanned = a.integration === 'planned';
             let statusHtml = '';
             if (a.provisioned) {
               statusHtml = '<span class="st-ok">' + esc(t('mcpConnected')) + '</span>';
@@ -4010,6 +4324,10 @@ function renderMcpAppHtml(edition, surface) {
               } else if (toolCount > 0) {
                 statusHtml += '<span class="st-sub">\xB7 ' + esc(toolCount) + ' ' + esc(t('toolsUnit')) + '</span>';
               }
+            } else if (isPlanned) {
+              statusHtml = a.appInstalled
+                ? '<span class="st-muted">' + esc(t('installedLocal')) + ' \xB7 ' + esc(t('plannedSoon')) + '</span>'
+                : '<span class="st-muted">' + esc(t('notConnected')) + '</span>';
             } else if (a.appInstalled) {
               statusHtml = '<span class="st-muted">' + esc(t('installedLocal')) + '</span>';
             } else {
@@ -4017,8 +4335,8 @@ function renderMcpAppHtml(edition, surface) {
             }
 
             const actKind = busy ? 'spinner' : (a.provisioned ? 'dots' : 'plus');
-            const actType = a.provisioned ? 'detail' : 'setup';
-            const actTitle = a.provisioned ? name : t('btnSetup');
+            const actType = (a.provisioned || isPlanned) ? 'detail' : 'setup';
+            const actTitle = a.provisioned ? name : (isPlanned ? t('plannedSoon') : t('btnSetup'));
 
             return [
               '<div class="conn-row" data-row-id="' + esc(a.id) + '">',
@@ -4071,9 +4389,12 @@ function renderMcpAppHtml(edition, surface) {
         badgesHtml += a.appInstalled
           ? '<span class="badge ok">' + esc(t('detected')) + '</span>'
           : '<span class="badge">' + esc(t('notDetected')) + '</span>';
+        const isPlanned = a.integration === 'planned';
         badgesHtml += a.provisioned
           ? '<span class="badge ok">' + esc(t('mcpConnected')) + (toolCount ? ' \xB7 ' + esc(toolCount) + ' ' + esc(t('toolsUnit')) : '') + '</span>'
-          : '<span class="badge warn">' + esc(t('notConnected')) + '</span>';
+          : (isPlanned
+              ? '<span class="badge">' + esc(t('plannedSoon')) + '</span>'
+              : '<span class="badge warn">' + esc(t('notConnected')) + '</span>');
         if (a.bridgeReady === true) {
           badgesHtml += '<span class="badge ok">' + esc(t('bridgeOnline')) + (a.bridgePort ? ' :' + esc(a.bridgePort) : '') + '</span>';
         } else if (a.bridgeReady === false) {
@@ -4092,6 +4413,8 @@ function renderMcpAppHtml(edition, surface) {
             '<button type="button" class="btn" data-modal-action="tools" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnTools')) + '</button>',
             '<button type="button" class="btn" data-modal-action="setup" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnReconfigure')) + '</button>',
           ].join('');
+        } else if (isPlanned) {
+          actionsHtml = '<button type="button" class="btn" disabled>' + esc(t('plannedSoon')) + '</button>';
         } else {
           actionsHtml = '<button type="button" class="btn primary" data-modal-action="setup" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(busy ? t('working') : t('btnSetup')) + '</button>';
         }
@@ -4389,7 +4712,7 @@ function renderMcpAppHtml(edition, surface) {
         try {
           const initRes = await rpcRequest('ui/initialize', {
             protocolVersion: PROTOCOL_VERSION,
-            appInfo: { name: 'engiaxis-connector-' + EDITION, version: '1.0.1' },
+            appInfo: { name: 'engiaxis-connector-' + EDITION, version: '1.0.2' },
             appCapabilities: { availableDisplayModes: ['fullscreen', 'inline'] },
           });
           hostConnected = true;
@@ -4890,7 +5213,7 @@ var ConnectorMcpServer = class {
           serverInfo: {
             name: `engiaxis-connector-${this.config.edition}`,
             title: sidebarTitleForEdition(this.config.edition),
-            version: "1.0.1",
+            version: "1.0.2",
             icons: entrypointIconsForEdition(this.config.edition)
           }
         }

@@ -1,7 +1,7 @@
 ====================================================================
 EngiAxis Connector — CAE Edition
 EngiAxis 工程连接器 · CAE 版
-SKU: EA-CONN-CAE | Version: v1.0.1 | Target: chatgpt-desktop
+SKU: EA-CONN-CAE | Version: v1.0.2 | Target: chatgpt-desktop
 ====================================================================
 
 Included Engineering Software Adapters:
@@ -12,6 +12,11 @@ Included Engineering Software Adapters:
   - COMSOL Multiphysics (COMSOL Multiphysics) [comsol]
   - CST Studio Suite (CST Studio Suite) [cst]
   - BETA CAE ANSA (BETA CAE ANSA) [ansa]
+  - HyperWorks (HyperWorks) [hyperworks]
+  - STAR-CCM+ (STAR-CCM+) [star-ccm]
+  - FloTHERM (FloTHERM) [flotherm]
+  - Adams (Adams) [adams]
+  - FLAC3D (FLAC3D) [flac3d]
   - CalculiX (CalculiX (开源有限元)) [calculix]
 
 Quick Start:

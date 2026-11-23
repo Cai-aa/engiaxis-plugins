@@ -1,6 +1,6 @@
 # EngiAxis Connector — ChatGPT Desktop / Codex Plugin Marketplace
 
-Version: **v1.0.1**
+Version: **v1.0.2**
 
 Official plugin marketplace for **EngiAxis Connector**, bringing one-click local CAD, CAE, and EDA engineering software connections natively into ChatGPT Desktop / Codex with a pinnable sidebar workspace.
 
@@ -8,10 +8,10 @@ Official plugin marketplace for **EngiAxis Connector**, bringing one-click local
 
 | Plugin | Edition | Supported Desktop Software |
 | :--- | :--- | :--- |
-| `engiaxis-connector-cad` | **CAD Edition** (`EA-CONN-CAD`) | SolidWorks, CATIA V5, UG / Siemens NX |
-| `engiaxis-connector-cae` | **CAE Edition** (`EA-CONN-CAE`) | Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, CalculiX |
-| `engiaxis-connector-eda` | **EDA Edition** (`EA-CONN-EDA`) | EasyEDA Pro (嘉立创EDA专业版), KiCad, Keysight ADS |
-| `engiaxis-connector-suite` | **All-in-One Suite** (`EA-CONN-SUITE`) | All 14 CAD + CAE + EDA engineering software adapters |
+| `engiaxis-connector-cad` | **CAD Edition** (`EA-CONN-CAD`) | SolidWorks, CATIA V5, UG / Siemens NX, EPLAN + Creo, Inventor, AutoCAD, Fusion (8) |
+| `engiaxis-connector-cae` | **CAE Edition** (`EA-CONN-CAE`) | Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, HyperWorks, Adams, CalculiX + STAR-CCM+, FloTHERM, FLAC3D (13) |
+| `engiaxis-connector-eda` | **EDA Edition** (`EA-CONN-EDA`) | EasyEDA Pro (嘉立创EDA专业版), KiCad, Keysight ADS + Altium Designer (4) |
+| `engiaxis-connector-suite` | **All-in-One Suite** (`EA-CONN-SUITE`) | All 25 CAD + CAE + EDA engineering software entries synced with EngiAxis |
 
 ## Quick Install in ChatGPT Desktop / 安装步骤
 

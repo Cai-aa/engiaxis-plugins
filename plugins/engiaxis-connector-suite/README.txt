@@ -1,13 +1,18 @@
 ====================================================================
 EngiAxis Connector — All-in-One Suite (CAD + CAE + EDA)
 EngiAxis 工程连接器 · 全能版（CAD + CAE + EDA）
-SKU: EA-CONN-SUITE | Version: v1.0.1 | Target: chatgpt-desktop
+SKU: EA-CONN-SUITE | Version: v1.0.2 | Target: chatgpt-desktop
 ====================================================================
 
 Included Engineering Software Adapters:
   - SolidWorks (SolidWorks) [solidworks]
   - CATIA V5 (CATIA V5) [catia]
   - UG / Siemens NX (UG / Siemens NX) [nx]
+  - Creo Parametric (Creo Parametric) [creo]
+  - Inventor (Inventor) [inventor]
+  - AutoCAD (AutoCAD) [autocad]
+  - Autodesk Fusion (Autodesk Fusion) [fusion]
+  - EPLAN (EPLAN) [eplan]
   - Abaqus (Abaqus) [abaqus]
   - Ansys Workbench (Ansys Workbench) [ansys-workbench]
   - Ansys Fluent (Ansys Fluent) [ansys-fluent]
@@ -15,9 +20,15 @@ Included Engineering Software Adapters:
   - COMSOL Multiphysics (COMSOL Multiphysics) [comsol]
   - CST Studio Suite (CST Studio Suite) [cst]
   - BETA CAE ANSA (BETA CAE ANSA) [ansa]
+  - HyperWorks (HyperWorks) [hyperworks]
+  - STAR-CCM+ (STAR-CCM+) [star-ccm]
+  - FloTHERM (FloTHERM) [flotherm]
+  - Adams (Adams) [adams]
+  - FLAC3D (FLAC3D) [flac3d]
   - CalculiX (CalculiX (开源有限元)) [calculix]
   - EasyEDA Pro (JLC EDA) (嘉立创EDA 专业版 (EasyEDA Pro)) [easyeda-pro]
   - KiCad (KiCad) [kicad]
+  - Altium Designer (Altium Designer) [altium-designer]
   - Keysight ADS (Keysight ADS (先进设计系统)) [ads]
 
 Quick Start:
