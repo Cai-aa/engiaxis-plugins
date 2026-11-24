@@ -3004,12 +3004,16 @@ function softwareIconsForEdition(edition) {
 }
 
 // packages/mcp-server/src/mcp-app-ui.ts
+var CONNECTOR_VERSION = "1.0.4";
 var MCP_APP_MIME_TYPE = "text/html;profile=mcp-app";
-var MCP_APP_URIS = {
-  global: "ui://engiaxis-connector/global-v1",
-  thread: "ui://engiaxis-connector/thread-v1",
-  widget: "ui://engiaxis-connector/widget-v1"
-};
+function mcpAppUrisForEdition(edition) {
+  return {
+    global: `ui://engiaxis-connector/${edition}/global-v${CONNECTOR_VERSION}`,
+    thread: `ui://engiaxis-connector/${edition}/thread-v${CONNECTOR_VERSION}`,
+    widget: `ui://engiaxis-connector/${edition}/widget-v${CONNECTOR_VERSION}`
+  };
+}
+var MCP_APP_URIS = mcpAppUrisForEdition("suite");
 function buildEditionSidebarSvg(edition, theme) {
   const rim = theme === "dark" ? "rgba(255,255,255,0.42)" : "rgba(15,23,42,0.22)";
   const hi = theme === "dark" ? "rgba(255,255,255,0.72)" : "rgba(255,255,255,0.85)";
@@ -3148,7 +3152,7 @@ function renderMcpAppHtml(edition, surface) {
   const title = sidebarTitleForEdition(edition);
   const accent = EDITION_ACCENT_PALETTE[edition];
   const iconsJson = JSON.stringify(softwareIconsForEdition(edition));
-  const cacheKey = `engiaxis-connector:state:${edition}:v4`;
+  const cacheKey = `engiaxis-connector:state:${edition}:v${CONNECTOR_VERSION}`;
   return `<!doctype html>
 <html lang="zh-CN" data-surface="${surface}" data-edition="${edition}">
 <head>
@@ -5306,7 +5310,7 @@ function renderMcpAppHtml(edition, surface) {
         try {
           const initRes = await rpcRequest('ui/initialize', {
             protocolVersion: PROTOCOL_VERSION,
-            appInfo: { name: 'engiaxis-connector-' + EDITION, version: '1.0.3' },
+            appInfo: { name: 'engiaxis-connector-' + EDITION, version: "1.0.4" },
             appCapabilities: { availableDisplayModes: ['fullscreen', 'inline'] },
           });
           hostConnected = true;
@@ -5354,6 +5358,7 @@ var ConnectorMcpServer = class {
   getToolDefinitions() {
     const editionSpec = EDITION_SPECS[this.config.edition];
     const sidebarTitle = sidebarTitleForEdition(this.config.edition);
+    const uris = mcpAppUrisForEdition(this.config.edition);
     const adapterIds = adaptersForEdition(this.config.edition).map((a) => a.id);
     const readOnlyAnnotations = {
       readOnlyHint: true,
@@ -5374,7 +5379,7 @@ var ConnectorMcpServer = class {
         annotations: readOnlyAnnotations,
         _meta: {
           ui: {
-            resourceUri: MCP_APP_URIS.global,
+            resourceUri: uris.global,
             visibility: ["app"]
           },
           "openai/ui": {
@@ -5395,7 +5400,7 @@ var ConnectorMcpServer = class {
         annotations: readOnlyAnnotations,
         _meta: {
           ui: {
-            resourceUri: MCP_APP_URIS.thread
+            resourceUri: uris.thread
           },
           "openai/ui": {
             entrypoints: [{ type: "thread" }]
@@ -5414,7 +5419,7 @@ var ConnectorMcpServer = class {
         annotations: readOnlyAnnotations,
         _meta: {
           ui: {
-            resourceUri: MCP_APP_URIS.widget
+            resourceUri: uris.widget
           }
         }
       },
@@ -5601,23 +5606,24 @@ var ConnectorMcpServer = class {
   }
   getResourceDefinitions() {
     const title = sidebarTitleForEdition(this.config.edition);
+    const uris = mcpAppUrisForEdition(this.config.edition);
     return [
       {
-        uri: MCP_APP_URIS.global,
+        uri: uris.global,
         name: `engiaxis-connector-${this.config.edition}-global`,
         title,
         description: "Fullscreen sidebar UI for managing EngiAxis engineering software connections.",
         mimeType: MCP_APP_MIME_TYPE
       },
       {
-        uri: MCP_APP_URIS.thread,
+        uri: uris.thread,
         name: `engiaxis-connector-${this.config.edition}-thread`,
         title: `${title} Panel`,
         description: "Thread side panel UI for managing EngiAxis engineering software connections.",
         mimeType: MCP_APP_MIME_TYPE
       },
       {
-        uri: MCP_APP_URIS.widget,
+        uri: uris.widget,
         name: `engiaxis-connector-${this.config.edition}-widget`,
         title: `${title} Status`,
         description: "Inline status widget for EngiAxis engineering software connections.",
@@ -5626,14 +5632,16 @@ var ConnectorMcpServer = class {
     ];
   }
   readResource(uri) {
+    const uris = mcpAppUrisForEdition(this.config.edition);
     const entries = [
-      ["global", MCP_APP_URIS.global],
-      ["thread", MCP_APP_URIS.thread],
-      ["widget", MCP_APP_URIS.widget]
+      ["global", uris.global],
+      ["thread", uris.thread],
+      ["widget", uris.widget]
     ];
-    const match = entries.find(([, u]) => u === uri);
-    if (!match) return null;
-    const [surface] = match;
+    const exactMatch = entries.find(([, u]) => u === uri);
+    const legacyMatch = !exactMatch ? /^ui:\/\/engiaxis-connector\/(?:[a-z]+\/)?(global|thread|widget)-v[\w.-]+$/.exec(uri) : null;
+    const surface = exactMatch ? exactMatch[0] : legacyMatch ? legacyMatch[1] : null;
+    if (!surface) return null;
     const preferredDisplayMode = surface === "widget" ? "inline" : "fullscreen";
     const availableDisplayModes = surface === "widget" ? ["inline", "fullscreen"] : ["fullscreen"];
     return {
@@ -5968,7 +5976,7 @@ var ConnectorMcpServer = class {
           serverInfo: {
             name: `engiaxis-connector-${this.config.edition}`,
             title: sidebarTitleForEdition(this.config.edition),
-            version: "1.0.3",
+            version: CONNECTOR_VERSION,
             icons: entrypointIconsForEdition(this.config.edition)
           }
         }

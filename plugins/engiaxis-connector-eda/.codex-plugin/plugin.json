@@ -1,6 +1,6 @@
 {
   "name": "engiaxis-connector-eda",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Connect EasyEDA Pro (JLC EDA), KiCad, Keysight ADS, and planned Altium Designer to AI desktop clients.",
   "author": {
     "name": "EngiAxis"
