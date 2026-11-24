@@ -1,6 +1,6 @@
 # EngiAxis Connector — ChatGPT Desktop / Codex Plugin Marketplace
 
-Version: **v1.0.4**
+Version: **v1.0.5**
 
 Official plugin marketplace for **EngiAxis Connector**, bringing one-click local CAD, CAE, and EDA engineering software connections natively into ChatGPT Desktop / Codex with a pinnable sidebar workspace.
 

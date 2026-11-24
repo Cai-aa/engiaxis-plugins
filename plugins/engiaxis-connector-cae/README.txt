@@ -1,7 +1,7 @@
 ====================================================================
 EngiAxis Connector — CAE Edition
 EngiAxis 工程连接器 · CAE 版
-SKU: EA-CONN-CAE | Version: v1.0.4 | Target: chatgpt-desktop
+SKU: EA-CONN-CAE | Version: v1.0.5 | Target: chatgpt-desktop
 ====================================================================
 
 Included Engineering Software Adapters:

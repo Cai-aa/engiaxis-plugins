@@ -1,7 +1,7 @@
 ====================================================================
 EngiAxis Connector — CAD Edition
 EngiAxis 工程连接器 · CAD 版
-SKU: EA-CONN-CAD | Version: v1.0.4 | Target: chatgpt-desktop
+SKU: EA-CONN-CAD | Version: v1.0.5 | Target: chatgpt-desktop
 ====================================================================
 
 Included Engineering Software Adapters:

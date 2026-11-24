@@ -96,6 +96,8 @@ var SOFTWARE_CATALOG = [
     id: "solidworks",
     title: "SolidWorks",
     titleZh: "SolidWorks",
+    subtitleEn: "3D mechanical and assembly design",
+    subtitleZh: "\u4E09\u7EF4\u673A\u68B0\u4E0E\u88C5\u914D\u8BBE\u8BA1",
     category: "cad",
     integration: "source",
     runtime: "python",
@@ -126,6 +128,8 @@ var SOFTWARE_CATALOG = [
     id: "catia",
     title: "CATIA V5",
     titleZh: "CATIA V5",
+    subtitleEn: "High-end surfacing and product design",
+    subtitleZh: "\u9AD8\u7AEF\u66F2\u9762\u4E0E\u6574\u673A\u8BBE\u8BA1",
     category: "cad",
     integration: "source",
     runtime: "python",
@@ -153,6 +157,8 @@ var SOFTWARE_CATALOG = [
     id: "nx",
     title: "UG / Siemens NX",
     titleZh: "UG / Siemens NX",
+    subtitleEn: "Advanced modeling and CAM",
+    subtitleZh: "\u590D\u6742\u9020\u578B\u4E0E\u6570\u63A7\u7F16\u7A0B",
     category: "cad",
     integration: "source",
     runtime: "python",
@@ -184,6 +190,8 @@ var SOFTWARE_CATALOG = [
     id: "creo",
     title: "Creo Parametric",
     titleZh: "Creo Parametric",
+    subtitleEn: "Parametric solid and mechanism design",
+    subtitleZh: "\u53C2\u6570\u5316\u5B9E\u4F53\u4E0E\u673A\u6784\u8BBE\u8BA1",
     category: "cad",
     integration: "planned",
     runtime: "python",
@@ -199,6 +207,8 @@ var SOFTWARE_CATALOG = [
     id: "inventor",
     title: "Inventor",
     titleZh: "Inventor",
+    subtitleEn: "Mechanical and sheet-metal design",
+    subtitleZh: "\u4E09\u7EF4\u673A\u68B0\u4E0E\u94A3\u91D1\u8BBE\u8BA1",
     category: "cad",
     integration: "planned",
     runtime: "python",
@@ -214,6 +224,8 @@ var SOFTWARE_CATALOG = [
     id: "autocad",
     title: "AutoCAD",
     titleZh: "AutoCAD",
+    subtitleEn: "2D drafting and DWG annotation",
+    subtitleZh: "\u4E8C\u7EF4\u5DE5\u7A0B\u5236\u56FE\u4E0E\u6807\u6CE8",
     category: "cad",
     integration: "planned",
     runtime: "python",
@@ -229,6 +241,8 @@ var SOFTWARE_CATALOG = [
     id: "fusion",
     title: "Autodesk Fusion",
     titleZh: "Autodesk Fusion",
+    subtitleEn: "3D modeling, surfacing, and CAM",
+    subtitleZh: "\u81EA\u7531\u9020\u578B\u4E0E\u5236\u9020\u52A0\u5DE5",
     category: "cad",
     integration: "planned",
     runtime: "python",
@@ -244,6 +258,8 @@ var SOFTWARE_CATALOG = [
     id: "eplan",
     title: "EPLAN",
     titleZh: "EPLAN",
+    subtitleEn: "Electrical schematics and wiring",
+    subtitleZh: "\u7535\u6C14\u539F\u7406\u56FE\u4E0E\u5E03\u7EBF\u8BBE\u8BA1",
     category: "cad",
     integration: "source",
     runtime: "python",
@@ -274,6 +290,8 @@ var SOFTWARE_CATALOG = [
     id: "abaqus",
     title: "Abaqus",
     titleZh: "Abaqus",
+    subtitleEn: "Nonlinear structural FEA",
+    subtitleZh: "\u975E\u7EBF\u6027\u7ED3\u6784\u6709\u9650\u5143",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -305,6 +323,8 @@ var SOFTWARE_CATALOG = [
     id: "ansys-workbench",
     title: "Ansys Workbench",
     titleZh: "Ansys Workbench",
+    subtitleEn: "Structural, modal, and thermal FEA",
+    subtitleZh: "\u7ED3\u6784\u70ED\u529B\u534F\u540C\u4EFF\u771F",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -336,6 +356,8 @@ var SOFTWARE_CATALOG = [
     id: "ansys-fluent",
     title: "Ansys Fluent",
     titleZh: "Ansys Fluent",
+    subtitleEn: "General-purpose fluid dynamics (CFD)",
+    subtitleZh: "\u901A\u7528\u8BA1\u7B97\u6D41\u4F53\u529B\u5B66",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -362,6 +384,8 @@ var SOFTWARE_CATALOG = [
     id: "ansys-aedt",
     title: "Ansys Electronics Desktop",
     titleZh: "Ansys Electronics Desktop (AEDT)",
+    subtitleEn: "3D electromagnetics and motor CAE",
+    subtitleZh: "\u9AD8\u9891\u7535\u78C1\u4E0E\u7535\u673A\u4EFF\u771F",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -388,6 +412,8 @@ var SOFTWARE_CATALOG = [
     id: "comsol",
     title: "COMSOL Multiphysics",
     titleZh: "COMSOL Multiphysics",
+    subtitleEn: "Coupled multiphysics simulation",
+    subtitleZh: "\u591A\u7269\u7406\u573A\u8026\u5408\u4EFF\u771F",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -415,6 +441,8 @@ var SOFTWARE_CATALOG = [
     id: "cst",
     title: "CST Studio Suite",
     titleZh: "CST Studio Suite",
+    subtitleEn: "Full-wave EM and antenna analysis",
+    subtitleZh: "\u5168\u6CE2\u7535\u78C1\u4E0E\u5929\u7EBF\u4EFF\u771F",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -441,6 +469,8 @@ var SOFTWARE_CATALOG = [
     id: "ansa",
     title: "BETA CAE ANSA",
     titleZh: "BETA CAE ANSA",
+    subtitleEn: "Geometry cleanup and FEA meshing",
+    subtitleZh: "\u51E0\u4F55\u6E05\u7406\u4E0E\u7F51\u683C\u524D\u5904\u7406",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -468,6 +498,8 @@ var SOFTWARE_CATALOG = [
     id: "hyperworks",
     title: "HyperWorks",
     titleZh: "HyperWorks",
+    subtitleEn: "FEA pre/post and topology optimization",
+    subtitleZh: "\u6709\u9650\u5143\u5EFA\u6A21\u4E0E\u62D3\u6251\u4F18\u5316",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -499,6 +531,8 @@ var SOFTWARE_CATALOG = [
     id: "star-ccm",
     title: "STAR-CCM+",
     titleZh: "STAR-CCM+",
+    subtitleEn: "Multiphase CFD and aero-thermal",
+    subtitleZh: "\u591A\u76F8\u6D41\u4E0E\u6C14\u52A8\u70ED\u4EFF\u771F",
     category: "cae",
     integration: "planned",
     runtime: "python",
@@ -514,6 +548,8 @@ var SOFTWARE_CATALOG = [
     id: "flotherm",
     title: "FloTHERM",
     titleZh: "FloTHERM",
+    subtitleEn: "Electronics and IC thermal CFD",
+    subtitleZh: "\u7535\u5B50\u8BBE\u5907\u4E0E\u82AF\u7247\u6563\u70ED",
     category: "cae",
     integration: "planned",
     runtime: "python",
@@ -529,6 +565,8 @@ var SOFTWARE_CATALOG = [
     id: "adams",
     title: "Adams",
     titleZh: "Adams",
+    subtitleEn: "Multibody dynamics and kinematics",
+    subtitleZh: "\u591A\u4F53\u673A\u6784\u52A8\u529B\u5B66\u4EFF\u771F",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -560,6 +598,8 @@ var SOFTWARE_CATALOG = [
     id: "flac3d",
     title: "FLAC3D",
     titleZh: "FLAC3D",
+    subtitleEn: "3D geotechnical and rock mechanics",
+    subtitleZh: "\u4E09\u7EF4\u5CA9\u571F\u4E0E\u5730\u4E0B\u529B\u5B66",
     category: "cae",
     integration: "planned",
     runtime: "python",
@@ -575,6 +615,8 @@ var SOFTWARE_CATALOG = [
     id: "calculix",
     title: "CalculiX",
     titleZh: "CalculiX (\u5F00\u6E90\u6709\u9650\u5143)",
+    subtitleEn: "Open-source structural and thermal FEA",
+    subtitleZh: "\u5F00\u6E90\u7ED3\u6784\u4E0E\u70ED\u529B\u6709\u9650\u5143",
     category: "cae",
     integration: "source",
     runtime: "python",
@@ -603,6 +645,8 @@ var SOFTWARE_CATALOG = [
     id: "easyeda-pro",
     title: "EasyEDA Pro (JLC EDA)",
     titleZh: "\u5609\u7ACB\u521BEDA \u4E13\u4E1A\u7248 (EasyEDA Pro)",
+    subtitleEn: "Schematic, PCB, and library design",
+    subtitleZh: "\u539F\u7406\u56FE\u4E0E PCB \u8BBE\u8BA1",
     category: "eda",
     integration: "source",
     runtime: "node",
@@ -629,6 +673,8 @@ var SOFTWARE_CATALOG = [
     id: "kicad",
     title: "KiCad",
     titleZh: "KiCad",
+    subtitleEn: "Open-source schematic and PCB EDA",
+    subtitleZh: "\u5F00\u6E90\u7535\u8DEF\u4E0E PCB \u8BBE\u8BA1",
     category: "eda",
     integration: "source",
     runtime: "python",
@@ -655,6 +701,8 @@ var SOFTWARE_CATALOG = [
     id: "altium-designer",
     title: "Altium Designer",
     titleZh: "Altium Designer",
+    subtitleEn: "High-speed multi-layer PCB design",
+    subtitleZh: "\u9AD8\u901F\u591A\u5C42 PCB \u8BBE\u8BA1",
     category: "eda",
     integration: "planned",
     runtime: "python",
@@ -670,6 +718,8 @@ var SOFTWARE_CATALOG = [
     id: "ads",
     title: "Keysight ADS",
     titleZh: "Keysight ADS (\u5148\u8FDB\u8BBE\u8BA1\u7CFB\u7EDF)",
+    subtitleEn: "RF, microwave, and high-speed EDA",
+    subtitleZh: "\u5C04\u9891\u5FAE\u6CE2\u4E0E\u9AD8\u901F\u7535\u8DEF",
     category: "eda",
     integration: "source",
     runtime: "python",
@@ -2549,6 +2599,8 @@ var ConnectorProvisioner = class _ConnectorProvisioner {
       id: spec.id,
       title: spec.title,
       titleZh: spec.titleZh,
+      subtitleEn: spec.subtitleEn,
+      subtitleZh: spec.subtitleZh,
       category: spec.category,
       integration: spec.integration,
       runtime: spec.runtime,
@@ -3004,7 +3056,7 @@ function softwareIconsForEdition(edition) {
 }
 
 // packages/mcp-server/src/mcp-app-ui.ts
-var CONNECTOR_VERSION = "1.0.4";
+var CONNECTOR_VERSION = "1.0.5";
 var MCP_APP_MIME_TYPE = "text/html;profile=mcp-app";
 function mcpAppUrisForEdition(edition) {
   return {
@@ -4292,14 +4344,14 @@ function renderMcpAppHtml(edition, surface) {
       const CAT_ORDER = ['cad', 'cae', 'eda'];
       const CAT_LABELS = {
         zh: {
-          cad: 'CAD \xB7 \u4E09\u7EF4\u5EFA\u6A21\u4E0E\u5DE5\u7A0B\u56FE',
+          cad: 'CAD \xB7 \u4E09\u7EF4\u9020\u578B\u4E0E\u5DE5\u7A0B\u5236\u56FE',
           cae: 'CAE \xB7 \u4EFF\u771F\u8BA1\u7B97\u4E0E\u5DE5\u7A0B\u5206\u6790',
-          eda: 'EDA \xB7 \u7535\u8DEF\u4E0EPCB\u8BBE\u8BA1',
+          eda: 'EDA \xB7 \u539F\u7406\u56FE\u4E0E PCB \u8BBE\u8BA1',
         },
         en: {
-          cad: 'CAD \xB7 3D Modeling & Drafting',
-          cae: 'CAE \xB7 Simulation & Engineering Analysis',
-          eda: 'EDA \xB7 Circuits & PCB Design',
+          cad: 'CAD \xB7 Modeling and engineering drawings',
+          cae: 'CAE \xB7 Simulation and engineering analysis',
+          eda: 'EDA \xB7 Schematic and PCB design',
         },
       };
 
@@ -4447,6 +4499,11 @@ function renderMcpAppHtml(edition, surface) {
       function catLabel(cat) {
         const key = String(cat || '').toLowerCase();
         return (isZh ? CAT_LABELS.zh[key] : CAT_LABELS.en[key]) || key.toUpperCase();
+      }
+
+      function adapterSubtitle(a) {
+        const sub = isZh ? (a.subtitleZh || a.subtitleEn) : (a.subtitleEn || a.subtitleZh);
+        return sub || catLabel(a.category);
       }
 
       function esc(s) {
@@ -4817,6 +4874,8 @@ function renderMcpAppHtml(edition, surface) {
             a.id,
             a.title,
             a.titleZh,
+            a.subtitleZh,
+            a.subtitleEn,
             a.category,
             a.prerequisitesZh,
             a.prerequisitesEn,
@@ -4878,7 +4937,7 @@ function renderMcpAppHtml(edition, surface) {
               '  ' + renderSoftwareIcon(a.id, 'conn-icon'),
               '  <div class="conn-body">',
               '    <div class="conn-name">' + esc(name) + '</div>',
-              '    <div class="conn-cat">' + esc(catLabel(a.category)) + '</div>',
+              '    <div class="conn-cat">' + esc(adapterSubtitle(a)) + '</div>',
               '    <div class="conn-status">' + statusHtml + '</div>',
               '  </div>',
               '  <button type="button" class="conn-act" data-quick-action="' + actType + '" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + ' title="' + esc(actTitle) + '" aria-label="' + esc(actTitle) + '">' + iconSvg(actKind) + '</button>',
@@ -4986,7 +5045,7 @@ function renderMcpAppHtml(edition, surface) {
           '  ' + renderSoftwareIcon(a.id, 'conn-icon'),
           '  <div class="modal-ident">',
           '    <h3 class="modal-title">' + esc(name) + '</h3>',
-          '    <div class="modal-sub">' + esc(catLabel(a.category)) + ' \xB7 ' + esc(a.runtime === 'node' ? 'Node.js MCP' : 'Python MCP') + '</div>',
+          '    <div class="modal-sub">' + esc(adapterSubtitle(a)) + ' \xB7 ' + esc(a.runtime === 'node' ? 'Node.js MCP' : 'Python MCP') + '</div>',
           '  </div>',
           '  <button type="button" class="icon-btn" data-close-modal="1" aria-label="Close">' + iconSvg('close') + '</button>',
           '</div>',
@@ -5310,7 +5369,7 @@ function renderMcpAppHtml(edition, surface) {
         try {
           const initRes = await rpcRequest('ui/initialize', {
             protocolVersion: PROTOCOL_VERSION,
-            appInfo: { name: 'engiaxis-connector-' + EDITION, version: "1.0.4" },
+            appInfo: { name: 'engiaxis-connector-' + EDITION, version: "1.0.5" },
             appCapabilities: { availableDisplayModes: ['fullscreen', 'inline'] },
           });
           hostConnected = true;
@@ -6214,7 +6273,7 @@ function renderWizardHtml(editionTitle, editionSlug) {
               : '<span class="badge">\u672A\u5B89\u88C5 MCP</span>');
         const bridgeBadge = a.bridgePort ? ('<span class="badge ' + (a.bridgeReady ? 'ok' : 'warn') + '">\u6865\u63A5 :' + a.bridgePort + (a.bridgeReady ? ' \u5728\u7EBF' : ' \u672A\u542F\u52A8') + '</span>') : '';
         return '<div class="card">'
-          + '<div class="card-top"><div><div class="card-title">' + a.titleZh + '</div><div class="sub">' + a.id + ' \xB7 ' + a.category.toUpperCase() + ' \xB7 ' + a.runtime + '</div></div>'
+          + '<div class="card-top"><div><div class="card-title">' + a.titleZh + '</div><div class="sub">' + (a.subtitleZh || a.category.toUpperCase()) + ' \xB7 ' + a.runtime + '</div></div>'
           + '<button class="btn primary" onclick="setupAdapter('' + a.id + '')">' + (isConn ? '\u91CD\u65B0\u68C0\u6D4B' : '+ \u4E00\u952E\u914D\u7F6E') + '</button></div>'
           + '<div class="pills">' + appBadge + provBadge + bridgeBadge + '</div>'
           + '<div class="meta">' + a.prerequisitesZh + '</div>'
