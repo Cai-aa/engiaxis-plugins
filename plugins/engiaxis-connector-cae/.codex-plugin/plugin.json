@@ -1,6 +1,6 @@
 {
   "name": "engiaxis-connector-cae",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Connect Abaqus, Ansys (Workbench / Fluent / AEDT), COMSOL, CST, ANSA, HyperWorks, Adams, CalculiX, and planned CAE solvers (STAR-CCM+, FloTHERM, FLAC3D).",
   "author": {
     "name": "EngiAxis"

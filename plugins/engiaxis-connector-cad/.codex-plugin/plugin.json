@@ -1,6 +1,6 @@
 {
   "name": "engiaxis-connector-cad",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Connect SolidWorks, CATIA V5, UG / Siemens NX, EPLAN, and planned CAD tools (Creo, Inventor, AutoCAD, Fusion) to AI desktop clients.",
   "author": {
     "name": "EngiAxis"

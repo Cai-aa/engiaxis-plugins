@@ -483,8 +483,10 @@ var SOFTWARE_CATALOG = [
       bundledDir: "hyperworks"
     },
     launch: {
-      kind: "python-script",
-      scripts: ["server.py"]
+      kind: "python-module",
+      module: "hyperworks_mcp",
+      checkFile: "src/hyperworks_mcp/server.py",
+      pythonPathSubdir: "src"
     },
     buildEnv: ({ homeDir, discoveredExecutable }) => ({
       ...executableEnv("HYPERWORKS_HOME", discoveredExecutable, hyperworksRootFromExecutable),
@@ -706,6 +708,36 @@ function adaptersForEdition(edition) {
 function isAdapterInEdition(id, edition) {
   const spec = adapterById(id);
   return spec ? editionCoversCategory(edition, spec.category) : false;
+}
+var HOST_SERVER_ALIASES = {
+  solidworks: ["solidworks", "solidworks-mcp", "solidworks-agent"],
+  catia: ["catia", "catia-v5", "catia-mcp", "catia-agent"],
+  nx: ["nx", "siemens-nx", "ug-nx", "nx-mcp"],
+  creo: ["creo", "creo-parametric", "creo-mcp"],
+  inventor: ["inventor", "autodesk-inventor", "inventor-mcp"],
+  autocad: ["autocad", "autodesk-autocad", "autocad-mcp"],
+  fusion: ["fusion", "autodesk-fusion", "fusion360", "fusion-360", "fusion-mcp"],
+  eplan: ["eplan", "eplan-p8", "eplan-mcp"],
+  abaqus: ["abaqus", "abaqus-mcp"],
+  "ansys-workbench": ["ansys-workbench", "workbench-mcp"],
+  "ansys-fluent": ["ansys-fluent", "fluent-mcp", "pyfluent", "pyfluent-mcp"],
+  "ansys-aedt": ["ansys-aedt", "aedt-mcp", "pyaedt", "pyaedt-mcp"],
+  comsol: ["comsol", "comsol-multiphysics", "comsol-mcp"],
+  cst: ["cst", "cst-studio-suite", "cst-mcp"],
+  ansa: ["ansa", "beta-cae-ansa", "ansa-mcp"],
+  hyperworks: ["hyperworks", "altair-hyperworks", "hyperworks-mcp"],
+  "star-ccm": ["star-ccm", "starccm", "star-ccm-plus", "starccm-mcp"],
+  flotherm: ["flotherm", "simcenter-flotherm", "flotherm-mcp"],
+  adams: ["adams", "hexagon-adams", "adams-mcp"],
+  flac3d: ["flac3d", "itasca-flac3d", "flac3d-mcp"],
+  calculix: ["calculix", "ccx", "calculix-mcp"],
+  "easyeda-pro": ["easyeda-pro", "easyeda", "jlc-eda", "lceda-pro", "easyeda-mcp"],
+  kicad: ["kicad", "kicad-mcp", "kicad-mcp-server"],
+  "altium-designer": ["altium-designer", "altium", "altium-mcp"],
+  ads: ["ads", "keysight-ads", "pathwave-ads", "ads-mcp"]
+};
+function resolveAdapterHostServerNames(id) {
+  return HOST_SERVER_ALIASES[id] ?? [id];
 }
 
 // packages/core/dist/detect.js
@@ -1822,15 +1854,382 @@ async function callMcpStdioTool(launch, toolName, args, options = {}) {
 // packages/core/dist/provisioner.js
 import { randomBytes } from "node:crypto";
 import { spawn as spawn2 } from "node:child_process";
-import { existsSync as existsSync5, mkdirSync as mkdirSync2, readFileSync as readFileSync4, writeFileSync as writeFileSync2 } from "node:fs";
+import { existsSync as existsSync6, mkdirSync as mkdirSync3, readFileSync as readFileSync5, writeFileSync as writeFileSync3 } from "node:fs";
 import { cp, mkdir as mkdir2, readdir, readFile, rename, rm } from "node:fs/promises";
+import { homedir as homedir2 } from "node:os";
+import { dirname as dirname7, isAbsolute as isAbsolute2, join as join6 } from "node:path";
+
+// packages/core/dist/hosts/chatgpt-desktop.js
+import { existsSync as existsSync5, mkdirSync as mkdirSync2, readFileSync as readFileSync4, writeFileSync as writeFileSync2 } from "node:fs";
 import { homedir } from "node:os";
 import { dirname as dirname6, isAbsolute, join as join5 } from "node:path";
+function resolveChatGptConfigTomlPath() {
+  const codexHome = process.env.CODEX_HOME?.trim();
+  if (codexHome)
+    return join5(codexHome, "config.toml");
+  return join5(homedir(), ".codex", "config.toml");
+}
+function tomlLiteralString(value) {
+  if (!value.includes("'") && !value.includes("\n") && !value.includes("\r")) {
+    return `'${value}'`;
+  }
+  return JSON.stringify(value);
+}
+function tomlKey(key) {
+  return /^[A-Za-z0-9_-]+$/.test(key) ? key : JSON.stringify(key);
+}
+function renderCodexMcpTomlSection(server) {
+  const sectionKey = tomlKey(server.name);
+  const lines = [
+    `[mcp_servers.${sectionKey}]`,
+    `enabled = ${server.enabled === false ? "false" : "true"}`,
+    `command = ${tomlLiteralString(server.command)}`,
+    `args = [${server.args.map(tomlLiteralString).join(", ")}]`
+  ];
+  if (server.cwd) {
+    lines.push(`cwd = ${tomlLiteralString(server.cwd)}`);
+  }
+  const envEntries = Object.entries(server.env ?? {});
+  if (envEntries.length > 0) {
+    lines.push("");
+    lines.push(`[mcp_servers.${sectionKey}.env]`);
+    for (const [k, v] of envEntries) {
+      lines.push(`${tomlKey(k)} = ${tomlLiteralString(v)}`);
+    }
+  }
+  return lines.join("\n");
+}
+function unquoteTomlScalar(raw) {
+  const trimmed = raw.trim();
+  if (trimmed.startsWith("'") && trimmed.endsWith("'") && trimmed.length >= 2) {
+    return trimmed.slice(1, -1);
+  }
+  if (trimmed.startsWith('"') && trimmed.endsWith('"') && trimmed.length >= 2) {
+    try {
+      return JSON.parse(trimmed);
+    } catch {
+      return trimmed.slice(1, -1);
+    }
+  }
+  return trimmed;
+}
+function stripTomlInlineComment(raw) {
+  let inSingle = false;
+  let inDouble = false;
+  let escaped = false;
+  for (let i = 0; i < raw.length; i += 1) {
+    const ch = raw[i];
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+    if (inDouble && ch === "\\") {
+      escaped = true;
+      continue;
+    }
+    if (!inDouble && ch === "'") {
+      inSingle = !inSingle;
+      continue;
+    }
+    if (!inSingle && ch === '"') {
+      inDouble = !inDouble;
+      continue;
+    }
+    if (!inSingle && !inDouble && ch === "#") {
+      return raw.slice(0, i).trim();
+    }
+  }
+  return raw.trim();
+}
+function parseTomlStringArray(raw) {
+  const trimmed = stripTomlInlineComment(raw);
+  if (!trimmed.startsWith("[") || !trimmed.endsWith("]"))
+    return [];
+  const inner = trimmed.slice(1, -1).trim();
+  if (!inner)
+    return [];
+  const items = [];
+  let current = "";
+  let inSingle = false;
+  let inDouble = false;
+  let escaped = false;
+  for (let i = 0; i < inner.length; i += 1) {
+    const ch = inner[i];
+    if (escaped) {
+      current += ch;
+      escaped = false;
+      continue;
+    }
+    if (inDouble && ch === "\\") {
+      current += ch;
+      escaped = true;
+      continue;
+    }
+    if (!inDouble && ch === "'") {
+      inSingle = !inSingle;
+      current += ch;
+      continue;
+    }
+    if (!inSingle && ch === '"') {
+      inDouble = !inDouble;
+      current += ch;
+      continue;
+    }
+    if (!inSingle && !inDouble && ch === ",") {
+      const token = stripTomlInlineComment(current);
+      if (token)
+        items.push(unquoteTomlScalar(token));
+      current = "";
+      continue;
+    }
+    current += ch;
+  }
+  const tail = stripTomlInlineComment(current);
+  if (tail)
+    items.push(unquoteTomlScalar(tail));
+  return items;
+}
+function matchMcpServerSectionHeader(line) {
+  const match = /^\s*\[\s*mcp_servers\.([^.\]\s"']+|"[^"]+"|'[^']+')(?:\.([^\]]+))?\s*\]\s*(?:#.*)?$/.exec(line);
+  if (!match)
+    return null;
+  const rawName = match[1] ?? "";
+  const serverName = unquoteTomlScalar(rawName);
+  const subPath = match[2] ? match[2].trim() : null;
+  return serverName ? { serverName, subPath } : null;
+}
+function isCommandExecutableAvailable(command) {
+  if (!command || !command.trim())
+    return false;
+  const trimmed = command.trim();
+  const looksLikePath = isAbsolute(trimmed) || /^[A-Za-z]:[\\/]/.test(trimmed) || trimmed.includes("/") || trimmed.includes("\\");
+  if (looksLikePath) {
+    return existsSync5(trimmed);
+  }
+  return true;
+}
+function parseCodexConfigTomlMcpServers(content) {
+  const lines = content.replace(/\r\n/g, "\n").split("\n");
+  const entries = /* @__PURE__ */ new Map();
+  let activeServer = null;
+  let activeSubPath = null;
+  let pendingArrayKey = null;
+  let pendingArrayBuffer = "";
+  const ensureEntry = (name) => {
+    let entry = entries.get(name);
+    if (!entry) {
+      entry = { name, enabled: true, args: [], env: {} };
+      entries.set(name, entry);
+    }
+    return entry;
+  };
+  for (const rawLine of lines) {
+    if (pendingArrayKey && activeServer && activeSubPath === null) {
+      pendingArrayBuffer += " " + stripTomlInlineComment(rawLine);
+      if (pendingArrayBuffer.includes("]")) {
+        if (pendingArrayKey === "args") {
+          activeServer.args = parseTomlStringArray(pendingArrayBuffer);
+        }
+        pendingArrayKey = null;
+        pendingArrayBuffer = "";
+      }
+      continue;
+    }
+    const mcpHeader = matchMcpServerSectionHeader(rawLine);
+    if (mcpHeader) {
+      activeServer = ensureEntry(mcpHeader.serverName);
+      activeSubPath = mcpHeader.subPath;
+      pendingArrayKey = null;
+      pendingArrayBuffer = "";
+      continue;
+    }
+    if (/^\s*\[/.test(rawLine)) {
+      activeServer = null;
+      activeSubPath = null;
+      pendingArrayKey = null;
+      pendingArrayBuffer = "";
+      continue;
+    }
+    if (!activeServer)
+      continue;
+    const cleaned = stripTomlInlineComment(rawLine);
+    if (!cleaned)
+      continue;
+    const eqIdx = cleaned.indexOf("=");
+    if (eqIdx <= 0)
+      continue;
+    const key = unquoteTomlScalar(cleaned.slice(0, eqIdx));
+    const rawVal = cleaned.slice(eqIdx + 1).trim();
+    if (activeSubPath === null) {
+      if (key === "enabled") {
+        if (rawVal === "false")
+          activeServer.enabled = false;
+        else if (rawVal === "true")
+          activeServer.enabled = true;
+      } else if (key === "command") {
+        activeServer.command = unquoteTomlScalar(rawVal);
+      } else if (key === "cwd") {
+        activeServer.cwd = unquoteTomlScalar(rawVal);
+      } else if (key === "url") {
+        activeServer.url = unquoteTomlScalar(rawVal);
+      } else if (key === "args") {
+        if (rawVal.startsWith("[") && !rawVal.includes("]")) {
+          pendingArrayKey = "args";
+          pendingArrayBuffer = rawVal;
+        } else {
+          activeServer.args = parseTomlStringArray(rawVal);
+        }
+      }
+    } else if (activeSubPath === "env") {
+      activeServer.env[key] = unquoteTomlScalar(rawVal);
+    }
+  }
+  const out = [];
+  for (const item of entries.values()) {
+    const isHttp = Boolean(item.url && !item.command);
+    const transport = isHttp ? "http" : "stdio";
+    const commandValid = isHttp ? Boolean(item.url) : isCommandExecutableAvailable(item.command);
+    out.push({
+      name: item.name,
+      enabled: item.enabled,
+      transport,
+      ...item.command ? { command: item.command } : {},
+      args: item.args,
+      ...item.cwd ? { cwd: item.cwd } : {},
+      ...item.url ? { url: item.url } : {},
+      env: item.env,
+      commandValid
+    });
+  }
+  return out;
+}
+function readChatGptDesktopMcpServers(configPath = resolveChatGptConfigTomlPath()) {
+  if (!existsSync5(configPath)) {
+    return { exists: false, configPath, servers: [] };
+  }
+  try {
+    const raw = readFileSync4(configPath, "utf8");
+    return { exists: true, configPath, servers: parseCodexConfigTomlMcpServers(raw) };
+  } catch {
+    return { exists: true, configPath, servers: [] };
+  }
+}
+function setCodexMcpServerEnabled(existingContent, serverName, enabled) {
+  const lines = existingContent.replace(/\r\n/g, "\n").split("\n");
+  let inTargetMain = false;
+  let foundSection = false;
+  let replacedEnabledLine = false;
+  let sectionHeaderIndex = -1;
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    const mcpHeader = matchMcpServerSectionHeader(line);
+    if (mcpHeader) {
+      if (mcpHeader.serverName === serverName && mcpHeader.subPath === null) {
+        inTargetMain = true;
+        foundSection = true;
+        sectionHeaderIndex = i;
+      } else {
+        inTargetMain = false;
+      }
+      continue;
+    }
+    if (/^\s*\[/.test(line)) {
+      inTargetMain = false;
+      continue;
+    }
+    if (inTargetMain) {
+      const cleaned = stripTomlInlineComment(line);
+      const eqIdx = cleaned.indexOf("=");
+      if (eqIdx > 0 && unquoteTomlScalar(cleaned.slice(0, eqIdx)) === "enabled") {
+        lines[i] = `enabled = ${enabled ? "true" : "false"}`;
+        replacedEnabledLine = true;
+        inTargetMain = false;
+      }
+    }
+  }
+  if (!foundSection) {
+    return { updated: false, content: existingContent };
+  }
+  if (!replacedEnabledLine && sectionHeaderIndex >= 0) {
+    lines.splice(sectionHeaderIndex + 1, 0, `enabled = ${enabled ? "true" : "false"}`);
+  }
+  const joined = lines.join("\n").replace(/\n*$/, "\n");
+  return { updated: true, content: joined };
+}
+function toggleChatGptDesktopServer(serverName, enabled, configPath = resolveChatGptConfigTomlPath()) {
+  if (!existsSync5(configPath))
+    return { updated: false, configPath };
+  const existing = readFileSync4(configPath, "utf8");
+  const res = setCodexMcpServerEnabled(existing, serverName, enabled);
+  if (res.updated) {
+    writeFileSync2(configPath, res.content, "utf8");
+  }
+  return { updated: res.updated, configPath };
+}
+function removeCodexConfigTomlServers(existingContent, serverNames) {
+  const lines = existingContent.replace(/\r\n/g, "\n").split("\n");
+  const targetSet = new Set(serverNames);
+  const removedSet = /* @__PURE__ */ new Set();
+  const kept = [];
+  let skipping = false;
+  for (const line of lines) {
+    const mcpHeader = matchMcpServerSectionHeader(line);
+    if (mcpHeader) {
+      if (targetSet.has(mcpHeader.serverName)) {
+        removedSet.add(mcpHeader.serverName);
+        skipping = true;
+        continue;
+      }
+      skipping = false;
+    } else if (/^\s*\[/.test(line)) {
+      skipping = false;
+    }
+    if (!skipping)
+      kept.push(line);
+  }
+  const normalized = kept.join("\n").replace(/\n{3,}/g, "\n\n").trimEnd();
+  return {
+    removed: [...removedSet],
+    content: normalized ? `${normalized}
+` : ""
+  };
+}
+function removeChatGptDesktopServers(serverNames, configPath = resolveChatGptConfigTomlPath()) {
+  if (!existsSync5(configPath))
+    return { removed: [], configPath };
+  const existing = readFileSync4(configPath, "utf8");
+  const res = removeCodexConfigTomlServers(existing, serverNames);
+  if (res.removed.length > 0) {
+    writeFileSync2(configPath, res.content, "utf8");
+  }
+  return { removed: res.removed, configPath };
+}
+function upsertCodexConfigToml(existingContent, servers) {
+  const { content: stripped } = removeCodexConfigTomlServers(existingContent, servers.map((s) => s.name));
+  const base = stripped.trimEnd();
+  const additions = servers.map(renderCodexMcpTomlSection).join("\n\n");
+  if (!base)
+    return `${additions}
+`;
+  return `${base}
+
+${additions}
+`;
+}
+function syncChatGptDesktopConfig(servers, configPath = resolveChatGptConfigTomlPath()) {
+  const existing = existsSync5(configPath) ? readFileSync4(configPath, "utf8") : "";
+  const next = upsertCodexConfigToml(existing, servers);
+  mkdirSync2(dirname6(configPath), { recursive: true });
+  writeFileSync2(configPath, next, "utf8");
+  return { configPath, updatedServers: servers.map((s) => s.name) };
+}
+
+// packages/core/dist/provisioner.js
 function defaultConnectorHomeDir() {
   const fromEnv = process.env.ENGIAXIS_CONNECTOR_HOME?.trim();
   if (fromEnv)
     return fromEnv;
-  return join5(homedir(), ".engiaxis-connector");
+  return join6(homedir2(), ".engiaxis-connector");
 }
 function createDefaultConfig(overrides = {}) {
   const homeDir = overrides.homeDir ?? defaultConnectorHomeDir();
@@ -1853,11 +2252,12 @@ function createDefaultConfig(overrides = {}) {
     executablePaths: overrides.executablePaths,
     publicKeyPem: overrides.publicKeyPem,
     activationApiUrl: overrides.activationApiUrl,
-    allowDevBypass: overrides.allowDevBypass ?? false
+    allowDevBypass: overrides.allowDevBypass ?? false,
+    codexConfigPath: overrides.codexConfigPath !== void 0 ? overrides.codexConfigPath : overrides.homeDir === void 0 ? resolveChatGptConfigTomlPath() : null
   };
 }
 function runtimePythonPath(runtimesDir, id, platform2 = process.platform) {
-  return platform2 === "win32" ? join5(runtimesDir, id, "Scripts", "python.exe") : join5(runtimesDir, id, "bin", "python");
+  return platform2 === "win32" ? join6(runtimesDir, id, "Scripts", "python.exe") : join6(runtimesDir, id, "bin", "python");
 }
 async function readAllPythonSources(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -1865,7 +2265,7 @@ async function readAllPythonSources(dir) {
   for (const entry of entries) {
     if (entry.name === ".venv" || entry.name === "__pycache__" || entry.name === ".git" || entry.name === "node_modules")
       continue;
-    const full = join5(dir, entry.name);
+    const full = join6(dir, entry.name);
     if (entry.isDirectory()) {
       out.push(...await readAllPythonSources(full));
     } else if (entry.name.endsWith(".py")) {
@@ -1946,57 +2346,133 @@ function validateSourceDir(dir, spec) {
   if (!launch)
     return { checkOk: false, launchArgs: [] };
   if (launch.kind === "python-module") {
-    const ok2 = existsSync5(join5(dir, "pyproject.toml")) && existsSync5(join5(dir, ...launch.checkFile.split("/")));
+    const hasPyproject = existsSync6(join6(dir, "pyproject.toml"));
+    const hasModuleEntry = existsSync6(join6(dir, ...launch.checkFile.split("/")));
+    if (hasPyproject && hasModuleEntry) {
+      return {
+        checkOk: true,
+        launchArgs: ["-m", launch.module],
+        pythonPath: join6(dir, launch.pythonPathSubdir)
+      };
+    }
+    if (hasPyproject && existsSync6(join6(dir, "server.py"))) {
+      return {
+        checkOk: true,
+        launchArgs: [join6(dir, "server.py")],
+        pythonPath: dir
+      };
+    }
     return {
-      checkOk: ok2,
+      checkOk: false,
       launchArgs: ["-m", launch.module],
-      pythonPath: join5(dir, launch.pythonPathSubdir)
+      pythonPath: join6(dir, launch.pythonPathSubdir)
     };
   }
   if (launch.kind === "python-script") {
-    if (!existsSync5(join5(dir, "pyproject.toml")))
+    if (!existsSync6(join6(dir, "pyproject.toml")))
       return { checkOk: false, launchArgs: [] };
     for (const script of launch.scripts) {
-      if (existsSync5(join5(dir, script))) {
-        return { checkOk: true, launchArgs: [join5(dir, script)], pythonPath: dir };
+      if (existsSync6(join6(dir, script))) {
+        return { checkOk: true, launchArgs: [join6(dir, script)], pythonPath: dir };
       }
     }
     return { checkOk: false, launchArgs: [] };
   }
-  const entry = join5(dir, ...launch.entryScript.split("/"));
-  const pkgJson = launch.packageDir ? join5(dir, launch.packageDir, "package.json") : join5(dir, "package.json");
-  const ok = existsSync5(entry) || launch.buildCommand !== void 0 && existsSync5(pkgJson);
+  const entry = join6(dir, ...launch.entryScript.split("/"));
+  const pkgJson = launch.packageDir ? join6(dir, launch.packageDir, "package.json") : join6(dir, "package.json");
+  const ok = existsSync6(entry) || launch.buildCommand !== void 0 && existsSync6(pkgJson);
   return { checkOk: ok, launchArgs: [entry] };
 }
 function ensureAdsBridgeConfig(runtimeDir, homeDir) {
-  const configPath = join5(runtimeDir, "bridge_config.json");
-  mkdirSync2(runtimeDir, { recursive: true });
-  if (existsSync5(configPath))
+  const configPath = join6(runtimeDir, "bridge_config.json");
+  mkdirSync3(runtimeDir, { recursive: true });
+  if (existsSync6(configPath))
     return configPath;
   const token = randomBytes(32).toString("hex");
   const payload = {
     host: "127.0.0.1",
     port: 48326,
     token,
-    workspace_root: join5(homeDir, "workspaces", "ads"),
+    workspace_root: join6(homeDir, "workspaces", "ads"),
     timeout: 60,
     max_message_bytes: 16777216
   };
-  mkdirSync2(payload.workspace_root, { recursive: true });
-  writeFileSync2(configPath, `${JSON.stringify(payload, null, 2)}
+  mkdirSync3(payload.workspace_root, { recursive: true });
+  writeFileSync3(configPath, `${JSON.stringify(payload, null, 2)}
 `, "utf8");
   return configPath;
 }
-var ConnectorProvisioner = class {
+function matchHostServerForAdapter(id, servers) {
+  const candidates = resolveAdapterHostServerNames(id).map((name) => servers.get(name)).filter((item) => item !== void 0);
+  if (candidates.length === 0)
+    return void 0;
+  return candidates.find((c) => c.enabled && c.commandValid) ?? candidates.find((c) => c.enabled) ?? candidates.find((c) => c.commandValid) ?? candidates[0];
+}
+function parseLoopbackHttpPort(rawUrl) {
+  if (!rawUrl)
+    return void 0;
+  try {
+    const parsed = new URL(rawUrl);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:")
+      return void 0;
+    const host = parsed.hostname.toLowerCase();
+    if (host !== "127.0.0.1" && host !== "localhost" && host !== "::1" && host !== "[::1]")
+      return void 0;
+    const port = Number.parseInt(parsed.port, 10);
+    return Number.isInteger(port) && port > 0 && port <= 65535 ? port : void 0;
+  } catch {
+    return void 0;
+  }
+}
+var ConnectorProvisioner = class _ConnectorProvisioner {
   config;
   registryPath;
+  probeCachePath;
   sourcesDir;
   runtimesDir;
   constructor(config) {
     this.config = config;
-    this.registryPath = join5(config.homeDir, "provisioned.json");
-    this.sourcesDir = join5(config.homeDir, "sources");
-    this.runtimesDir = join5(config.homeDir, "runtimes");
+    this.registryPath = join6(config.homeDir, "provisioned.json");
+    this.probeCachePath = join6(config.homeDir, "host-probe-cache.json");
+    this.sourcesDir = join6(config.homeDir, "sources");
+    this.runtimesDir = join6(config.homeDir, "runtimes");
+  }
+  static launchSignature(launch) {
+    return JSON.stringify([launch.command, launch.args]);
+  }
+  readProbeCache() {
+    if (!existsSync6(this.probeCachePath))
+      return {};
+    try {
+      const parsed = JSON.parse(readFileSync5(this.probeCachePath, "utf8"));
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        return parsed;
+      }
+    } catch {
+    }
+    return {};
+  }
+  saveProbeCache(id, launch, toolNames) {
+    const current = this.readProbeCache();
+    current[id] = {
+      signature: _ConnectorProvisioner.launchSignature(launch),
+      toolCount: toolNames.length,
+      toolNames: [...toolNames],
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    mkdirSync3(dirname7(this.probeCachePath), { recursive: true });
+    writeFileSync3(this.probeCachePath, `${JSON.stringify(current, null, 2)}
+`, "utf8");
+  }
+  removeProbeCache(id) {
+    const current = this.readProbeCache();
+    if (!(id in current))
+      return false;
+    delete current[id];
+    mkdirSync3(dirname7(this.probeCachePath), { recursive: true });
+    writeFileSync3(this.probeCachePath, `${JSON.stringify(current, null, 2)}
+`, "utf8");
+    return true;
   }
   getEdition() {
     return this.config.edition;
@@ -2005,10 +2481,10 @@ var ConnectorProvisioner = class {
     return this.config.homeDir;
   }
   readRegistry() {
-    if (!existsSync5(this.registryPath))
+    if (!existsSync6(this.registryPath))
       return {};
     try {
-      const parsed = JSON.parse(readFileSync4(this.registryPath, "utf8"));
+      const parsed = JSON.parse(readFileSync5(this.registryPath, "utf8"));
       if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
         return parsed;
       }
@@ -2019,8 +2495,8 @@ var ConnectorProvisioner = class {
   saveRecord(record) {
     const current = this.readRegistry();
     current[record.id] = record;
-    mkdirSync2(dirname6(this.registryPath), { recursive: true });
-    writeFileSync2(this.registryPath, `${JSON.stringify(current, null, 2)}
+    mkdirSync3(dirname7(this.registryPath), { recursive: true });
+    writeFileSync3(this.registryPath, `${JSON.stringify(current, null, 2)}
 `, "utf8");
   }
   removeRecord(id) {
@@ -2028,20 +2504,47 @@ var ConnectorProvisioner = class {
     if (!(id in current))
       return false;
     delete current[id];
-    mkdirSync2(dirname6(this.registryPath), { recursive: true });
-    writeFileSync2(this.registryPath, `${JSON.stringify(current, null, 2)}
+    mkdirSync3(dirname7(this.registryPath), { recursive: true });
+    writeFileSync3(this.registryPath, `${JSON.stringify(current, null, 2)}
 `, "utf8");
     return true;
   }
-  async inspectAdapter(id) {
+  async inspectAdapter(id, preloadedHostServers) {
     const spec = adapterById(id);
     if (!spec)
       throw new Error(`Unknown software adapter: ${id}`);
     const app = await detectSoftwareExecutable(id, this.config.executablePaths?.[id]);
-    const bridgeReady = spec.bridgePort ? await probeTcpPort(spec.bridgePort) : null;
     const registry = this.readRegistry();
     const record = registry[id];
-    const provisioned = Boolean(record && existsSync5(record.command));
+    const provisioned = Boolean(record && existsSync6(record.command));
+    const codexPath = this.config.codexConfigPath;
+    let hostServers = null;
+    if (preloadedHostServers !== void 0) {
+      hostServers = preloadedHostServers;
+    } else if (codexPath) {
+      const readRes = readChatGptDesktopMcpServers(codexPath);
+      if (readRes.exists) {
+        hostServers = new Map(readRes.servers.map((s) => [s.name, s]));
+      }
+    }
+    const matched = hostServers ? matchHostServerForAdapter(id, hostServers) : void 0;
+    const hostConfigured = hostServers ? Boolean(matched) : provisioned;
+    const hostEnabled = hostServers ? Boolean(matched?.enabled) : provisioned;
+    const connected = hostServers ? Boolean(matched && matched.enabled && matched.commandValid) : provisioned;
+    const launch = matched && matched.transport === "stdio" && matched.command && matched.commandValid ? {
+      command: matched.command,
+      args: matched.args,
+      cwd: matched.cwd ?? process.cwd(),
+      env: matched.env
+    } : provisioned && record ? { command: record.command, args: record.args, cwd: record.cwd, env: record.env } : void 0;
+    const cachedProbe = launch ? this.readProbeCache()[id] : void 0;
+    const cacheValid = Boolean(launch && cachedProbe && cachedProbe.signature === _ConnectorProvisioner.launchSignature(launch));
+    const recordMatchesLaunch = Boolean(provisioned && record && (!matched || matched.command === record.command));
+    const toolNames = cacheValid && cachedProbe ? cachedProbe.toolNames : recordMatchesLaunch && record ? record.toolNames : [];
+    const toolCount = cacheValid && cachedProbe ? cachedProbe.toolCount : recordMatchesLaunch && record ? record.toolCount : 0;
+    const effectiveBridgePort = spec.bridgePort ?? (matched?.transport === "http" ? parseLoopbackHttpPort(matched.url) : void 0);
+    const bridgeReady = effectiveBridgePort ? await probeTcpPort(effectiveBridgePort) : null;
+    const bridgeDetail = effectiveBridgePort ? `127.0.0.1:${effectiveBridgePort} TCP ${bridgeReady ? "open" : "unreachable"}` : matched?.transport === "http" && matched.url ? matched.url : "not-required";
     return {
       id: spec.id,
       title: spec.title,
@@ -2057,18 +2560,30 @@ var ConnectorProvisioner = class {
       platformSupported: !spec.platformWindowsOnly || process.platform === "win32",
       appInstalled: app.installed,
       appDetail: app.detail,
-      ...spec.bridgePort ? { bridgePort: spec.bridgePort } : {},
+      ...effectiveBridgePort ? { bridgePort: effectiveBridgePort } : {},
       bridgeReady,
-      bridgeDetail: spec.bridgePort ? `127.0.0.1:${spec.bridgePort} TCP ${bridgeReady ? "open" : "unreachable"}` : "not-required",
+      bridgeDetail,
       provisioned,
-      toolCount: provisioned && record ? record.toolCount : 0,
-      toolNames: provisioned && record ? record.toolNames : [],
-      ...provisioned && record ? { launch: { command: record.command, args: record.args, cwd: record.cwd, env: record.env } } : {}
+      connected,
+      hostConfigured,
+      hostEnabled,
+      ...matched ? { hostServerName: matched.name, hostTransport: matched.transport } : {},
+      toolCount,
+      toolNames,
+      ...launch ? { launch } : {}
     };
   }
   async listEditionAdapters() {
     const specs = adaptersForEdition(this.config.edition);
-    return Promise.all(specs.map((spec) => this.inspectAdapter(spec.id)));
+    const codexPath = this.config.codexConfigPath;
+    let preloadedHostServers = null;
+    if (codexPath) {
+      const readRes = readChatGptDesktopMcpServers(codexPath);
+      if (readRes.exists) {
+        preloadedHostServers = new Map(readRes.servers.map((s) => [s.name, s]));
+      }
+    }
+    return Promise.all(specs.map((spec) => this.inspectAdapter(spec.id, preloadedHostServers)));
   }
   async setup(id, options = {}) {
     const spec = adapterById(id);
@@ -2116,7 +2631,7 @@ var ConnectorProvisioner = class {
       ...spec.buildEnv({
         homeDir: this.config.homeDir,
         sourceDir: resolvedSource.sourceDir,
-        ...detected.installed && isAbsolute(detected.detail) ? { discoveredExecutable: detected.detail } : {},
+        ...detected.installed && isAbsolute2(detected.detail) ? { discoveredExecutable: detected.detail } : {},
         ...runtimeConfigPath ? { runtimeConfigPath } : {}
       }),
       ...resolvedSource.pythonPath ? { PYTHONPATH: resolvedSource.pythonPath } : {}
@@ -2166,8 +2681,8 @@ var ConnectorProvisioner = class {
     const repoNames = [source.repo, ...source.localRepoAliases ?? []];
     for (const root of this.config.hubRoots) {
       const candidates = [
-        join5(root, ...source.repoSubpath.split("/")),
-        ...repoNames.map((repo) => join5(root, repo, ...source.repoSubpath.split("/")))
+        join6(root, ...source.repoSubpath.split("/")),
+        ...repoNames.map((repo) => join6(root, repo, ...source.repoSubpath.split("/")))
       ];
       for (const candidate of candidates) {
         const checked = validateSourceDir(candidate, spec);
@@ -2183,12 +2698,12 @@ var ConnectorProvisioner = class {
       }
     }
     if (this.config.bundledMcpDir) {
-      const bundledSource = join5(this.config.bundledMcpDir, spec.source.bundledDir);
+      const bundledSource = join6(this.config.bundledMcpDir, spec.source.bundledDir);
       const checked = validateSourceDir(bundledSource, spec);
       if (checked.checkOk) {
-        const writableCopy = join5(this.sourcesDir, "bundled", spec.id);
-        if (!existsSync5(writableCopy)) {
-          await mkdir2(dirname6(writableCopy), { recursive: true });
+        const writableCopy = join6(this.sourcesDir, "bundled", spec.id);
+        if (!existsSync6(writableCopy)) {
+          await mkdir2(dirname7(writableCopy), { recursive: true });
           await cp(bundledSource, writableCopy, { recursive: true });
         }
         const copiedCheck = validateSourceDir(writableCopy, spec);
@@ -2201,7 +2716,7 @@ var ConnectorProvisioner = class {
         };
       }
     }
-    const cachedDir = join5(this.sourcesDir, spec.source.repo, ...spec.source.repoSubpath.split("/"));
+    const cachedDir = join6(this.sourcesDir, spec.source.repo, ...spec.source.repoSubpath.split("/"));
     const cachedCheck = validateSourceDir(cachedDir, spec);
     if (cachedCheck.checkOk) {
       return {
@@ -2234,7 +2749,7 @@ var ConnectorProvisioner = class {
         return { ok: false, detail: `Subpath ${spec.source.repoSubpath} not found in ${archiveUrl}.` };
       }
       await rm(cachedDir, { recursive: true, force: true });
-      await mkdir2(dirname6(cachedDir), { recursive: true });
+      await mkdir2(dirname7(cachedDir), { recursive: true });
       await rename(stagingDir, cachedDir);
       const finalCheck = validateSourceDir(cachedDir, spec);
       return {
@@ -2250,37 +2765,37 @@ var ConnectorProvisioner = class {
     }
   }
   async provisionRuntime(spec, sourceDir, signal) {
-    const runtimeDir = join5(this.runtimesDir, spec.id);
+    const runtimeDir = join6(this.runtimesDir, spec.id);
     await mkdir2(runtimeDir, { recursive: true });
     if (spec.runtime === "node") {
       const launch = spec.launch;
       if (!launch || launch.kind !== "node-script") {
         return { ok: false, code: "invalid-recipe", detail: "Node runtime requires a node-script launch spec." };
       }
-      const pkgDir = launch.packageDir ? join5(sourceDir, launch.packageDir) : sourceDir;
-      if (existsSync5(join5(pkgDir, "package.json")) && !existsSync5(join5(pkgDir, "node_modules"))) {
-        const installCmd = existsSync5(join5(pkgDir, "package-lock.json")) ? ["npm", "ci"] : ["npm", "install"];
+      const pkgDir = launch.packageDir ? join6(sourceDir, launch.packageDir) : sourceDir;
+      if (existsSync6(join6(pkgDir, "package.json")) && !existsSync6(join6(pkgDir, "node_modules"))) {
+        const installCmd = existsSync6(join6(pkgDir, "package-lock.json")) ? ["npm", "ci"] : ["npm", "install"];
         const res = await runSubprocess(installCmd, pkgDir, this.config.installTimeoutMs, signal);
         if (!res.ok)
           return { ok: false, code: "dependency-failed", detail: res.diagnostic };
       }
-      const entry = join5(sourceDir, ...launch.entryScript.split("/"));
-      if (!existsSync5(entry) && launch.buildCommand) {
+      const entry = join6(sourceDir, ...launch.entryScript.split("/"));
+      if (!existsSync6(entry) && launch.buildCommand) {
         const buildRes = await runSubprocess(launch.buildCommand, pkgDir, this.config.installTimeoutMs, signal);
         if (!buildRes.ok)
           return { ok: false, code: "build-failed", detail: buildRes.diagnostic };
       }
-      if (!existsSync5(entry)) {
+      if (!existsSync6(entry)) {
         return { ok: false, code: "entry-missing", detail: `Node MCP entry script not found: ${entry}` };
       }
       return { ok: true, command: process.execPath, runtimeDir };
     }
-    const toml = await readFile(join5(sourceDir, "pyproject.toml"), "utf8");
+    const toml = await readFile(join6(sourceDir, "pyproject.toml"), "utf8");
     const pySources = await readAllPythonSources(sourceDir);
     const deps = constrainFastMcpDependencies(parsePyprojectDependencies(toml), pySources);
     const venvPython = runtimePythonPath(this.runtimesDir, spec.id);
     let provisionedWithUv = false;
-    if (!existsSync5(venvPython)) {
+    if (!existsSync6(venvPython)) {
       const uvVenv = await runSubprocess([this.config.uvExecutable, "venv", runtimeDir], sourceDir, this.config.installTimeoutMs, signal);
       if (uvVenv.ok)
         provisionedWithUv = true;
@@ -2296,7 +2811,7 @@ var ConnectorProvisioner = class {
       }
       return { ok: true, command: venvPython, runtimeDir };
     }
-    if (!existsSync5(venvPython)) {
+    if (!existsSync6(venvPython)) {
       let created = false;
       const errors = [];
       for (const candidate of this.config.pythonCandidates) {
@@ -2326,84 +2841,6 @@ var ConnectorProvisioner = class {
     return { ok: true, command: venvPython, runtimeDir };
   }
 };
-
-// packages/core/dist/hosts/chatgpt-desktop.js
-import { existsSync as existsSync6, mkdirSync as mkdirSync3, readFileSync as readFileSync5, writeFileSync as writeFileSync3 } from "node:fs";
-import { homedir as homedir2 } from "node:os";
-import { dirname as dirname7, join as join6 } from "node:path";
-function resolveChatGptConfigTomlPath() {
-  const codexHome = process.env.CODEX_HOME?.trim();
-  if (codexHome)
-    return join6(codexHome, "config.toml");
-  return join6(homedir2(), ".codex", "config.toml");
-}
-function tomlLiteralString(value) {
-  if (!value.includes("'") && !value.includes("\n") && !value.includes("\r")) {
-    return `'${value}'`;
-  }
-  return JSON.stringify(value);
-}
-function tomlKey(key) {
-  return /^[A-Za-z0-9_-]+$/.test(key) ? key : JSON.stringify(key);
-}
-function renderCodexMcpTomlSection(server) {
-  const sectionKey = tomlKey(server.name);
-  const lines = [
-    `[mcp_servers.${sectionKey}]`,
-    `enabled = ${server.enabled === false ? "false" : "true"}`,
-    `command = ${tomlLiteralString(server.command)}`,
-    `args = [${server.args.map(tomlLiteralString).join(", ")}]`
-  ];
-  if (server.cwd) {
-    lines.push(`cwd = ${tomlLiteralString(server.cwd)}`);
-  }
-  const envEntries = Object.entries(server.env ?? {});
-  if (envEntries.length > 0) {
-    lines.push("");
-    lines.push(`[mcp_servers.${sectionKey}.env]`);
-    for (const [k, v] of envEntries) {
-      lines.push(`${tomlKey(k)} = ${tomlLiteralString(v)}`);
-    }
-  }
-  return lines.join("\n");
-}
-function upsertCodexConfigToml(existingContent, servers) {
-  const lines = existingContent.replace(/\r\n/g, "\n").split("\n");
-  const namesToReplace = new Set(servers.map((s) => s.name));
-  const kept = [];
-  let skipping = false;
-  for (const line of lines) {
-    const headerMatch = /^\s*\[\s*mcp_servers\.([^.\]\s"]+|"[^"]+")(?:\.env)?\s*\]\s*$/.exec(line);
-    if (headerMatch) {
-      const rawName = headerMatch[1]?.replace(/^"|"$/g, "") ?? "";
-      if (namesToReplace.has(rawName)) {
-        skipping = true;
-        continue;
-      }
-      skipping = false;
-    } else if (/^\s*\[/.test(line)) {
-      skipping = false;
-    }
-    if (!skipping)
-      kept.push(line);
-  }
-  const base = kept.join("\n").trimEnd();
-  const additions = servers.map(renderCodexMcpTomlSection).join("\n\n");
-  if (!base)
-    return `${additions}
-`;
-  return `${base}
-
-${additions}
-`;
-}
-function syncChatGptDesktopConfig(servers, configPath = resolveChatGptConfigTomlPath()) {
-  const existing = existsSync6(configPath) ? readFileSync5(configPath, "utf8") : "";
-  const next = upsertCodexConfigToml(existing, servers);
-  mkdirSync3(dirname7(configPath), { recursive: true });
-  writeFileSync3(configPath, next, "utf8");
-  return { configPath, updatedServers: servers.map((s) => s.name) };
-}
 
 // packages/core/dist/hosts/workbuddy.js
 import { existsSync as existsSync7, mkdirSync as mkdirSync4, readFileSync as readFileSync6, writeFileSync as writeFileSync4 } from "node:fs";
@@ -2527,6 +2964,7 @@ function syncDshProfileConfig(servers, profile = "desktop", patchPath = resolveD
 }
 
 // packages/mcp-server/src/mcp-server.ts
+import { existsSync as existsSync9 } from "node:fs";
 import { createInterface as createInterface2 } from "node:readline";
 
 // packages/mcp-server/src/software-icons.ts
@@ -2710,7 +3148,7 @@ function renderMcpAppHtml(edition, surface) {
   const title = sidebarTitleForEdition(edition);
   const accent = EDITION_ACCENT_PALETTE[edition];
   const iconsJson = JSON.stringify(softwareIconsForEdition(edition));
-  const cacheKey = `engiaxis-connector:state:${edition}:v3`;
+  const cacheKey = `engiaxis-connector:state:${edition}:v4`;
   return `<!doctype html>
 <html lang="zh-CN" data-surface="${surface}" data-edition="${edition}">
 <head>
@@ -3445,6 +3883,10 @@ function renderMcpAppHtml(edition, surface) {
     .btn.sm { height: 29px; padding: 0 10px; font-size: 12px; border-radius: 7px; }
     .btn.ghost { border-color: transparent; background: transparent; color: var(--ea-muted); }
     .btn.ghost:hover { background: var(--ea-row-hover); color: var(--ea-text); }
+    .btn.danger { color: #dc2626; border-color: rgba(220, 38, 38, 0.28); }
+    .btn.danger:hover { background: rgba(220, 38, 38, 0.08); border-color: rgba(220, 38, 38, 0.48); color: #dc2626; }
+    html[data-theme="dark"] .btn.danger { color: #f87171; border-color: rgba(248, 113, 113, 0.3); }
+    html[data-theme="dark"] .btn.danger:hover { background: rgba(248, 113, 113, 0.12); border-color: rgba(248, 113, 113, 0.5); color: #fca5a5; }
 
     /* Settings & License View */
     .view.hidden { display: none; }
@@ -3875,6 +4317,7 @@ function renderMcpAppHtml(edition, surface) {
           connectedOnly: '\u5DF2\u8FDE\u63A5',
           pendingOnly: '\u5F85\u63A5\u5165',
           mcpConnected: 'MCP \u5DF2\u8FDE\u63A5',
+          mcpDisabled: 'MCP \u5DF2\u505C\u7528',
           installedLocal: '\u672C\u673A\u5DF2\u5B89\u88C5',
           notConnected: '\u5F85\u63A5\u5165',
           plannedSoon: '\u5373\u5C06\u652F\u6301',
@@ -3905,6 +4348,12 @@ function renderMcpAppHtml(edition, surface) {
           btnProbe: '\u6D4B\u8BD5\u8FDE\u63A5',
           btnTools: '\u67E5\u770B\u5DE5\u5177',
           btnUseInChat: '\u5728\u5BF9\u8BDD\u4E2D\u4F7F\u7528',
+          btnEnable: '\u542F\u7528\u8FDE\u63A5',
+          btnDisable: '\u505C\u7528\u8FDE\u63A5',
+          btnUninstall: '\u5378\u8F7D\u8FDE\u63A5',
+          enabledToast: '\u5DF2\u542F\u7528 MCP \u8FDE\u63A5',
+          disabledToast: '\u5DF2\u505C\u7528 MCP \u8FDE\u63A5',
+          uninstalledToast: '\u5DF2\u5378\u8F7D MCP \u8FDE\u63A5',
           working: '\u5904\u7406\u4E2D...',
           detected: '\u672C\u673A\u5DF2\u5B89\u88C5',
           notDetected: '\u672A\u68C0\u6D4B\u5230\u5B89\u88C5',
@@ -3935,6 +4384,7 @@ function renderMcpAppHtml(edition, surface) {
           connectedOnly: 'Connected',
           pendingOnly: 'Pending',
           mcpConnected: 'MCP Connected',
+          mcpDisabled: 'MCP Disabled',
           installedLocal: 'Installed locally',
           notConnected: 'Not connected',
           plannedSoon: 'Coming soon',
@@ -3965,6 +4415,12 @@ function renderMcpAppHtml(edition, surface) {
           btnProbe: 'Test Connection',
           btnTools: 'View Tools',
           btnUseInChat: 'Use in Chat',
+          btnEnable: 'Enable',
+          btnDisable: 'Disable',
+          btnUninstall: 'Uninstall',
+          enabledToast: 'MCP connection enabled',
+          disabledToast: 'MCP connection disabled',
+          uninstalledToast: 'MCP connection removed',
           working: 'Working...',
           detected: 'Installed',
           notDetected: 'Not found',
@@ -4124,9 +4580,67 @@ function renderMcpAppHtml(edition, surface) {
         return { raw: res, data: extractToolPayload(res), isError: Boolean(res && res.isError) };
       }
 
+      const autoProbedIds = new Set();
+      let autoProbing = false;
+
+      function isConnected(a) {
+        return Boolean(a && (a.connected !== undefined ? a.connected : a.provisioned));
+      }
+
+      function isDisabledInHost(a) {
+        return Boolean(a && a.hostConfigured && !a.hostEnabled);
+      }
+
+      function normalizeToolNames(list) {
+        if (!Array.isArray(list)) return [];
+        return list
+          .map(function (item) {
+            return typeof item === 'string' ? item : (item && typeof item.name === 'string' ? item.name : '');
+          })
+          .filter(Boolean);
+      }
+
+      async function autoProbeMissingToolCounts() {
+        if (!hostConnected || autoProbing || !state || !Array.isArray(state.adapters)) return;
+        const targets = state.adapters.filter(function (a) {
+          const count = typeof a.toolCount === 'number' ? a.toolCount : 0;
+          return isConnected(a) && a.hostTransport !== 'http' && count === 0 && !autoProbedIds.has(a.id);
+        });
+        if (targets.length === 0) return;
+        autoProbing = true;
+        let updatedAny = false;
+        try {
+          for (const target of targets) {
+            autoProbedIds.add(target.id);
+            try {
+              const res = await callTool('connector_probe', { software_id: target.id });
+              const probe = res.data && res.data.probe;
+              if (probe && probe.ok) {
+                const names = normalizeToolNames(probe.toolNames || probe.tools);
+                if (names.length > 0) {
+                  toolsBySoftware[target.id] = names;
+                  updatedAny = true;
+                }
+              }
+            } catch {}
+          }
+          if (updatedAny) {
+            const latest = await callTool('connector_status', {});
+            if (latest.data && Array.isArray(latest.data.adapters)) {
+              state = latest.data;
+              try { localStorage.setItem(CACHE_KEY, JSON.stringify(state)); } catch {}
+              render();
+              updateModelContext();
+            }
+          }
+        } finally {
+          autoProbing = false;
+        }
+      }
+
       function updateModelContext() {
         if (!hostConnected || !state) return;
-        const ready = (state.adapters || []).filter(function (a) { return a.provisioned; }).map(function (a) { return a.id; });
+        const ready = (state.adapters || []).filter(function (a) { return isConnected(a); }).map(function (a) { return a.id; });
         const detected = (state.adapters || []).filter(function (a) { return Boolean(a.appInstalled); }).map(function (a) { return a.id; });
         rpcRequest('ui/update-model-context', {
           structuredContent: {
@@ -4153,6 +4667,7 @@ function renderMcpAppHtml(edition, surface) {
         try { localStorage.setItem(CACHE_KEY, JSON.stringify(next)); } catch {}
         render();
         updateModelContext();
+        void autoProbeMissingToolCounts();
       }
 
       async function refreshStatus(silent) {
@@ -4219,9 +4734,12 @@ function renderMcpAppHtml(edition, surface) {
       function renderSidebarInstalled(adapters) {
         const el = document.getElementById('sidebarInstalled');
         const list = adapters
-          .filter(function (a) { return a.provisioned || a.appInstalled; })
+          .filter(function (a) { return isConnected(a) || a.hostConfigured || a.appInstalled; })
           .sort(function (a, b) {
-            if (Boolean(a.provisioned) !== Boolean(b.provisioned)) return a.provisioned ? -1 : 1;
+            const ac = isConnected(a);
+            const bc = isConnected(b);
+            if (ac !== bc) return ac ? -1 : 1;
+            if (Boolean(a.hostConfigured) !== Boolean(b.hostConfigured)) return a.hostConfigured ? -1 : 1;
             return 0;
           });
 
@@ -4233,7 +4751,12 @@ function renderMcpAppHtml(edition, surface) {
         el.innerHTML = list.map(function (a) {
           const name = isZh ? (a.titleZh || a.title || a.id) : (a.title || a.id);
           const busy = busyIds.has(a.id);
+          const on = isConnected(a);
           const isPlanned = a.integration === 'planned';
+          const canToggle = on || a.hostConfigured || a.provisioned || !isPlanned;
+          const toggleTitle = on
+            ? t('btnDisable')
+            : ((a.hostConfigured || a.provisioned) ? t('btnEnable') : (isPlanned ? t('plannedSoon') : t('btnSetup')));
           return [
             '<div class="sb-item">',
             '  <button type="button" class="sb-item-main" data-open-detail="' + esc(a.id) + '" title="' + esc(name) + '">',
@@ -4241,7 +4764,7 @@ function renderMcpAppHtml(edition, surface) {
             '    <span class="sb-item-name">' + esc(name) + '</span>',
             '  </button>',
             '  <button type="button" class="sb-gear" data-open-detail="' + esc(a.id) + '" title="' + esc(name) + '">' + iconSvg('gear') + '</button>',
-            '  <button type="button" class="toggle ' + (a.provisioned ? 'on' : '') + '" data-toggle-id="' + esc(a.id) + '" ' + ((busy || isPlanned) ? 'disabled' : '') + ' aria-pressed="' + (a.provisioned ? 'true' : 'false') + '" title="' + esc(isPlanned ? t('plannedSoon') : (a.provisioned ? t('btnProbe') : t('btnSetup'))) + '"></button>',
+            '  <button type="button" class="toggle ' + (on ? 'on' : '') + '" data-toggle-id="' + esc(a.id) + '" ' + ((busy || !canToggle) ? 'disabled' : '') + ' aria-pressed="' + (on ? 'true' : 'false') + '" title="' + esc(toggleTitle) + '"></button>',
             '</div>',
           ].join('');
         }).join('');
@@ -4274,7 +4797,7 @@ function renderMcpAppHtml(edition, surface) {
           return '<button type="button" class="filter-pill ' + (activeFilter === o.id ? 'active' : '') + '" data-filter="' + esc(o.id) + '">' + esc(o.label) + '</button>';
         }).join('');
 
-        const readyCount = adapters.filter(function (a) { return a.provisioned; }).length;
+        const readyCount = adapters.filter(function (a) { return isConnected(a); }).length;
         document.getElementById('summaryHint').textContent = STR[isZh ? 'zh' : 'en'].summaryFmt(readyCount, adapters.length);
       }
 
@@ -4282,8 +4805,8 @@ function renderMcpAppHtml(edition, surface) {
         const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
         const filtered = adapters.filter(function (a) {
           const cat = String(a.category || '').toLowerCase();
-          if (activeFilter === 'connected' && !a.provisioned) return false;
-          if (activeFilter === 'pending' && a.provisioned) return false;
+          if (activeFilter === 'connected' && !isConnected(a)) return false;
+          if (activeFilter === 'pending' && isConnected(a)) return false;
           if (CAT_ORDER.includes(activeFilter) && cat !== activeFilter) return false;
           if (!q) return true;
           return [
@@ -4316,13 +4839,20 @@ function renderMcpAppHtml(edition, surface) {
               : (Array.isArray(a.toolNames) ? a.toolNames.length : 0);
 
             const isPlanned = a.integration === 'planned';
+            const on = isConnected(a);
+            const disabledHost = isDisabledInHost(a);
             let statusHtml = '';
-            if (a.provisioned) {
+            if (on) {
               statusHtml = '<span class="st-ok">' + esc(t('mcpConnected')) + '</span>';
               if (a.bridgeReady === false) {
                 statusHtml += '<span class="st-warn">\xB7 ' + esc(t('bridgeOffline')) + (a.bridgePort ? ' :' + esc(a.bridgePort) : '') + '</span>';
               } else if (toolCount > 0) {
                 statusHtml += '<span class="st-sub">\xB7 ' + esc(toolCount) + ' ' + esc(t('toolsUnit')) + '</span>';
+              }
+            } else if (disabledHost) {
+              statusHtml = '<span class="st-warn">' + esc(t('mcpDisabled')) + '</span>';
+              if (a.appInstalled) {
+                statusHtml += '<span class="st-sub">\xB7 ' + esc(t('installedLocal')) + '</span>';
               }
             } else if (isPlanned) {
               statusHtml = a.appInstalled
@@ -4334,9 +4864,10 @@ function renderMcpAppHtml(edition, surface) {
               statusHtml = '<span class="st-muted">' + esc(t('notConnected')) + '</span>';
             }
 
-            const actKind = busy ? 'spinner' : (a.provisioned ? 'dots' : 'plus');
-            const actType = (a.provisioned || isPlanned) ? 'detail' : 'setup';
-            const actTitle = a.provisioned ? name : (isPlanned ? t('plannedSoon') : t('btnSetup'));
+            const hasExisting = on || disabledHost;
+            const actKind = busy ? 'spinner' : (hasExisting ? 'dots' : 'plus');
+            const actType = (hasExisting || isPlanned) ? 'detail' : 'setup';
+            const actTitle = hasExisting ? name : (isPlanned ? t('plannedSoon') : t('btnSetup'));
 
             return [
               '<div class="conn-row" data-row-id="' + esc(a.id) + '">',
@@ -4380,21 +4911,26 @@ function renderMcpAppHtml(edition, surface) {
         const busy = busyIds.has(a.id);
         const name = isZh ? (a.titleZh || a.title || a.id) : (a.title || a.id);
         const prereq = isZh ? (a.prerequisitesZh || a.prerequisitesEn || '') : (a.prerequisitesEn || '');
-        const toolCount = typeof a.toolCount === 'number'
-          ? a.toolCount
-          : (Array.isArray(a.toolNames) ? a.toolNames.length : 0);
-        const tools = toolsBySoftware[a.id] || (Array.isArray(a.toolNames) && a.toolNames.length > 0 ? a.toolNames : null);
+        const rawTools = toolsBySoftware[a.id] || (Array.isArray(a.toolNames) && a.toolNames.length > 0 ? a.toolNames : null);
+        const tools = rawTools ? normalizeToolNames(rawTools) : null;
+        const toolCount = tools && tools.length > 0
+          ? tools.length
+          : (typeof a.toolCount === 'number' ? a.toolCount : 0);
 
         let badgesHtml = '';
         badgesHtml += a.appInstalled
           ? '<span class="badge ok">' + esc(t('detected')) + '</span>'
           : '<span class="badge">' + esc(t('notDetected')) + '</span>';
         const isPlanned = a.integration === 'planned';
-        badgesHtml += a.provisioned
+        const on = isConnected(a);
+        const disabledHost = isDisabledInHost(a);
+        badgesHtml += on
           ? '<span class="badge ok">' + esc(t('mcpConnected')) + (toolCount ? ' \xB7 ' + esc(toolCount) + ' ' + esc(t('toolsUnit')) : '') + '</span>'
-          : (isPlanned
-              ? '<span class="badge">' + esc(t('plannedSoon')) + '</span>'
-              : '<span class="badge warn">' + esc(t('notConnected')) + '</span>');
+          : (disabledHost
+              ? '<span class="badge warn">' + esc(t('mcpDisabled')) + '</span>'
+              : (isPlanned
+                  ? '<span class="badge">' + esc(t('plannedSoon')) + '</span>'
+                  : '<span class="badge warn">' + esc(t('notConnected')) + '</span>'));
         if (a.bridgeReady === true) {
           badgesHtml += '<span class="badge ok">' + esc(t('bridgeOnline')) + (a.bridgePort ? ' :' + esc(a.bridgePort) : '') + '</span>';
         } else if (a.bridgeReady === false) {
@@ -4406,13 +4942,29 @@ function renderMcpAppHtml(edition, surface) {
         const prereqHtml = prereq ? ('<div class="modal-prereq">' + esc(prereq) + '</div>') : '';
 
         let actionsHtml = '';
-        if (a.provisioned) {
-          actionsHtml = [
+        if (on) {
+          const btns = [
             '<button type="button" class="btn primary" data-modal-action="chat" data-id="' + esc(a.id) + '">' + esc(t('btnUseInChat')) + '</button>',
             '<button type="button" class="btn" data-modal-action="probe" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(busy ? t('working') : t('btnProbe')) + '</button>',
-            '<button type="button" class="btn" data-modal-action="tools" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnTools')) + '</button>',
-            '<button type="button" class="btn" data-modal-action="setup" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnReconfigure')) + '</button>',
-          ].join('');
+          ];
+          if (a.hostTransport !== 'http') {
+            btns.push('<button type="button" class="btn" data-modal-action="tools" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnTools')) + '</button>');
+          }
+          if (!isPlanned) {
+            btns.push('<button type="button" class="btn" data-modal-action="setup" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnReconfigure')) + '</button>');
+          }
+          btns.push('<button type="button" class="btn" data-modal-action="disable" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnDisable')) + '</button>');
+          btns.push('<button type="button" class="btn danger" data-modal-action="uninstall" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnUninstall')) + '</button>');
+          actionsHtml = btns.join('');
+        } else if (disabledHost || (a.provisioned && !isPlanned)) {
+          const btns = [
+            '<button type="button" class="btn primary" data-modal-action="enable" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(busy ? t('working') : t('btnEnable')) + '</button>',
+          ];
+          if (!isPlanned) {
+            btns.push('<button type="button" class="btn" data-modal-action="setup" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnReconfigure')) + '</button>');
+          }
+          btns.push('<button type="button" class="btn danger" data-modal-action="uninstall" data-id="' + esc(a.id) + '" ' + (busy ? 'disabled' : '') + '>' + esc(t('btnUninstall')) + '</button>');
+          actionsHtml = btns.join('');
         } else if (isPlanned) {
           actionsHtml = '<button type="button" class="btn" disabled>' + esc(t('plannedSoon')) + '</button>';
         } else {
@@ -4527,23 +5079,60 @@ function renderMcpAppHtml(edition, surface) {
               toast(msg);
               appendLog(id + ' \u914D\u7F6E\u5931\u8D25: ' + msg);
             } else {
-              const n = res.data.probe && Array.isArray(res.data.probe.tools) ? res.data.probe.tools.length : 0;
-              if (res.data.probe && Array.isArray(res.data.probe.tools)) {
-                toolsBySoftware[id] = res.data.probe.tools;
+              const names = res.data.probe ? normalizeToolNames(res.data.probe.toolNames || res.data.probe.tools) : [];
+              if (names.length > 0) {
+                toolsBySoftware[id] = names;
               }
-              toast(id + ' \u5DF2\u8FDE\u63A5 (' + n + ' ' + t('toolsUnit') + ')');
-              appendLog(id + ' \u914D\u7F6E\u6210\u529F\uFF0C\u63A2\u6D4B\u5230 ' + n + ' \u4E2A MCP \u5DE5\u5177\u3002');
+              toast(id + ' \u5DF2\u8FDE\u63A5 (' + names.length + ' ' + t('toolsUnit') + ')');
+              appendLog(id + ' \u914D\u7F6E\u6210\u529F\uFF0C\u63A2\u6D4B\u5230 ' + names.length + ' \u4E2A MCP \u5DE5\u5177\u3002');
               await refreshStatus(true);
+            }
+          } else if (action === 'enable' || action === 'disable') {
+            const enableFlag = action === 'enable';
+            const res = await callTool('connector_toggle', { software_id: id, enabled: enableFlag });
+            if (res.isError || !res.data || !res.data.ok) {
+              const msg = (res.data && (res.data.error || res.data.message)) || '\u5207\u6362\u72B6\u6001\u5931\u8D25';
+              toast(msg);
+              appendLog(id + ' \u5207\u6362\u5931\u8D25: ' + msg);
+            } else {
+              if (Array.isArray(res.data.adapters)) {
+                setState(res.data);
+              } else {
+                await refreshStatus(true);
+              }
+              toast(enableFlag ? t('enabledToast') : t('disabledToast'));
+              appendLog(id + (enableFlag ? ' \u5DF2\u542F\u7528\u8FDE\u63A5\u3002' : ' \u5DF2\u505C\u7528\u8FDE\u63A5\u3002'));
+            }
+          } else if (action === 'uninstall') {
+            const res = await callTool('connector_uninstall', { software_id: id });
+            if (res.isError || !res.data || !res.data.ok) {
+              const msg = (res.data && (res.data.error || res.data.message)) || '\u5378\u8F7D\u5931\u8D25';
+              toast(msg);
+              appendLog(id + ' \u5378\u8F7D\u5931\u8D25: ' + msg);
+            } else {
+              delete toolsBySoftware[id];
+              selectedAdapterId = null;
+              if (Array.isArray(res.data.adapters)) {
+                setState(res.data);
+              } else {
+                await refreshStatus(true);
+              }
+              toast(t('uninstalledToast'));
+              appendLog(id + ' \u5DF2\u4ECE ChatGPT Desktop \u4E0E\u672C\u5730\u6CE8\u518C\u8868\u79FB\u9664\u3002');
             }
           } else if (action === 'probe') {
             appendLog('\u6D4B\u8BD5\u8FDE\u63A5 ' + id + ' ...');
             const res = await callTool('connector_probe', { software_id: id });
             const probe = res.data && res.data.probe;
             if (probe && probe.ok) {
-              const list = Array.isArray(probe.tools) ? probe.tools : [];
-              toolsBySoftware[id] = list;
-              toast(id + ' \u8FDE\u901A\u6B63\u5E38 (' + list.length + ' ' + t('toolsUnit') + ')');
-              appendLog(id + ' \u63A2\u6D4B\u6210\u529F (' + probe.latencyMs + 'ms, ' + list.length + ' tools)');
+              const list = normalizeToolNames(probe.toolNames || probe.tools);
+              if (list.length > 0) {
+                toolsBySoftware[id] = list;
+              }
+              const ms = probe.durationMs !== undefined ? probe.durationMs : (probe.latencyMs || 0);
+              toast(id + ' \u8FDE\u901A\u6B63\u5E38' + (list.length > 0 ? ' (' + list.length + ' ' + t('toolsUnit') + ')' : ''));
+              appendLog(id + ' \u63A2\u6D4B\u6210\u529F (' + ms + 'ms, ' + list.length + ' tools)');
+              await refreshStatus(true);
             } else {
               const errMsg = (probe && probe.error) || (res.data && res.data.error) || '\u8FDE\u63A5\u5931\u8D25';
               toast(errMsg);
@@ -4551,10 +5140,12 @@ function renderMcpAppHtml(edition, surface) {
             }
           } else if (action === 'tools') {
             const res = await callTool('connector_list_adapter_tools', { software_id: id });
-            if (res.data && res.data.ok && Array.isArray(res.data.tools)) {
-              toolsBySoftware[id] = res.data.tools;
-              toast(id + ': ' + res.data.tools.length + ' ' + t('toolsUnit'));
-              appendLog(id + ' \u5DE5\u5177\u5217\u8868: ' + res.data.tools.join(', '));
+            if (res.data && res.data.ok) {
+              const names = normalizeToolNames(res.data.toolNames || res.data.tools);
+              toolsBySoftware[id] = names;
+              toast(id + ': ' + names.length + ' ' + t('toolsUnit'));
+              appendLog(id + ' \u5DE5\u5177\u5217\u8868: ' + names.join(', '));
+              await refreshStatus(true);
             } else {
               toast((res.data && res.data.error) || '\u8BFB\u53D6\u5DE5\u5177\u5931\u8D25');
             }
@@ -4623,7 +5214,10 @@ function renderMcpAppHtml(edition, surface) {
           const id = toggleBtn.getAttribute('data-toggle-id');
           const a = state && state.adapters ? state.adapters.find(function (x) { return x.id === id; }) : null;
           if (!a) return;
-          runAdapterAction(a.provisioned ? 'probe' : 'setup', id);
+          const nextAction = isConnected(a)
+            ? 'disable'
+            : ((a.hostConfigured || a.provisioned) ? 'enable' : 'setup');
+          runAdapterAction(nextAction, id);
           return;
         }
         const detailTrigger = e.target.closest('[data-open-detail]');
@@ -4712,16 +5306,21 @@ function renderMcpAppHtml(edition, surface) {
         try {
           const initRes = await rpcRequest('ui/initialize', {
             protocolVersion: PROTOCOL_VERSION,
-            appInfo: { name: 'engiaxis-connector-' + EDITION, version: '1.0.2' },
+            appInfo: { name: 'engiaxis-connector-' + EDITION, version: '1.0.3' },
             appCapabilities: { availableDisplayModes: ['fullscreen', 'inline'] },
           });
           hostConnected = true;
           if (initRes && initRes.hostContext) applyHostContext(initRes.hostContext);
           window.parent.postMessage({ jsonrpc: '2.0', method: 'ui/notifications/initialized', params: {} }, '*');
 
+          if (receivedInitialToolResult && state) {
+            void autoProbeMissingToolCounts();
+          }
           setTimeout(function () {
             if (!receivedInitialToolResult) {
               refreshStatus(true);
+            } else {
+              void autoProbeMissingToolCounts();
             }
           }, 350);
         } catch (err) {
@@ -4897,6 +5496,44 @@ var ConnectorMcpServer = class {
         annotations: readOnlyAnnotations
       },
       {
+        name: "connector_toggle",
+        title: "Toggle Software Connection",
+        description: "Enable or disable an engineering software MCP connection in ChatGPT Desktop (~/.codex/config.toml).",
+        inputSchema: {
+          type: "object",
+          required: ["software_id", "enabled"],
+          properties: {
+            software_id: {
+              type: "string",
+              enum: adapterIds,
+              description: "Canonical software adapter identifier."
+            },
+            enabled: {
+              type: "boolean",
+              description: "True to enable the MCP server in the host client; false to disable it."
+            }
+          },
+          additionalProperties: false
+        }
+      },
+      {
+        name: "connector_uninstall",
+        title: "Uninstall Software Connection",
+        description: "Remove an engineering software MCP connection from ChatGPT Desktop (~/.codex/config.toml) and clear its localConnector registry entry.",
+        inputSchema: {
+          type: "object",
+          required: ["software_id"],
+          properties: {
+            software_id: {
+              type: "string",
+              enum: adapterIds,
+              description: "Canonical software adapter identifier."
+            }
+          },
+          additionalProperties: false
+        }
+      },
+      {
         name: "connector_sync_host",
         title: "Sync Host Client Config",
         description: "Register all provisioned engineering MCP servers into ChatGPT Desktop (~/.codex/config.toml), WorkBuddy Desktop (~/.workbuddy/mcp.json), or DeepSeek Harness (cordis.patch.yml).",
@@ -5066,26 +5703,65 @@ var ConnectorMcpServer = class {
       adapters
     };
   }
+  resolveTargetCodexConfigPath() {
+    return this.config.codexConfigPath ?? resolveChatGptConfigTomlPath();
+  }
   collectProvisionedHostServers() {
     const registry = this.provisioner.readRegistry();
     const allowed = new Set(adaptersForEdition(this.config.edition).map((a) => a.id));
-    return Object.values(registry).filter((record) => allowed.has(record.id)).map((record) => ({
+    const codexPath = this.config.codexConfigPath;
+    const hostRead = codexPath ? readChatGptDesktopMcpServers(codexPath) : null;
+    const existingHost = hostRead && hostRead.exists ? new Map(hostRead.servers.map((s) => [s.name, s])) : null;
+    return Object.values(registry).filter((record) => allowed.has(record.id) && existsSync9(record.command)).filter((record) => {
+      if (!existingHost) return true;
+      const aliases = resolveAdapterHostServerNames(record.id);
+      return aliases.some((alias) => existingHost.has(alias));
+    }).map((record) => {
+      const existingEntry = existingHost ? resolveAdapterHostServerNames(record.id).map((alias) => existingHost.get(alias)).find(Boolean) : void 0;
+      return {
+        name: existingEntry?.name ?? record.id,
+        command: record.command,
+        args: record.args,
+        cwd: record.cwd,
+        env: record.env,
+        enabled: existingEntry ? existingEntry.enabled : true
+      };
+    });
+  }
+  syncSingleHostServer(record, host, dshProfile = "desktop") {
+    const server = {
       name: record.id,
       command: record.command,
       args: record.args,
       cwd: record.cwd,
       env: record.env,
       enabled: true
-    }));
+    };
+    const results = {};
+    if (host === "chatgpt" || host === "all") {
+      const targetPath = this.resolveTargetCodexConfigPath();
+      const nonCanonicalAliases = resolveAdapterHostServerNames(record.id).filter((alias) => alias !== record.id);
+      if (nonCanonicalAliases.length > 0 && existsSync9(targetPath)) {
+        removeChatGptDesktopServers(nonCanonicalAliases, targetPath);
+      }
+      results.chatgpt = syncChatGptDesktopConfig([server], targetPath);
+    }
+    if (host === "workbuddy" || host === "all") {
+      results.workbuddy = syncWorkBuddyDesktopConfig([server]);
+    }
+    if (host === "dsh" || host === "all") {
+      results.dsh = syncDshProfileConfig([server], dshProfile);
+    }
+    return { synced: true, count: 1, targets: results };
   }
   syncHosts(host, dshProfile = "desktop") {
     const servers = this.collectProvisionedHostServers();
     if (servers.length === 0) {
-      return { synced: false, message: "No provisioned adapters in this edition yet. Run connector_setup first." };
+      return { synced: false, message: "No active provisioned adapters in this edition yet. Run connector_setup first." };
     }
     const results = {};
     if (host === "chatgpt" || host === "all") {
-      results.chatgpt = syncChatGptDesktopConfig(servers);
+      results.chatgpt = syncChatGptDesktopConfig(servers, this.resolveTargetCodexConfigPath());
     }
     if (host === "workbuddy" || host === "all") {
       results.workbuddy = syncWorkBuddyDesktopConfig(servers);
@@ -5138,22 +5814,92 @@ var ConnectorMcpServer = class {
       if (!outcome.ok) {
         return jsonText({ ...outcome, stages }, true);
       }
-      const syncHost = typeof rawArgs.sync_host === "string" ? rawArgs.sync_host : "none";
+      const defaultSync = this.config.codexConfigPath ? "chatgpt" : "none";
+      const syncHost = typeof rawArgs.sync_host === "string" ? rawArgs.sync_host : defaultSync;
       const dshProfile = typeof rawArgs.dsh_profile === "string" ? rawArgs.dsh_profile : "desktop";
-      const hostSync = syncHost !== "none" ? this.syncHosts(syncHost, dshProfile) : void 0;
+      const hostSync = syncHost !== "none" ? this.syncSingleHostServer(outcome.record, syncHost, dshProfile) : void 0;
+      this.provisioner.saveProbeCache(
+        outcome.record.id,
+        { command: outcome.record.command, args: outcome.record.args, cwd: outcome.record.cwd, env: outcome.record.env },
+        outcome.probe.toolNames
+      );
       return jsonText({ ok: true, stages, record: outcome.record, probe: outcome.probe, ...hostSync ? { hostSync } : {} });
+    }
+    if (name === "connector_toggle") {
+      const softwareId = typeof rawArgs.software_id === "string" ? rawArgs.software_id : "";
+      const enabled = Boolean(rawArgs.enabled);
+      if (!adapterById(softwareId) || !isAdapterInEdition(softwareId, this.config.edition)) {
+        return jsonText({ ok: false, error: `Software "${softwareId}" is not included in this edition.` }, true);
+      }
+      const id = softwareId;
+      const current = await this.provisioner.inspectAdapter(id);
+      const targetConfigPath = this.resolveTargetCodexConfigPath();
+      if (current.hostConfigured && current.hostServerName) {
+        toggleChatGptDesktopServer(current.hostServerName, enabled, targetConfigPath);
+      } else if (enabled) {
+        const record = this.provisioner.readRegistry()[id];
+        if (!record || !existsSync9(record.command)) {
+          return jsonText({ ok: false, error: `Software "${softwareId}" is not configured yet. Run connector_setup first.` }, true);
+        }
+        syncChatGptDesktopConfig([{
+          name: record.id,
+          command: record.command,
+          args: record.args,
+          cwd: record.cwd,
+          env: record.env,
+          enabled: true
+        }], targetConfigPath);
+      }
+      const payload = await this.buildStatusPayload();
+      const updated = payload.adapters.find((a) => a.id === id);
+      return jsonText({ ok: true, software_id: id, enabled, adapter: updated, ...payload });
+    }
+    if (name === "connector_uninstall") {
+      const softwareId = typeof rawArgs.software_id === "string" ? rawArgs.software_id : "";
+      if (!adapterById(softwareId) || !isAdapterInEdition(softwareId, this.config.edition)) {
+        return jsonText({ ok: false, error: `Software "${softwareId}" is not included in this edition.` }, true);
+      }
+      const id = softwareId;
+      if (this.config.codexConfigPath !== null) {
+        const targetConfigPath = this.resolveTargetCodexConfigPath();
+        if (existsSync9(targetConfigPath)) {
+          removeChatGptDesktopServers(resolveAdapterHostServerNames(id), targetConfigPath);
+        }
+      }
+      this.provisioner.removeRecord(id);
+      this.provisioner.removeProbeCache(id);
+      const payload = await this.buildStatusPayload();
+      return jsonText({ ok: true, software_id: id, ...payload });
     }
     if (name === "connector_probe") {
       const softwareId = typeof rawArgs.software_id === "string" ? rawArgs.software_id : "";
-      const record = this.provisioner.readRegistry()[softwareId];
-      if (!record) {
-        return jsonText({ ok: false, error: `Software "${softwareId}" is not provisioned yet. Run connector_setup first.` }, true);
+      if (!adapterById(softwareId) || !isAdapterInEdition(softwareId, this.config.edition)) {
+        return jsonText({ ok: false, error: `Software "${softwareId}" is not included in this edition.` }, true);
       }
-      const probe = await probeMcpStdio(
-        { command: record.command, args: record.args, cwd: record.cwd, env: record.env },
-        { timeoutMs: this.config.probeTimeoutMs }
-      );
-      return jsonText({ software_id: softwareId, probe }, !probe.ok);
+      const id = softwareId;
+      const status = await this.provisioner.inspectAdapter(id);
+      if (status.launch) {
+        const probe = await probeMcpStdio(status.launch, { timeoutMs: this.config.probeTimeoutMs });
+        if (probe.ok) {
+          this.provisioner.saveProbeCache(id, status.launch, probe.toolNames);
+        }
+        return jsonText({ ok: probe.ok, software_id: softwareId, probe }, !probe.ok);
+      }
+      if (status.hostConfigured && status.hostTransport === "http") {
+        const httpOk = status.bridgeReady !== false;
+        return jsonText({
+          ok: httpOk,
+          software_id: softwareId,
+          probe: {
+            ok: httpOk,
+            durationMs: 0,
+            toolNames: status.toolNames,
+            tools: [],
+            ...httpOk ? {} : { error: `HTTP MCP endpoint unreachable (${status.bridgeDetail})` }
+          }
+        }, !httpOk);
+      }
+      return jsonText({ ok: false, error: `Software "${softwareId}" is not provisioned yet. Run connector_setup first.` }, true);
     }
     if (name === "connector_sync_host") {
       const host = typeof rawArgs.host === "string" ? rawArgs.host : "all";
@@ -5174,18 +5920,27 @@ var ConnectorMcpServer = class {
       if (!auth.valid) {
         return jsonText({ ok: false, code: auth.code, error: auth.message }, true);
       }
-      const record = this.provisioner.readRegistry()[softwareId];
-      if (!record) {
-        return jsonText({ ok: false, error: `Software "${softwareId}" is not provisioned yet. Run connector_setup first.` }, true);
+      const status = await this.provisioner.inspectAdapter(softwareId);
+      if (!status.launch) {
+        const detail = status.hostTransport === "http" ? `Software "${softwareId}" uses direct HTTP MCP transport in the host client.` : `Software "${softwareId}" is not provisioned yet. Run connector_setup first.`;
+        return jsonText({ ok: false, error: detail }, true);
       }
-      const launch = { command: record.command, args: record.args, cwd: record.cwd, env: record.env };
       if (name === "connector_list_adapter_tools") {
-        const probe = await probeMcpStdio(launch, { timeoutMs: this.config.probeTimeoutMs });
-        return jsonText({ software_id: softwareId, ok: probe.ok, tools: probe.tools, error: probe.error }, !probe.ok);
+        const probe = await probeMcpStdio(status.launch, { timeoutMs: this.config.probeTimeoutMs });
+        if (probe.ok) {
+          this.provisioner.saveProbeCache(softwareId, status.launch, probe.toolNames);
+        }
+        return jsonText({
+          software_id: softwareId,
+          ok: probe.ok,
+          toolNames: probe.toolNames,
+          tools: probe.tools,
+          error: probe.error
+        }, !probe.ok);
       }
       const toolName = typeof rawArgs.tool_name === "string" ? rawArgs.tool_name : "";
       const args = rawArgs.arguments && typeof rawArgs.arguments === "object" && !Array.isArray(rawArgs.arguments) ? rawArgs.arguments : {};
-      const callResult = await callMcpStdioTool(launch, toolName, args);
+      const callResult = await callMcpStdioTool(status.launch, toolName, args);
       return jsonText({ ...callResult }, !callResult.ok);
     }
     return jsonText({ error: `Unknown tool: ${name}` }, true);
@@ -5213,7 +5968,7 @@ var ConnectorMcpServer = class {
           serverInfo: {
             name: `engiaxis-connector-${this.config.edition}`,
             title: sidebarTitleForEdition(this.config.edition),
-            version: "1.0.2",
+            version: "1.0.3",
             icons: entrypointIconsForEdition(this.config.edition)
           }
         }
@@ -5443,11 +6198,16 @@ function renderWizardHtml(editionTitle, editionSlug) {
       );
       document.getElementById('cards').innerHTML = items.map(a => {
         const appBadge = a.appInstalled ? '<span class="badge ok">\u5DF2\u68C0\u6D4B\u5230\u8F6F\u4EF6</span>' : '<span class="badge">\u672A\u81EA\u52A8\u68C0\u6D4B\u5230\u8F6F\u4EF6</span>';
-        const provBadge = a.provisioned ? '<span class="badge ok">\u5DF2\u914D\u7F6E (' + a.toolCount + ' \u5DE5\u5177)</span>' : '<span class="badge">\u672A\u5B89\u88C5 MCP</span>';
+        const isConn = a.connected !== undefined ? a.connected : a.provisioned;
+        const provBadge = isConn
+          ? '<span class="badge ok">MCP \u5DF2\u8FDE\u63A5' + (a.toolCount ? ' (' + a.toolCount + ' \u5DE5\u5177)' : '') + '</span>'
+          : (a.hostConfigured && !a.hostEnabled
+              ? '<span class="badge warn">MCP \u5DF2\u505C\u7528</span>'
+              : '<span class="badge">\u672A\u5B89\u88C5 MCP</span>');
         const bridgeBadge = a.bridgePort ? ('<span class="badge ' + (a.bridgeReady ? 'ok' : 'warn') + '">\u6865\u63A5 :' + a.bridgePort + (a.bridgeReady ? ' \u5728\u7EBF' : ' \u672A\u542F\u52A8') + '</span>') : '';
         return '<div class="card">'
           + '<div class="card-top"><div><div class="card-title">' + a.titleZh + '</div><div class="sub">' + a.id + ' \xB7 ' + a.category.toUpperCase() + ' \xB7 ' + a.runtime + '</div></div>'
-          + '<button class="btn primary" onclick="setupAdapter('' + a.id + '')">' + (a.provisioned ? '\u91CD\u65B0\u68C0\u6D4B' : '+ \u4E00\u952E\u914D\u7F6E') + '</button></div>'
+          + '<button class="btn primary" onclick="setupAdapter('' + a.id + '')">' + (isConn ? '\u91CD\u65B0\u68C0\u6D4B' : '+ \u4E00\u952E\u914D\u7F6E') + '</button></div>'
           + '<div class="pills">' + appBadge + provBadge + bridgeBadge + '</div>'
           + '<div class="meta">' + a.prerequisitesZh + '</div>'
           + '<div class="meta">\u8DEF\u5F84: <code>' + a.appDetail + '</code></div>'
@@ -5655,13 +6415,16 @@ async function main() {
       process.exitCode = 2;
       return;
     }
-    const record = provisioner.readRegistry()[id];
-    if (!record) {
-      console.error(`Adapter "${id}" is not provisioned yet.`);
+    const status = await provisioner.inspectAdapter(id);
+    if (!status.launch) {
+      console.error(`Adapter "${id}" is not provisioned or configured with stdio launch.`);
       process.exitCode = 1;
       return;
     }
-    const probe = await probeMcpStdio({ command: record.command, args: record.args, cwd: record.cwd, env: record.env });
+    const probe = await probeMcpStdio(status.launch);
+    if (probe.ok) {
+      provisioner.saveProbeCache(id, status.launch, probe.toolNames);
+    }
     console.log(JSON.stringify(probe, null, 2));
     if (!probe.ok) process.exitCode = 1;
     return;
