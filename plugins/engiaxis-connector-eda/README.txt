@@ -1,7 +1,7 @@
 ====================================================================
 EngiAxis Connector — EDA Edition
 EngiAxis 工程连接器 · EDA 版
-SKU: EA-CONN-EDA | Version: v1.0.5 | Target: chatgpt-desktop
+SKU: EA-CONN-EDA | Version: v1.1.0 | Target: chatgpt-desktop
 ====================================================================
 
 Included Engineering Software Adapters:
