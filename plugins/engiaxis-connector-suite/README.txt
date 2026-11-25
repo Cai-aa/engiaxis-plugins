@@ -1,7 +1,7 @@
 ====================================================================
 EngiAxis Connector — All-in-One Suite (CAD + CAE + EDA)
 EngiAxis 工程连接器 · 全能版（CAD + CAE + EDA）
-SKU: EA-CONN-SUITE | Version: v1.1.2 | Target: chatgpt-desktop
+SKU: EA-CONN-SUITE | Version: v1.1.3 | Target: chatgpt-desktop
 ====================================================================
 
 Included Engineering Software Adapters:

@@ -31,8 +31,8 @@ var EDITION_SPECS = {
     nameEn: "EngiAxis Connector \u2014 EDA Edition",
     nameZh: "EngiAxis \u5DE5\u7A0B\u8FDE\u63A5\u5668 \xB7 EDA \u7248",
     shortLabel: "EDA",
-    descriptionEn: "Connect EasyEDA Pro (JLC EDA), KiCad, Keysight ADS, and planned Altium Designer to AI desktop clients.",
-    descriptionZh: "\u8986\u76D6\u5609\u7ACB\u521BEDA\uFF08EasyEDA Pro\uFF09\u3001KiCad\u3001Keysight ADS \u53CA\u89C4\u5212\u4E2D\u7684 Altium Designer \u7B49 4 \u6B3E EDA \u7535\u8DEF\u8F6F\u4EF6\u3002",
+    descriptionEn: "Connect Keysight ADS and planned EDA tools (EasyEDA Pro / JLC EDA, KiCad, Altium Designer) to AI desktop clients.",
+    descriptionZh: "\u8986\u76D6 Keysight ADS \u53CA\u89C4\u5212\u4E2D\u7684\u5609\u7ACB\u521BEDA\uFF08EasyEDA Pro\uFF09\u3001KiCad\u3001Altium Designer \u7B49 4 \u6B3E EDA \u7535\u8DEF\u8F6F\u4EF6\u3002",
     categories: ["eda"]
   },
   suite: {
@@ -648,25 +648,14 @@ var SOFTWARE_CATALOG = [
     subtitleEn: "Schematic, PCB, and library design",
     subtitleZh: "\u539F\u7406\u56FE\u4E0E PCB \u8BBE\u8BA1",
     category: "eda",
-    integration: "source",
+    integration: "planned",
     runtime: "node",
     platformWindowsOnly: false,
     sourceUrl: `${EDA_REPO}/easyeda-agent`,
-    prerequisitesEn: "EasyEDA Pro desktop client with the EasyEDA Agent WebSocket bridge extension enabled.",
-    prerequisitesZh: "\u9700\u5B89\u88C5\u5609\u7ACB\u521BEDA \u4E13\u4E1A\u7248\u5E76\u542F\u7528 EasyEDA Agent \u6865\u63A5\u6269\u5C55\uFF08Node.js \u8FD0\u884C\u65F6\uFF09\u3002",
+    prerequisitesEn: "Planned EDA integration. Local EasyEDA Pro installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 EDA \u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A\u5609\u7ACB\u521BEDA \u4E13\u4E1A\u7248\u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
     capabilities: ["Schematic capture", "PCB placement & routing", "BOM & DRC checks", "JLCPCB library lookup"],
     iconFile: "easyeda-pro.png",
-    source: {
-      repo: "EDA-Agent-Hub",
-      repoSubpath: "MCP/easyeda-agent",
-      bundledDir: "easyeda-pro"
-    },
-    launch: {
-      kind: "node-script",
-      packageDir: "packages/mcp-server",
-      entryScript: "packages/mcp-server/dist/index.js",
-      buildCommand: ["npm", "run", "build"]
-    },
     buildEnv: () => ({})
   },
   {
@@ -676,23 +665,14 @@ var SOFTWARE_CATALOG = [
     subtitleEn: "Open-source schematic and PCB EDA",
     subtitleZh: "\u5F00\u6E90\u7535\u8DEF\u4E0E PCB \u8BBE\u8BA1",
     category: "eda",
-    integration: "source",
+    integration: "planned",
     runtime: "python",
     platformWindowsOnly: false,
     sourceUrl: `${EDA_REPO}/KiCAD-MCP-Server`,
-    prerequisitesEn: "KiCad 8/9 installed locally with kicad-cli available in PATH or standard installation folder.",
-    prerequisitesZh: "\u9700\u5B89\u88C5 KiCad 8/9\uFF0C\u5E76\u786E\u4FDD kicad-cli \u5728\u7CFB\u7EDF PATH \u6216\u6807\u51C6\u5B89\u88C5\u76EE\u5F55\u4E2D\u53EF\u7528\u3002",
+    prerequisitesEn: "Planned EDA integration. Local KiCad installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
+    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 EDA \u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A KiCad \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
     capabilities: ["Schematic & PCB editing", "ERC / DRC verification", "Gerber / Drill / 3D export"],
     iconFile: "kicad.png",
-    source: {
-      repo: "EDA-Agent-Hub",
-      repoSubpath: "MCP/KiCAD-MCP-Server",
-      bundledDir: "kicad"
-    },
-    launch: {
-      kind: "python-script",
-      scripts: ["python/kicad_interface.py", "server.py", "mcp_server.py"]
-    },
     buildEnv: () => ({
       PYTHONUNBUFFERED: "1"
     })
@@ -4235,7 +4215,7 @@ function softwareIconsForEdition(edition) {
 }
 
 // packages/mcp-server/src/mcp-app-ui.ts
-var CONNECTOR_VERSION = "1.1.2";
+var CONNECTOR_VERSION = "1.1.3";
 var MCP_APP_MIME_TYPE = "text/html;profile=mcp-app";
 function mcpAppUrisForEdition(edition) {
   return {
@@ -4728,7 +4708,11 @@ function renderMcpAppHtml(edition, surface) {
       transform: translateX(14px);
       background: var(--ea-toggle-on-thumb);
     }
-    .toggle:disabled { opacity: 0.5; cursor: wait; }
+    .toggle:disabled { opacity: 0.42; cursor: not-allowed; }
+    .sb-item.is-planned .sb-item-ico { filter: grayscale(1); opacity: 0.45; }
+    .sb-item.is-planned .sb-item-name { color: var(--ea-muted); opacity: 0.62; }
+    .sb-item.is-planned .sb-gear { opacity: 0.45; }
+    .sb-item.is-planned .toggle { opacity: 0.34; cursor: not-allowed; }
 
     /* Main content pane */
     .main {
@@ -5091,7 +5075,13 @@ function renderMcpAppHtml(edition, surface) {
       background: var(--ea-act-hover);
       color: var(--ea-text);
     }
-    .conn-act:disabled { opacity: 0.5; cursor: wait; }
+    .conn-act:disabled { opacity: 0.45; cursor: not-allowed; }
+    .conn-row.is-planned { opacity: 0.62; }
+    .conn-row.is-planned:hover { opacity: 0.82; }
+    .conn-row.is-planned .conn-icon { filter: grayscale(1); opacity: 0.5; }
+    .conn-row.is-planned .conn-name { color: var(--ea-muted); }
+    .conn-row.is-planned .conn-act { opacity: 0.48; }
+    .conn-icon.is-planned-icon { filter: grayscale(1); opacity: 0.5; }
 
     /* Buttons */
     .btn {
@@ -6612,11 +6602,13 @@ function renderMcpAppHtml(edition, surface) {
       let autoProbing = false;
 
       function isConnected(a) {
-        return Boolean(a && (a.connected !== undefined ? a.connected : a.provisioned));
+        if (!a || a.integration === 'planned') return false;
+        return Boolean(a.connected !== undefined ? a.connected : a.provisioned);
       }
 
       function isDisabledInHost(a) {
-        return Boolean(a && a.hostConfigured && !a.hostEnabled);
+        if (!a || a.integration === 'planned') return false;
+        return Boolean(a.hostConfigured && !a.hostEnabled);
       }
 
       function normalizeToolNames(list) {
@@ -6767,6 +6759,9 @@ function renderMcpAppHtml(edition, surface) {
         const list = adapters
           .filter(function (a) { return isConnected(a) || a.hostConfigured || a.appInstalled; })
           .sort(function (a, b) {
+            const ap = a.integration === 'planned';
+            const bp = b.integration === 'planned';
+            if (ap !== bp) return ap ? 1 : -1;
             const ac = isConnected(a);
             const bc = isConnected(b);
             if (ac !== bc) return ac ? -1 : 1;
@@ -6784,12 +6779,14 @@ function renderMcpAppHtml(edition, surface) {
           const busy = busyIds.has(a.id);
           const on = isConnected(a);
           const isPlanned = a.integration === 'planned';
-          const canToggle = on || a.hostConfigured || a.provisioned || !isPlanned;
-          const toggleTitle = on
-            ? t('btnDisable')
-            : ((a.hostConfigured || a.provisioned) ? t('btnEnable') : (isPlanned ? t('plannedSoon') : t('btnSetup')));
+          const canToggle = !isPlanned && (on || a.hostConfigured || a.provisioned || !isPlanned);
+          const toggleTitle = isPlanned
+            ? t('plannedSoon')
+            : (on
+                ? t('btnDisable')
+                : ((a.hostConfigured || a.provisioned) ? t('btnEnable') : t('btnSetup')));
           return [
-            '<div class="sb-item">',
+            '<div class="sb-item' + (isPlanned ? ' is-planned' : '') + '">',
             '  <button type="button" class="sb-item-main" data-open-detail="' + esc(a.id) + '" title="' + esc(name) + '">',
             '    ' + renderSoftwareIcon(a.id, 'sb-item-ico'),
             '    <span class="sb-item-name">' + esc(name) + '</span>',
@@ -6890,7 +6887,7 @@ function renderMcpAppHtml(edition, surface) {
             } else if (isPlanned) {
               statusHtml = a.appInstalled
                 ? '<span class="st-muted">' + esc(t('installedLocal')) + ' \xB7 ' + esc(t('plannedSoon')) + '</span>'
-                : '<span class="st-muted">' + esc(t('notConnected')) + '</span>';
+                : '<span class="st-muted">' + esc(t('plannedSoon')) + '</span>';
             } else if (a.appInstalled) {
               statusHtml = '<span class="st-muted">' + esc(t('installedLocal')) + '</span>';
             } else {
@@ -6903,7 +6900,7 @@ function renderMcpAppHtml(edition, surface) {
             const actTitle = hasExisting ? name : (isPlanned ? t('plannedSoon') : t('btnSetup'));
 
             return [
-              '<div class="conn-row" data-row-id="' + esc(a.id) + '">',
+              '<div class="conn-row' + (isPlanned ? ' is-planned' : '') + '" data-row-id="' + esc(a.id) + '">',
               '  ' + renderSoftwareIcon(a.id, 'conn-icon'),
               '  <div class="conn-body">',
               '    <div class="conn-name">' + esc(name) + '</div>',
@@ -7012,7 +7009,7 @@ function renderMcpAppHtml(edition, surface) {
 
         modal.innerHTML = [
           '<div class="modal-head">',
-          '  ' + renderSoftwareIcon(a.id, 'conn-icon'),
+          '  ' + renderSoftwareIcon(a.id, 'conn-icon' + (isPlanned ? ' is-planned-icon' : '')),
           '  <div class="modal-ident">',
           '    <h3 class="modal-title">' + esc(name) + '</h3>',
           '    <div class="modal-sub">' + esc(adapterSubtitle(a)) + ' \xB7 ' + esc(a.runtime === 'node' ? 'Node.js MCP' : 'Python MCP') + '</div>',
@@ -8961,17 +8958,23 @@ function renderWizardHtml(editionTitle, editionSlug) {
         && (!q || a.title.toLowerCase().includes(q) || a.titleZh.toLowerCase().includes(q) || a.id.includes(q))
       );
       document.getElementById('cards').innerHTML = items.map(a => {
+        const isPlanned = a.integration === 'planned';
         const appBadge = a.appInstalled ? '<span class="badge ok">\u5DF2\u68C0\u6D4B\u5230\u8F6F\u4EF6</span>' : '<span class="badge">\u672A\u81EA\u52A8\u68C0\u6D4B\u5230\u8F6F\u4EF6</span>';
-        const isConn = a.connected !== undefined ? a.connected : a.provisioned;
-        const provBadge = isConn
-          ? '<span class="badge ok">MCP \u5DF2\u8FDE\u63A5' + (a.toolCount ? ' (' + a.toolCount + ' \u5DE5\u5177)' : '') + '</span>'
-          : (a.hostConfigured && !a.hostEnabled
-              ? '<span class="badge warn">MCP \u5DF2\u505C\u7528</span>'
-              : '<span class="badge">\u672A\u5B89\u88C5 MCP</span>');
-        const bridgeBadge = a.bridgePort ? ('<span class="badge ' + (a.bridgeReady ? 'ok' : 'warn') + '">\u6865\u63A5 :' + a.bridgePort + (a.bridgeReady ? ' \u5728\u7EBF' : ' \u672A\u542F\u52A8') + '</span>') : '';
-        return '<div class="card">'
+        const isConn = !isPlanned && (a.connected !== undefined ? a.connected : a.provisioned);
+        const provBadge = isPlanned
+          ? '<span class="badge">\u5373\u5C06\u652F\u6301</span>'
+          : (isConn
+              ? '<span class="badge ok">MCP \u5DF2\u8FDE\u63A5' + (a.toolCount ? ' (' + a.toolCount + ' \u5DE5\u5177)' : '') + '</span>'
+              : (a.hostConfigured && !a.hostEnabled
+                  ? '<span class="badge warn">MCP \u5DF2\u505C\u7528</span>'
+                  : '<span class="badge">\u672A\u5B89\u88C5 MCP</span>'));
+        const bridgeBadge = (!isPlanned && a.bridgePort) ? ('<span class="badge ' + (a.bridgeReady ? 'ok' : 'warn') + '">\u6865\u63A5 :' + a.bridgePort + (a.bridgeReady ? ' \u5728\u7EBF' : ' \u672A\u542F\u52A8') + '</span>') : '';
+        const actionBtn = isPlanned
+          ? '<button class="btn" disabled style="opacity:0.55;cursor:not-allowed">\u5373\u5C06\u652F\u6301</button>'
+          : '<button class="btn primary" onclick="setupAdapter('' + a.id + '')">' + (isConn ? '\u91CD\u65B0\u68C0\u6D4B' : '+ \u4E00\u952E\u914D\u7F6E') + '</button>';
+        return '<div class="card"' + (isPlanned ? ' style="opacity:0.58;filter:grayscale(0.85)"' : '') + '>'
           + '<div class="card-top"><div><div class="card-title">' + a.titleZh + '</div><div class="sub">' + (a.subtitleZh || a.category.toUpperCase()) + ' \xB7 ' + a.runtime + '</div></div>'
-          + '<button class="btn primary" onclick="setupAdapter('' + a.id + '')">' + (isConn ? '\u91CD\u65B0\u68C0\u6D4B' : '+ \u4E00\u952E\u914D\u7F6E') + '</button></div>'
+          + actionBtn + '</div>'
           + '<div class="pills">' + appBadge + provBadge + bridgeBadge + '</div>'
           + '<div class="meta">' + a.prerequisitesZh + '</div>'
           + '<div class="meta">\u8DEF\u5F84: <code>' + a.appDetail + '</code></div>'
