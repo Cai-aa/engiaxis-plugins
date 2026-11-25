@@ -3702,8 +3702,473 @@ function syncDshProfileConfig(servers, profile = "desktop", patchPath = resolveD
   return { configPath: patchPath, updatedServers: servers.map((s) => s.name) };
 }
 
+// packages/core/dist/hosts/agent-hosts.js
+import { existsSync as existsSync9, mkdirSync as mkdirSync6, readFileSync as readFileSync8, writeFileSync as writeFileSync6 } from "node:fs";
+import { homedir as homedir5 } from "node:os";
+import { dirname as dirname10, isAbsolute as isAbsolute3, join as join9 } from "node:path";
+function platformUserConfigRoot(platform2 = process.platform) {
+  if (platform2 === "win32") {
+    return process.env.APPDATA?.trim() || join9(homedir5(), "AppData", "Roaming");
+  }
+  if (platform2 === "darwin") {
+    return join9(homedir5(), "Library", "Application Support");
+  }
+  return process.env.XDG_CONFIG_HOME?.trim() || join9(homedir5(), ".config");
+}
+function resolveAntigravityMcpConfigPath() {
+  const override = process.env.ANTIGRAVITY_MCP_CONFIG?.trim();
+  if (override)
+    return override;
+  return join9(homedir5(), ".gemini", "antigravity", "mcp_config.json");
+}
+function resolveCursorMcpJsonPath() {
+  const override = process.env.CURSOR_MCP_CONFIG?.trim();
+  if (override)
+    return override;
+  return join9(homedir5(), ".cursor", "mcp.json");
+}
+function resolveVsCodeMcpJsonPath() {
+  const override = process.env.VSCODE_MCP_CONFIG?.trim();
+  if (override)
+    return override;
+  return join9(platformUserConfigRoot(), "Code", "User", "mcp.json");
+}
+function resolveClaudeDesktopConfigPath() {
+  const override = process.env.CLAUDE_DESKTOP_CONFIG?.trim();
+  if (override)
+    return override;
+  return join9(platformUserConfigRoot(), "Claude", "claude_desktop_config.json");
+}
+function resolveClaudeCodeConfigPath() {
+  const override = process.env.CLAUDE_CODE_CONFIG?.trim();
+  if (override)
+    return override;
+  return join9(homedir5(), ".claude.json");
+}
+function resolveWindsurfMcpConfigPath() {
+  const override = process.env.WINDSURF_MCP_CONFIG?.trim();
+  if (override)
+    return override;
+  return join9(homedir5(), ".codeium", "windsurf", "mcp_config.json");
+}
+function resolveTraeMcpJsonPath() {
+  const override = process.env.TRAE_MCP_CONFIG?.trim();
+  if (override)
+    return override;
+  return join9(platformUserConfigRoot(), "Trae", "User", "mcp.json");
+}
+var ALL_AGENT_HOSTS = [
+  "chatgpt",
+  "workbuddy",
+  "antigravity",
+  "cursor",
+  "vscode",
+  "claude-desktop",
+  "claude-code",
+  "dsh",
+  "windsurf",
+  "trae"
+];
+var AGENT_HOST_SPECS = {
+  chatgpt: {
+    id: "chatgpt",
+    name: "ChatGPT Desktop",
+    nameZh: "ChatGPT Desktop",
+    badge: "CG",
+    format: "toml",
+    shortPathHint: "~/.codex/config.toml",
+    resolveConfigPath: (opts) => opts?.codexConfigPath ?? resolveChatGptConfigTomlPath(),
+    resolveDetectDirs: (opts) => [dirname10(opts?.codexConfigPath ?? resolveChatGptConfigTomlPath())]
+  },
+  workbuddy: {
+    id: "workbuddy",
+    name: "WorkBuddy Desktop",
+    nameZh: "WorkBuddy \u684C\u9762\u7AEF",
+    badge: "WB",
+    format: "json",
+    containerKey: "mcpServers",
+    includeTypeField: true,
+    httpUrlField: "url",
+    shortPathHint: "~/.workbuddy/mcp.json",
+    resolveConfigPath: () => resolveWorkBuddyMcpJsonPath(),
+    resolveDetectDirs: () => [
+      dirname10(resolveWorkBuddyMcpJsonPath()),
+      join9(homedir5(), ".workbuddy"),
+      join9(homedir5(), ".workbuddy-ai")
+    ]
+  },
+  antigravity: {
+    id: "antigravity",
+    name: "Antigravity",
+    nameZh: "Antigravity",
+    badge: "AG",
+    format: "json",
+    containerKey: "mcpServers",
+    includeTypeField: false,
+    httpUrlField: "serverUrl",
+    shortPathHint: "~/.gemini/antigravity/mcp_config.json",
+    resolveConfigPath: () => resolveAntigravityMcpConfigPath(),
+    resolveDetectDirs: () => [dirname10(resolveAntigravityMcpConfigPath())]
+  },
+  cursor: {
+    id: "cursor",
+    name: "Cursor",
+    nameZh: "Cursor",
+    badge: "CU",
+    format: "json",
+    containerKey: "mcpServers",
+    includeTypeField: true,
+    httpUrlField: "url",
+    shortPathHint: "~/.cursor/mcp.json",
+    resolveConfigPath: () => resolveCursorMcpJsonPath(),
+    resolveDetectDirs: () => [dirname10(resolveCursorMcpJsonPath())]
+  },
+  vscode: {
+    id: "vscode",
+    name: "VS Code",
+    nameZh: "VS Code",
+    badge: "VS",
+    format: "json",
+    containerKey: "servers",
+    includeTypeField: true,
+    httpUrlField: "url",
+    shortPathHint: "Code/User/mcp.json",
+    resolveConfigPath: () => resolveVsCodeMcpJsonPath(),
+    resolveDetectDirs: () => [dirname10(resolveVsCodeMcpJsonPath())]
+  },
+  "claude-desktop": {
+    id: "claude-desktop",
+    name: "Claude Desktop",
+    nameZh: "Claude Desktop",
+    badge: "CD",
+    format: "json",
+    containerKey: "mcpServers",
+    includeTypeField: false,
+    httpUrlField: "unsupported",
+    shortPathHint: "Claude/claude_desktop_config.json",
+    resolveConfigPath: () => resolveClaudeDesktopConfigPath(),
+    resolveDetectDirs: () => [dirname10(resolveClaudeDesktopConfigPath())]
+  },
+  "claude-code": {
+    id: "claude-code",
+    name: "Claude Code",
+    nameZh: "Claude Code",
+    badge: "CC",
+    format: "json",
+    containerKey: "mcpServers",
+    includeTypeField: true,
+    httpUrlField: "url",
+    shortPathHint: "~/.claude.json",
+    resolveConfigPath: () => resolveClaudeCodeConfigPath(),
+    resolveDetectDirs: () => [join9(homedir5(), ".claude")]
+  },
+  dsh: {
+    id: "dsh",
+    name: "DeepSeek Harness",
+    nameZh: "DeepSeek Harness",
+    badge: "DH",
+    format: "yaml",
+    shortPathHint: "~/.dsh/profiles/desktop/cordis.patch.yml",
+    resolveConfigPath: (opts) => resolveDshProfilePatchPath(opts?.dshProfile ?? "desktop"),
+    resolveDetectDirs: () => [resolveDshHomeDir()]
+  },
+  windsurf: {
+    id: "windsurf",
+    name: "Windsurf",
+    nameZh: "Windsurf",
+    badge: "WS",
+    format: "json",
+    containerKey: "mcpServers",
+    includeTypeField: true,
+    httpUrlField: "serverUrl",
+    shortPathHint: "~/.codeium/windsurf/mcp_config.json",
+    resolveConfigPath: () => resolveWindsurfMcpConfigPath(),
+    resolveDetectDirs: () => [dirname10(resolveWindsurfMcpConfigPath())]
+  },
+  trae: {
+    id: "trae",
+    name: "Trae",
+    nameZh: "Trae",
+    badge: "TR",
+    format: "json",
+    containerKey: "mcpServers",
+    includeTypeField: false,
+    httpUrlField: "url",
+    shortPathHint: "Trae/User/mcp.json",
+    resolveConfigPath: () => resolveTraeMcpJsonPath(),
+    resolveDetectDirs: () => [dirname10(resolveTraeMcpJsonPath())]
+  }
+};
+function isAgentHostId(value) {
+  return ALL_AGENT_HOSTS.includes(value);
+}
+function isPlainRecord(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+function formatJsonMcpEntry(server, options = {}) {
+  const isHttp = server.transport === "http" || !server.command && Boolean(server.url);
+  if (isHttp) {
+    if (!server.url)
+      return null;
+    const urlField = options.httpUrlField ?? "url";
+    if (urlField === "unsupported")
+      return null;
+    if (urlField === "serverUrl") {
+      return { serverUrl: server.url };
+    }
+    return options.includeTypeField ? { type: "http", url: server.url } : { url: server.url };
+  }
+  if (!server.command)
+    return null;
+  return {
+    ...options.includeTypeField ? { type: "stdio" } : {},
+    command: server.command,
+    args: [...server.args ?? []],
+    ...server.cwd ? { cwd: server.cwd } : {},
+    ...server.env && Object.keys(server.env).length > 0 ? { env: { ...server.env } } : {}
+  };
+}
+function upsertJsonMcpConfig(existingContent, servers, options = {}) {
+  let root = {};
+  const trimmed = existingContent.trim();
+  if (trimmed) {
+    let parsed;
+    try {
+      parsed = JSON.parse(trimmed);
+    } catch (err) {
+      const target = options.configPathForError ? ` (${options.configPathForError})` : "";
+      const reason = err instanceof Error ? err.message : String(err);
+      throw new Error(`Existing MCP JSON file${target} contains invalid JSON and was not overwritten: ${reason}`);
+    }
+    if (!isPlainRecord(parsed)) {
+      const target = options.configPathForError ? ` (${options.configPathForError})` : "";
+      throw new Error(`Existing MCP JSON file${target} does not contain a JSON object at top level.`);
+    }
+    root = { ...parsed };
+  }
+  let containerKey;
+  if (options.containerKey === "servers" || options.containerKey === "mcpServers") {
+    containerKey = options.containerKey;
+  } else {
+    containerKey = isPlainRecord(root.servers) && !isPlainRecord(root.mcpServers) ? "servers" : "mcpServers";
+  }
+  const existingMap = isPlainRecord(root[containerKey]) ? { ...root[containerKey] } : {};
+  const updatedServers = [];
+  const skippedServers = [];
+  for (const server of servers) {
+    const entry = formatJsonMcpEntry(server, {
+      includeTypeField: options.includeTypeField,
+      httpUrlField: options.httpUrlField
+    });
+    if (!entry) {
+      skippedServers.push(server.name);
+      continue;
+    }
+    existingMap[server.name] = entry;
+    updatedServers.push(server.name);
+  }
+  root[containerKey] = existingMap;
+  return {
+    content: `${JSON.stringify(root, null, 2)}
+`,
+    containerKey,
+    updatedServers,
+    skippedServers
+  };
+}
+function buildStandardMcpJson(servers, containerKey = "mcpServers") {
+  const result = upsertJsonMcpConfig("", servers, {
+    containerKey,
+    includeTypeField: containerKey === "servers",
+    httpUrlField: "url"
+  });
+  return result.content;
+}
+function toStdioServers(servers) {
+  const out = [];
+  for (const s of servers) {
+    if (s.transport === "http" || !s.command)
+      continue;
+    out.push({
+      name: s.name,
+      command: s.command,
+      args: [...s.args ?? []],
+      ...s.cwd ? { cwd: s.cwd } : {},
+      ...s.env ? { env: { ...s.env } } : {},
+      ...s.enabled !== void 0 ? { enabled: s.enabled } : {}
+    });
+  }
+  return out;
+}
+function syncAgentHost(hostId, servers, options = {}) {
+  const spec = AGENT_HOST_SPECS[hostId];
+  const configPath = options.configPath ?? spec.resolveConfigPath(options);
+  if (hostId === "chatgpt") {
+    const stdio = toStdioServers(servers);
+    const skipped = servers.filter((s) => s.transport === "http" || !s.command).map((s) => s.name);
+    const res = syncChatGptDesktopConfig(stdio, configPath);
+    return {
+      host: hostId,
+      configPath: res.configPath,
+      updatedServers: res.updatedServers,
+      ...skipped.length > 0 ? { skippedServers: skipped } : {}
+    };
+  }
+  if (hostId === "dsh") {
+    const stdio = toStdioServers(servers);
+    const skipped = servers.filter((s) => s.transport === "http" || !s.command).map((s) => s.name);
+    const res = syncDshProfileConfig(stdio, options.dshProfile ?? "desktop", configPath);
+    return {
+      host: hostId,
+      configPath: res.configPath,
+      updatedServers: res.updatedServers,
+      ...skipped.length > 0 ? { skippedServers: skipped } : {}
+    };
+  }
+  if (hostId === "workbuddy") {
+    const existing2 = existsSync9(configPath) ? readFileSync8(configPath, "utf8") : "";
+    const hasHttp = servers.some((s) => s.transport === "http" || !s.command && Boolean(s.url));
+    if (!hasHttp) {
+      const res = syncWorkBuddyDesktopConfig(toStdioServers(servers), configPath);
+      return {
+        host: hostId,
+        configPath: res.configPath,
+        updatedServers: res.updatedServers,
+        containerKey: "mcpServers"
+      };
+    }
+    const merged2 = upsertJsonMcpConfig(existing2, servers, {
+      containerKey: "mcpServers",
+      includeTypeField: true,
+      httpUrlField: "url",
+      configPathForError: configPath
+    });
+    mkdirSync6(dirname10(configPath), { recursive: true });
+    writeFileSync6(configPath, merged2.content, "utf8");
+    return {
+      host: hostId,
+      configPath,
+      updatedServers: merged2.updatedServers,
+      ...merged2.skippedServers.length > 0 ? { skippedServers: merged2.skippedServers } : {},
+      containerKey: merged2.containerKey
+    };
+  }
+  const existing = existsSync9(configPath) ? readFileSync8(configPath, "utf8") : "";
+  const merged = upsertJsonMcpConfig(existing, servers, {
+    containerKey: spec.containerKey ?? "mcpServers",
+    includeTypeField: spec.includeTypeField,
+    httpUrlField: spec.httpUrlField,
+    configPathForError: configPath
+  });
+  mkdirSync6(dirname10(configPath), { recursive: true });
+  writeFileSync6(configPath, merged.content, "utf8");
+  return {
+    host: hostId,
+    configPath,
+    updatedServers: merged.updatedServers,
+    ...merged.skippedServers.length > 0 ? { skippedServers: merged.skippedServers } : {},
+    containerKey: merged.containerKey
+  };
+}
+function syncCustomMcpJsonFile(configPath, servers, containerKey = "auto") {
+  const trimmedPath = configPath.trim();
+  if (!trimmedPath || !isAbsolute3(trimmedPath)) {
+    throw new Error("Custom MCP config path must be an absolute path to a JSON file.");
+  }
+  const existing = existsSync9(trimmedPath) ? readFileSync8(trimmedPath, "utf8") : "";
+  const merged = upsertJsonMcpConfig(existing, servers, {
+    containerKey,
+    includeTypeField: containerKey === "servers",
+    httpUrlField: "url",
+    configPathForError: trimmedPath
+  });
+  mkdirSync6(dirname10(trimmedPath), { recursive: true });
+  writeFileSync6(trimmedPath, merged.content, "utf8");
+  return {
+    host: "custom",
+    configPath: trimmedPath,
+    updatedServers: merged.updatedServers,
+    ...merged.skippedServers.length > 0 ? { skippedServers: merged.skippedServers } : {},
+    containerKey: merged.containerKey
+  };
+}
+function readSyncedServerIdsFromHost(spec, configPath, allowedAdapters) {
+  if (!existsSync9(configPath))
+    return [];
+  const aliasToCanonical = /* @__PURE__ */ new Map();
+  for (const id of allowedAdapters) {
+    for (const alias of resolveAdapterHostServerNames(id)) {
+      aliasToCanonical.set(alias, id);
+    }
+  }
+  const matched = /* @__PURE__ */ new Set();
+  try {
+    const raw = readFileSync8(configPath, "utf8");
+    if (spec.format === "toml") {
+      for (const srv of parseCodexConfigTomlMcpServers(raw)) {
+        if (!srv.enabled)
+          continue;
+        const canonical = aliasToCanonical.get(srv.name);
+        if (canonical)
+          matched.add(canonical);
+      }
+      return [...matched];
+    }
+    if (spec.format === "yaml") {
+      const rx = /serverName:s*["']?([A-Za-z0-9._-]+)["']?/g;
+      let m;
+      while ((m = rx.exec(raw)) !== null) {
+        const canonical = aliasToCanonical.get(m[1]);
+        if (canonical)
+          matched.add(canonical);
+      }
+      return [...matched];
+    }
+    const parsed = JSON.parse(raw);
+    if (!isPlainRecord(parsed))
+      return [];
+    const key = spec.containerKey ?? "mcpServers";
+    const map = parsed[key];
+    if (!isPlainRecord(map))
+      return [];
+    for (const [name, entry] of Object.entries(map)) {
+      if (isPlainRecord(entry) && entry.disabled === true)
+        continue;
+      const canonical = aliasToCanonical.get(name);
+      if (canonical)
+        matched.add(canonical);
+    }
+    return [...matched];
+  } catch {
+    return [];
+  }
+}
+function detectAgentHosts(allowedAdapters, options = {}) {
+  return ALL_AGENT_HOSTS.map((id) => {
+    const spec = AGENT_HOST_SPECS[id];
+    const configPath = spec.resolveConfigPath(options);
+    const configExists = existsSync9(configPath);
+    const detected = configExists || spec.resolveDetectDirs(options).some((dir) => existsSync9(dir));
+    const syncedServers = configExists ? readSyncedServerIdsFromHost(spec, configPath, allowedAdapters) : [];
+    return {
+      id: spec.id,
+      name: spec.name,
+      nameZh: spec.nameZh,
+      badge: spec.badge,
+      format: spec.format,
+      ...spec.containerKey ? { containerKey: spec.containerKey } : {},
+      configPath,
+      shortPathHint: spec.shortPathHint,
+      detected,
+      configExists,
+      syncedCount: syncedServers.length,
+      syncedServers
+    };
+  });
+}
+
 // packages/mcp-server/src/mcp-server.ts
-import { existsSync as existsSync9 } from "node:fs";
+import { existsSync as existsSync10 } from "node:fs";
 import { createInterface as createInterface2 } from "node:readline";
 
 // packages/mcp-server/src/case-covers.ts
@@ -3770,7 +4235,7 @@ function softwareIconsForEdition(edition) {
 }
 
 // packages/mcp-server/src/mcp-app-ui.ts
-var CONNECTOR_VERSION = "1.1.0";
+var CONNECTOR_VERSION = "1.1.1";
 var MCP_APP_MIME_TYPE = "text/html;profile=mcp-app";
 function mcpAppUrisForEdition(edition) {
   return {
@@ -4707,6 +5172,182 @@ function renderMcpAppHtml(edition, surface) {
     }
     .badge.ok { background: var(--ea-ok-soft); color: var(--ea-ok); }
     .badge.warn { background: var(--ea-warn-soft); color: var(--ea-warn); }
+    .s-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .host-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 14px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--ea-divider);
+    }
+    @media (max-width: 760px) {
+      .host-grid { grid-template-columns: 1fr; }
+    }
+
+    .host-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 9px;
+      border: 1px solid var(--ea-border);
+      background: var(--ea-surface-sub);
+      transition: border-color 0.14s ease, background 0.14s ease;
+    }
+    .host-row:hover {
+      border-color: var(--ea-border-strong);
+      background: var(--ea-row-hover);
+    }
+    .host-row.undetected {
+      opacity: 0.76;
+    }
+
+    .host-row-main {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .host-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: var(--ea-surface);
+      border: 1px solid var(--ea-border);
+      color: var(--ea-text);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .host-row.detected .host-badge {
+      border-color: rgba(22, 163, 74, 0.34);
+      background: var(--ea-ok-soft);
+      color: var(--ea-ok);
+    }
+
+    .host-meta {
+      min-width: 0;
+      flex: 1;
+    }
+    .host-name-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .host-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ea-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .host-pill {
+      font-size: 11px;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: var(--ea-pill-bg);
+      color: var(--ea-muted);
+      white-space: nowrap;
+    }
+    .host-pill.ok {
+      background: var(--ea-ok-soft);
+      color: var(--ea-ok);
+    }
+    .host-path {
+      margin-top: 2px;
+      font-size: 11.5px;
+      color: var(--ea-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .custom-sync-box {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--ea-divider);
+    }
+    .custom-sync-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ea-muted);
+      margin-bottom: 8px;
+    }
+    .custom-sync-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .custom-sync-form .text-input {
+      flex: 1;
+      min-width: 200px;
+    }
+    .select-input {
+      height: 36px;
+      padding: 0 10px;
+      border-radius: 8px;
+      border: 1px solid var(--ea-border);
+      background: var(--ea-surface);
+      color: var(--ea-text);
+      font-size: 12.5px;
+      outline: none;
+    }
+    .select-input:focus { border-color: var(--ea-border-strong); }
+
+    .export-json-panel.hidden { display: none !important; }
+    .export-json-panel {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--ea-divider);
+    }
+    .export-json-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .export-json-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .export-json-pre {
+      margin: 0;
+      max-height: 220px;
+      overflow: auto;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--ea-border);
+      background: var(--ea-surface-sub);
+      color: var(--ea-text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.48;
+      white-space: pre;
+    }
+
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -5446,10 +6087,39 @@ function renderMcpAppHtml(edition, surface) {
             <div class="s-card">
               <div class="s-card-head">
                 <div>
-                  <h2 class="s-card-title" id="secSyncTitle">\u540C\u6B65\u5230 ChatGPT Desktop</h2>
-                  <p class="s-card-desc" id="secSyncDesc">\u5C06\u6240\u6709\u5DF2\u914D\u7F6E\u7684\u672C\u5730\u5DE5\u7A0B\u8F6F\u4EF6 MCP \u9002\u914D\u5668\u5199\u5165 ~/.codex/config.toml\u3002</p>
+                  <h2 class="s-card-title" id="secSyncTitle">\u540C\u6B65\u5230 Agent \u684C\u9762\u7AEF</h2>
+                  <p class="s-card-desc" id="secSyncDesc">\u5C06\u5DF2\u542F\u7528\u7684\u5DE5\u7A0B\u8F6F\u4EF6 MCP \u9002\u914D\u5668\u4E00\u952E\u540C\u6B65\u5230\u672C\u673A\u4EFB\u610F\u652F\u6301 MCP \u7684\u684C\u9762\u7AEF Agent\u3002</p>
                 </div>
-                <button type="button" class="btn" id="btnSync">\u540C\u6B65\u5230 ChatGPT</button>
+                <div class="s-card-actions">
+                  <button type="button" class="btn primary sm" id="btnSyncDetected">\u4E00\u952E\u540C\u6B65\u5DF2\u68C0\u6D4B\u5BA2\u6237\u7AEF</button>
+                  <button type="button" class="btn sm" id="btnToggleExportJson">\u5BFC\u51FA\u901A\u7528 mcp.json</button>
+                </div>
+              </div>
+
+              <div class="host-grid" id="hostSyncGrid"></div>
+
+              <div class="custom-sync-box">
+                <div class="custom-sync-label" id="customSyncLabel">\u5176\u4ED6\u4EFB\u610F MCP \u5BA2\u6237\u7AEF\uFF08Cherry Studio / Cline / Roo Code / Zed / Kiro / OpenCode \u7B49\uFF09</div>
+                <div class="custom-sync-form">
+                  <input id="customSyncPath" class="text-input" type="text" placeholder="\u8F93\u5165\u4EFB\u610F\u672C\u5730 MCP JSON \u914D\u7F6E\u6587\u4EF6\u7EDD\u5BF9\u8DEF\u5F84\uFF08\u5982 C:/Users/.../mcp.json\uFF09" />
+                  <select id="customSyncContainer" class="select-input">
+                    <option value="auto" id="optAuto">\u81EA\u52A8\u8BC6\u522B\u952E\u540D</option>
+                    <option value="mcpServers">mcpServers</option>
+                    <option value="servers">servers (VS Code)</option>
+                  </select>
+                  <button type="button" class="btn sm" id="btnSyncCustom">\u540C\u6B65\u5230\u8BE5\u6587\u4EF6</button>
+                </div>
+              </div>
+
+              <div class="export-json-panel hidden" id="exportJsonPanel">
+                <div class="export-json-head">
+                  <div class="export-json-tabs">
+                    <button type="button" class="btn sm primary" id="btnExportStd">\u6807\u51C6 mcpServers</button>
+                    <button type="button" class="btn sm" id="btnExportVscode">VS Code servers</button>
+                  </div>
+                  <button type="button" class="btn sm" id="btnCopyExportJson">\u590D\u5236 JSON</button>
+                </div>
+                <pre class="export-json-pre" id="exportJsonPre">{}</pre>
               </div>
             </div>
 
@@ -5596,9 +6266,23 @@ function renderMcpAppHtml(edition, surface) {
           keyPlaceholder: '\u8F93\u5165\u6FC0\u6D3B\u5361\u5BC6\uFF08EA-CAD-XXXX-XXXX-XXXX\uFF09\u6216\u79BB\u7EBF\u6388\u6743\u7801\uFF08EA1.xxx\uFF09',
           secLicTitle: '\u5546\u4E1A\u6388\u6743',
           secLicDesc: '\u652F\u6301\u5728\u7EBF\u6FC0\u6D3B\u5361\u5BC6\uFF08\u81EA\u52A8\u7ED1\u5B9A\u672C\u673A\u6C38\u4E45\u751F\u6548\uFF09\u53CA\u79BB\u7EBF Ed25519 \u6388\u6743\u7801\u3002',
-          secSyncTitle: '\u540C\u6B65\u5230 ChatGPT Desktop',
-          secSyncDesc: '\u5C06\u6240\u6709\u5DF2\u914D\u7F6E\u7684\u672C\u5730\u5DE5\u7A0B\u8F6F\u4EF6 MCP \u9002\u914D\u5668\u5199\u5165 ~/.codex/config.toml\u3002',
-          syncBtn: '\u540C\u6B65\u5230 ChatGPT',
+          secSyncTitle: '\u540C\u6B65\u5230 Agent \u684C\u9762\u7AEF',
+          secSyncDesc: '\u5C06\u5DF2\u542F\u7528\u7684\u5DE5\u7A0B\u8F6F\u4EF6 MCP \u9002\u914D\u5668\u4E00\u952E\u540C\u6B65\u5230\u672C\u673A\u4EFB\u610F\u652F\u6301 MCP \u7684\u684C\u9762\u7AEF Agent\u3002',
+          syncDetectedBtn: '\u4E00\u952E\u540C\u6B65\u5DF2\u68C0\u6D4B\u5BA2\u6237\u7AEF',
+          exportJsonBtn: '\u5BFC\u51FA\u901A\u7528 mcp.json',
+          hostSyncBtn: '\u540C\u6B65',
+          hostDetected: '\u5DF2\u68C0\u6D4B',
+          hostNotDetected: '\u672A\u68C0\u6D4B\u5230',
+          hostSyncedFmt: function (n) { return '\u5DF2\u540C\u6B65 ' + n + ' \u4E2A'; },
+          customSyncLabel: '\u5176\u4ED6\u4EFB\u610F MCP \u5BA2\u6237\u7AEF\uFF08Cherry Studio / Cline / Roo Code / Zed / Kiro / OpenCode \u7B49\uFF09',
+          customSyncPlaceholder: '\u8F93\u5165\u4EFB\u610F\u672C\u5730 MCP JSON \u914D\u7F6E\u6587\u4EF6\u7EDD\u5BF9\u8DEF\u5F84\uFF08\u5982 C:/Users/.../mcp.json\uFF09',
+          optAuto: '\u81EA\u52A8\u8BC6\u522B\u952E\u540D',
+          syncCustomBtn: '\u540C\u6B65\u5230\u8BE5\u6587\u4EF6',
+          exportStdBtn: '\u6807\u51C6 mcpServers',
+          exportVscodeBtn: 'VS Code servers',
+          copyJsonBtn: '\u590D\u5236 JSON',
+          jsonCopiedToast: '\u901A\u7528 MCP JSON \u5DF2\u590D\u5236\uFF0C\u53EF\u76F4\u63A5\u7C98\u8D34\u5230\u4EFB\u610F MCP \u5BA2\u6237\u7AEF',
+          needCustomPathToast: '\u8BF7\u5148\u8F93\u5165\u76EE\u6807 MCP JSON \u914D\u7F6E\u6587\u4EF6\u7684\u7EDD\u5BF9\u8DEF\u5F84',
           secLogTitle: '\u8FDE\u63A5\u4E0E\u914D\u7F6E\u65E5\u5FD7',
           clearLog: '\u6E05\u7A7A',
           btnSetup: '\u4E00\u952E\u914D\u7F6E\u63A5\u5165',
@@ -5696,9 +6380,23 @@ function renderMcpAppHtml(edition, surface) {
           keyPlaceholder: 'Enter redeem code (EA-CAD-XXXX-XXXX-XXXX) or offline key (EA1.xxx)',
           secLicTitle: 'Commercial License',
           secLicDesc: 'Supports online redeem codes (auto-bound permanently) and offline Ed25519 keys.',
-          secSyncTitle: 'Sync to ChatGPT Desktop',
-          secSyncDesc: 'Register all provisioned engineering MCP adapters into ~/.codex/config.toml.',
-          syncBtn: 'Sync to ChatGPT',
+          secSyncTitle: 'Sync to Agent Desktop Apps',
+          secSyncDesc: 'Sync active engineering MCP adapters to any MCP-compatible desktop Agent client.',
+          syncDetectedBtn: 'Sync All Detected',
+          exportJsonBtn: 'Export mcp.json',
+          hostSyncBtn: 'Sync',
+          hostDetected: 'Detected',
+          hostNotDetected: 'Not found',
+          hostSyncedFmt: function (n) { return n + ' synced'; },
+          customSyncLabel: 'Any Other MCP Agent (Cherry Studio, Cline, Roo Code, Zed, Kiro, OpenCode, etc.)',
+          customSyncPlaceholder: 'Absolute path to any local MCP JSON config file (e.g. ~/.agent/mcp.json)',
+          optAuto: 'Auto-detect key',
+          syncCustomBtn: 'Sync to File',
+          exportStdBtn: 'Standard mcpServers',
+          exportVscodeBtn: 'VS Code servers',
+          copyJsonBtn: 'Copy JSON',
+          jsonCopiedToast: 'Standard MCP JSON copied \u2014 paste into any MCP Agent',
+          needCustomPathToast: 'Please enter an absolute path to the target MCP JSON file',
           secLogTitle: 'Activity Log',
           clearLog: 'Clear',
           btnSetup: 'One-Click Connect',
@@ -5816,7 +6514,15 @@ function renderMcpAppHtml(edition, surface) {
         document.getElementById('secLicDesc').textContent = t('secLicDesc');
         document.getElementById('secSyncTitle').textContent = t('secSyncTitle');
         document.getElementById('secSyncDesc').textContent = t('secSyncDesc');
-        document.getElementById('btnSync').textContent = t('syncBtn');
+        document.getElementById('btnSyncDetected').textContent = t('syncDetectedBtn');
+        document.getElementById('btnToggleExportJson').textContent = t('exportJsonBtn');
+        document.getElementById('customSyncLabel').textContent = t('customSyncLabel');
+        document.getElementById('customSyncPath').placeholder = t('customSyncPlaceholder');
+        document.getElementById('optAuto').textContent = t('optAuto');
+        document.getElementById('btnSyncCustom').textContent = t('syncCustomBtn');
+        document.getElementById('btnExportStd').textContent = t('exportStdBtn');
+        document.getElementById('btnExportVscode').textContent = t('exportVscodeBtn');
+        document.getElementById('btnCopyExportJson').textContent = t('copyJsonBtn');
         document.getElementById('secLogTitle').textContent = t('secLogTitle');
         document.getElementById('btnClearLog').textContent = t('clearLog');
         document.getElementById('disclaimerFooter').textContent = t('disclaimer');
@@ -6641,6 +7347,98 @@ function renderMcpAppHtml(edition, surface) {
         }
       }
 
+
+      let exportJsonFormat = 'mcpServers';
+      let exportJsonVisible = false;
+
+      function renderHostSyncGrid() {
+        const grid = document.getElementById('hostSyncGrid');
+        if (!grid) return;
+        const hosts = (state && Array.isArray(state.hosts)) ? state.hosts.slice() : [];
+        if (hosts.length === 0) {
+          grid.innerHTML = '';
+          return;
+        }
+        hosts.sort(function (a, b) {
+          if (Boolean(a.detected) !== Boolean(b.detected)) return a.detected ? -1 : 1;
+          return 0;
+        });
+        grid.innerHTML = hosts.map(function (h) {
+          const name = isZh ? (h.nameZh || h.name) : h.name;
+          const statusText = h.syncedCount > 0
+            ? (t('hostDetected') + ' \xB7 ' + t('hostSyncedFmt')(h.syncedCount))
+            : (h.detected ? t('hostDetected') : t('hostNotDetected'));
+          const pillCls = (h.syncedCount > 0 || h.detected) ? 'host-pill ok' : 'host-pill';
+          const rowCls = h.detected ? 'host-row detected' : 'host-row undetected';
+          const titlePath = esc(h.configPath || h.shortPathHint || '');
+          return '<div class="' + rowCls + '" data-host-id="' + esc(h.id) + '">'
+            + '<div class="host-row-main">'
+            +   '<div class="host-badge">' + esc(h.badge || h.id.slice(0, 2).toUpperCase()) + '</div>'
+            +   '<div class="host-meta">'
+            +     '<div class="host-name-line">'
+            +       '<span class="host-name">' + esc(name) + '</span>'
+            +       '<span class="' + pillCls + '">' + esc(statusText) + '</span>'
+            +     '</div>'
+            +     '<div class="host-path" title="' + titlePath + '">' + esc(h.shortPathHint || h.configPath || '') + '</div>'
+            +   '</div>'
+            + '</div>'
+            + '<button type="button" class="btn sm" data-sync-host="' + esc(h.id) + '">' + esc(t('hostSyncBtn')) + '</button>'
+            + '</div>';
+        }).join('');
+      }
+
+      async function loadExportJson(format) {
+        exportJsonFormat = format || 'mcpServers';
+        document.getElementById('btnExportStd').classList.toggle('primary', exportJsonFormat === 'mcpServers');
+        document.getElementById('btnExportVscode').classList.toggle('primary', exportJsonFormat === 'servers');
+        const pre = document.getElementById('exportJsonPre');
+        pre.textContent = isZh ? '\u6B63\u5728\u751F\u6210\u914D\u7F6E...' : 'Generating config...';
+        try {
+          const res = await callTool('connector_export_mcp_json', { format: exportJsonFormat });
+          if (res.data && typeof res.data.json === 'string') {
+            pre.textContent = res.data.json;
+          } else {
+            pre.textContent = JSON.stringify(res.data || {}, null, 2);
+          }
+        } catch (err) {
+          pre.textContent = '// ' + (err && err.message ? err.message : String(err));
+        }
+      }
+
+      async function triggerHostSync(payload, triggerBtn, label) {
+        if (triggerBtn) triggerBtn.disabled = true;
+        try {
+          const res = await callTool('connector_sync_host', payload);
+          if (res.data && Array.isArray(res.data.hosts) && state) {
+            state.hosts = res.data.hosts;
+            renderHostSyncGrid();
+          }
+          let msg;
+          if (res.data && res.data.synced) {
+            const hostCount = Array.isArray(res.data.syncedHosts) ? res.data.syncedHosts.length : 1;
+            const errCount = res.data.errors ? Object.keys(res.data.errors).length : 0;
+            if (payload.host === 'detected') {
+              msg = isZh
+                ? ('\u5DF2\u540C\u6B65 ' + res.data.count + ' \u4E2A\u9002\u914D\u5668\u5230 ' + hostCount + ' \u4E2A\u5DF2\u68C0\u6D4B Agent \u5BA2\u6237\u7AEF' + (errCount ? ('\uFF08' + errCount + ' \u4E2A\u8DF3\u8FC7\uFF09') : ''))
+                : ('Synced ' + res.data.count + ' adapter(s) to ' + hostCount + ' detected Agent client(s)');
+            } else {
+              msg = isZh
+                ? ('\u5DF2\u540C\u6B65 ' + res.data.count + ' \u4E2A\u9002\u914D\u5668\u5230 ' + label)
+                : ('Synced ' + res.data.count + ' adapter(s) to ' + label);
+            }
+          } else {
+            msg = (res.data && res.data.message) || (isZh ? '\u65E0\u53EF\u540C\u6B65\u9002\u914D\u5668' : 'No syncable adapters');
+          }
+          toast(msg);
+          appendLog(msg + (res.isError ? ' (error)' : ''));
+        } catch (err) {
+          toast(err.message);
+          appendLog((isZh ? '\u540C\u6B65\u5931\u8D25: ' : 'Sync failed: ') + err.message);
+        } finally {
+          if (triggerBtn) triggerBtn.disabled = false;
+        }
+      }
+
       function render() {
         if (!state || !Array.isArray(state.adapters)) return;
         renderLicenseState(state.license);
@@ -6649,6 +7447,7 @@ function renderMcpAppHtml(edition, surface) {
         renderConnectionsList(state.adapters);
         renderDetailModal();
         renderCaseSpace();
+        renderHostSyncGrid();
       }
 
       function copyMachineFingerprint() {
@@ -6886,21 +7685,48 @@ function renderMcpAppHtml(edition, surface) {
         document.getElementById('logContent').textContent = '\u5C31\u7EEA\u3002';
       });
 
-      document.getElementById('btnSync').addEventListener('click', async function () {
-        const btn = document.getElementById('btnSync');
-        btn.disabled = true;
-        try {
-          const res = await callTool('connector_sync_host', { host: 'chatgpt' });
-          const msg = (res.data && res.data.synced)
-            ? ('\u5DF2\u540C\u6B65 ' + res.data.count + ' \u4E2A\u9002\u914D\u5668\u5230 ChatGPT \u914D\u7F6E')
-            : ((res.data && res.data.message) || '\u65E0\u53EF\u540C\u6B65\u9002\u914D\u5668');
-          toast(msg);
-          appendLog(msg + (res.isError ? ' (error)' : ''));
-        } catch (err) {
-          toast(err.message);
-          appendLog('\u540C\u6B65\u5931\u8D25: ' + err.message);
-        } finally {
-          btn.disabled = false;
+      document.getElementById('btnSyncDetected').addEventListener('click', function () {
+        triggerHostSync({ host: 'detected' }, document.getElementById('btnSyncDetected'), isZh ? '\u6240\u6709\u5DF2\u68C0\u6D4B\u5BA2\u6237\u7AEF' : 'all detected clients');
+      });
+
+      document.getElementById('hostSyncGrid').addEventListener('click', function (e) {
+        const btn = e.target.closest('button[data-sync-host]');
+        if (!btn) return;
+        const hostId = btn.getAttribute('data-sync-host');
+        const h = state && Array.isArray(state.hosts) ? state.hosts.find(function (x) { return x.id === hostId; }) : null;
+        const label = h ? (isZh ? (h.nameZh || h.name) : h.name) : hostId;
+        triggerHostSync({ host: hostId }, btn, label);
+      });
+
+      document.getElementById('btnSyncCustom').addEventListener('click', function () {
+        const input = document.getElementById('customSyncPath');
+        const sel = document.getElementById('customSyncContainer');
+        const customPath = (input.value || '').trim();
+        if (!customPath) {
+          toast(t('needCustomPathToast'));
+          return;
+        }
+        triggerHostSync(
+          { host: 'custom', custom_path: customPath, container_key: sel.value || 'auto' },
+          document.getElementById('btnSyncCustom'),
+          customPath
+        );
+      });
+
+      document.getElementById('btnToggleExportJson').addEventListener('click', function () {
+        exportJsonVisible = !exportJsonVisible;
+        document.getElementById('exportJsonPanel').classList.toggle('hidden', !exportJsonVisible);
+        if (exportJsonVisible) loadExportJson(exportJsonFormat);
+      });
+      document.getElementById('btnExportStd').addEventListener('click', function () { loadExportJson('mcpServers'); });
+      document.getElementById('btnExportVscode').addEventListener('click', function () { loadExportJson('servers'); });
+      document.getElementById('btnCopyExportJson').addEventListener('click', function () {
+        const text = document.getElementById('exportJsonPre').textContent || '';
+        if (!text) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { toast(t('jsonCopiedToast')); }).catch(function () { toast(t('jsonCopiedToast')); });
+        } else {
+          toast(t('jsonCopiedToast'));
         }
       });
 
@@ -7177,7 +8003,7 @@ var ConnectorMcpServer = class {
             },
             sync_host: {
               type: "string",
-              enum: ["none", "chatgpt", "workbuddy", "dsh", "all"],
+              enum: ["none", ...ALL_AGENT_HOSTS, "detected", "all"],
               description: "Optional host client config to update automatically after verification."
             },
             dsh_profile: {
@@ -7247,23 +8073,49 @@ var ConnectorMcpServer = class {
       {
         name: "connector_sync_host",
         title: "Sync Host Client Config",
-        description: "Register all provisioned engineering MCP servers into ChatGPT Desktop (~/.codex/config.toml), WorkBuddy Desktop (~/.workbuddy/mcp.json), or DeepSeek Harness (cordis.patch.yml).",
+        description: "Register all configured engineering MCP servers into any supported MCP desktop Agent client (ChatGPT Desktop, WorkBuddy, Antigravity, Cursor, VS Code, Claude Desktop, Claude Code, DeepSeek Harness, Windsurf, Trae, all detected clients, or any custom MCP JSON file path).",
         inputSchema: {
           type: "object",
           required: ["host"],
           properties: {
             host: {
               type: "string",
-              enum: ["chatgpt", "workbuddy", "dsh", "all"],
-              description: "Target desktop client to synchronize."
+              enum: [...ALL_AGENT_HOSTS, "detected", "all", "custom"],
+              description: 'Target desktop Agent client ID, "detected" (all installed Agent apps), "all", or "custom" with custom_path.'
             },
             dsh_profile: {
               type: "string",
               description: 'DeepSeek Harness profile name (defaults to "desktop").'
+            },
+            custom_path: {
+              type: "string",
+              description: 'Absolute path to any custom MCP JSON config file when host is "custom".'
+            },
+            container_key: {
+              type: "string",
+              enum: ["auto", "mcpServers", "servers"],
+              description: 'Top-level JSON key for custom MCP config files (defaults to "auto", detecting "servers" vs "mcpServers").'
             }
           },
           additionalProperties: false
         }
+      },
+      {
+        name: "connector_export_mcp_json",
+        title: "Export Standard MCP JSON",
+        description: 'Generate ready-to-paste standard mcp.json ("mcpServers") or VS Code ("servers") configuration for all active engineering software MCP adapters in this edition.',
+        inputSchema: {
+          type: "object",
+          properties: {
+            format: {
+              type: "string",
+              enum: ["mcpServers", "servers"],
+              description: 'Top-level container key ("mcpServers" for standard MCP Agents or "servers" for VS Code). Defaults to "mcpServers".'
+            }
+          },
+          additionalProperties: false
+        },
+        annotations: readOnlyAnnotations
       },
       {
         name: "connector_list_adapter_tools",
@@ -7437,38 +8289,75 @@ var ConnectorMcpServer = class {
   async buildStatusPayload() {
     const adapters = await this.provisioner.listEditionAdapters();
     const license = this.resolveLicenseState();
+    const adapterIds = adaptersForEdition(this.config.edition).map((a) => a.id);
+    const hosts = detectAgentHosts(adapterIds, { codexConfigPath: this.resolveTargetCodexConfigPath() });
+    const syncableCount = this.collectSyncableHostServers({ includeDisabled: false }).length;
     return {
       edition: EDITION_SPECS[this.config.edition],
       homeDir: this.config.homeDir,
       license,
       adapters,
+      hosts,
+      syncableCount,
       cases: projectCasesForLicense(this.config.edition, Boolean(license.activated))
     };
   }
   resolveTargetCodexConfigPath() {
     return this.config.codexConfigPath ?? resolveChatGptConfigTomlPath();
   }
-  collectProvisionedHostServers() {
+  collectSyncableHostServers(options = {}) {
+    const includeDisabled = options.includeDisabled ?? false;
     const registry = this.provisioner.readRegistry();
-    const allowed = new Set(adaptersForEdition(this.config.edition).map((a) => a.id));
-    const codexPath = this.config.codexConfigPath;
-    const hostRead = codexPath ? readChatGptDesktopMcpServers(codexPath) : null;
+    const allowedIds = adaptersForEdition(this.config.edition).map((a) => a.id);
+    const allowed = new Set(allowedIds);
+    const codexPath = this.resolveTargetCodexConfigPath();
+    const hostRead = existsSync10(codexPath) ? readChatGptDesktopMcpServers(codexPath) : null;
     const existingHost = hostRead && hostRead.exists ? new Map(hostRead.servers.map((s) => [s.name, s])) : null;
-    return Object.values(registry).filter((record) => allowed.has(record.id) && existsSync9(record.command)).filter((record) => {
-      if (!existingHost) return true;
+    const byCanonicalId = /* @__PURE__ */ new Map();
+    for (const record of Object.values(registry)) {
+      if (!allowed.has(record.id) || !existsSync10(record.command)) continue;
       const aliases = resolveAdapterHostServerNames(record.id);
-      return aliases.some((alias) => existingHost.has(alias));
-    }).map((record) => {
-      const existingEntry = existingHost ? resolveAdapterHostServerNames(record.id).map((alias) => existingHost.get(alias)).find(Boolean) : void 0;
-      return {
+      const existingEntry = existingHost ? aliases.map((alias) => existingHost.get(alias)).find(Boolean) : void 0;
+      if (existingHost && !existingEntry) continue;
+      const enabled = existingEntry ? existingEntry.enabled : true;
+      if (!includeDisabled && !enabled) continue;
+      byCanonicalId.set(record.id, {
         name: existingEntry?.name ?? record.id,
+        transport: "stdio",
         command: record.command,
         args: record.args,
         cwd: record.cwd,
         env: record.env,
-        enabled: existingEntry ? existingEntry.enabled : true
-      };
-    });
+        enabled
+      });
+    }
+    if (existingHost) {
+      for (const id of allowedIds) {
+        if (byCanonicalId.has(id)) continue;
+        const existingEntry = resolveAdapterHostServerNames(id).map((alias) => existingHost.get(alias)).find(Boolean);
+        if (!existingEntry || !existingEntry.commandValid) continue;
+        if (!includeDisabled && !existingEntry.enabled) continue;
+        if (existingEntry.transport === "http" && existingEntry.url) {
+          byCanonicalId.set(id, {
+            name: existingEntry.name,
+            transport: "http",
+            url: existingEntry.url,
+            enabled: existingEntry.enabled
+          });
+        } else if (existingEntry.command) {
+          byCanonicalId.set(id, {
+            name: existingEntry.name,
+            transport: "stdio",
+            command: existingEntry.command,
+            args: existingEntry.args,
+            cwd: existingEntry.cwd,
+            env: existingEntry.env,
+            enabled: existingEntry.enabled
+          });
+        }
+      }
+    }
+    return [...byCanonicalId.values()];
   }
   syncSingleHostServer(record, host, dshProfile = "desktop") {
     const server = {
@@ -7480,38 +8369,95 @@ var ConnectorMcpServer = class {
       enabled: true
     };
     const results = {};
-    if (host === "chatgpt" || host === "all") {
-      const targetPath = this.resolveTargetCodexConfigPath();
-      const nonCanonicalAliases = resolveAdapterHostServerNames(record.id).filter((alias) => alias !== record.id);
-      if (nonCanonicalAliases.length > 0 && existsSync9(targetPath)) {
-        removeChatGptDesktopServers(nonCanonicalAliases, targetPath);
+    const codexPath = this.resolveTargetCodexConfigPath();
+    const syncTo = (hostId) => {
+      if (hostId === "chatgpt") {
+        const nonCanonicalAliases = resolveAdapterHostServerNames(record.id).filter((alias) => alias !== record.id);
+        if (nonCanonicalAliases.length > 0 && existsSync10(codexPath)) {
+          removeChatGptDesktopServers(nonCanonicalAliases, codexPath);
+        }
+        results.chatgpt = syncChatGptDesktopConfig([server], codexPath);
+        return;
       }
-      results.chatgpt = syncChatGptDesktopConfig([server], targetPath);
+      results[hostId] = syncAgentHost(hostId, [server], { dshProfile, codexConfigPath: codexPath });
+    };
+    if (isAgentHostId(host)) {
+      syncTo(host);
+    } else if (host === "detected") {
+      const detected = detectAgentHosts([record.id], { dshProfile, codexConfigPath: codexPath }).filter((h) => h.detected);
+      for (const h of detected) syncTo(h.id);
+    } else if (host === "all") {
+      for (const h of ["chatgpt", "workbuddy", "dsh"]) syncTo(h);
     }
-    if (host === "workbuddy" || host === "all") {
-      results.workbuddy = syncWorkBuddyDesktopConfig([server]);
-    }
-    if (host === "dsh" || host === "all") {
-      results.dsh = syncDshProfileConfig([server], dshProfile);
-    }
-    return { synced: true, count: 1, targets: results };
+    return { synced: Object.keys(results).length > 0, count: 1, targets: results };
   }
-  syncHosts(host, dshProfile = "desktop") {
-    const servers = this.collectProvisionedHostServers();
-    if (servers.length === 0) {
-      return { synced: false, message: "No active provisioned adapters in this edition yet. Run connector_setup first." };
+  syncHosts(host, options = {}) {
+    const dshProfile = options.dshProfile ?? "desktop";
+    const codexPath = this.resolveTargetCodexConfigPath();
+    const adapterIds = adaptersForEdition(this.config.edition).map((a) => a.id);
+    if (host === "custom") {
+      const servers = this.collectSyncableHostServers({ includeDisabled: false });
+      if (servers.length === 0) {
+        return { synced: false, message: "No active engineering MCP adapters in this edition yet. Connect at least one software first." };
+      }
+      if (!options.customPath?.trim()) {
+        return { synced: false, message: "Please provide an absolute path to the target MCP JSON config file." };
+      }
+      try {
+        const customResult = syncCustomMcpJsonFile(options.customPath, servers, options.containerKey ?? "auto");
+        return {
+          synced: true,
+          count: customResult.updatedServers.length,
+          targets: { custom: customResult },
+          hosts: detectAgentHosts(adapterIds, { dshProfile, codexConfigPath: codexPath })
+        };
+      } catch (err) {
+        return { synced: false, message: err instanceof Error ? err.message : String(err) };
+      }
+    }
+    const activeServers = this.collectSyncableHostServers({ includeDisabled: false });
+    const allServers = this.collectSyncableHostServers({ includeDisabled: true });
+    if (allServers.length === 0) {
+      return { synced: false, message: "No configured engineering MCP adapters in this edition yet. Connect at least one software first." };
+    }
+    const targetHostIds = [];
+    if (isAgentHostId(host)) {
+      targetHostIds.push(host);
+    } else if (host === "detected") {
+      const detected = detectAgentHosts(adapterIds, { dshProfile, codexConfigPath: codexPath }).filter((h) => h.detected).map((h) => h.id);
+      if (detected.length === 0) {
+        return { synced: false, message: "No installed MCP Agent desktop clients were detected on this machine." };
+      }
+      targetHostIds.push(...detected);
+    } else if (host === "all") {
+      const detected = detectAgentHosts(adapterIds, { dshProfile, codexConfigPath: codexPath }).filter((h) => h.detected).map((h) => h.id);
+      targetHostIds.push(...detected.length > 0 ? detected : ["chatgpt", "workbuddy", "dsh"]);
+    } else {
+      return { synced: false, message: `Unsupported host target: ${host}` };
     }
     const results = {};
-    if (host === "chatgpt" || host === "all") {
-      results.chatgpt = syncChatGptDesktopConfig(servers, this.resolveTargetCodexConfigPath());
+    const errors = {};
+    let maxUpdated = 0;
+    for (const hostId of targetHostIds) {
+      const serversToWrite = hostId === "chatgpt" ? allServers : activeServers.length > 0 ? activeServers : allServers;
+      try {
+        const res = syncAgentHost(hostId, serversToWrite, { dshProfile, codexConfigPath: codexPath });
+        results[hostId] = res;
+        if (res.updatedServers.length > maxUpdated) maxUpdated = res.updatedServers.length;
+      } catch (err) {
+        errors[hostId] = err instanceof Error ? err.message : String(err);
+      }
     }
-    if (host === "workbuddy" || host === "all") {
-      results.workbuddy = syncWorkBuddyDesktopConfig(servers);
-    }
-    if (host === "dsh" || host === "all") {
-      results.dsh = syncDshProfileConfig(servers, dshProfile);
-    }
-    return { synced: true, count: servers.length, targets: results };
+    const syncedAny = Object.keys(results).length > 0;
+    return {
+      synced: syncedAny,
+      count: maxUpdated,
+      syncedHosts: Object.keys(results),
+      targets: results,
+      ...Object.keys(errors).length > 0 ? { errors } : {},
+      ...!syncedAny ? { message: Object.values(errors).join("; ") || "Failed to sync target host(s)." } : {},
+      hosts: detectAgentHosts(adapterIds, { dshProfile, codexConfigPath: codexPath })
+    };
   }
   async callTool(name, rawArgs = {}) {
     const jsonText = (data, isError = false) => ({
@@ -7580,7 +8526,7 @@ var ConnectorMcpServer = class {
         toggleChatGptDesktopServer(current.hostServerName, enabled, targetConfigPath);
       } else if (enabled) {
         const record = this.provisioner.readRegistry()[id];
-        if (!record || !existsSync9(record.command)) {
+        if (!record || !existsSync10(record.command)) {
           return jsonText({ ok: false, error: `Software "${softwareId}" is not configured yet. Run connector_setup first.` }, true);
         }
         syncChatGptDesktopConfig([{
@@ -7604,7 +8550,7 @@ var ConnectorMcpServer = class {
       const id = softwareId;
       if (this.config.codexConfigPath !== null) {
         const targetConfigPath = this.resolveTargetCodexConfigPath();
-        if (existsSync9(targetConfigPath)) {
+        if (existsSync10(targetConfigPath)) {
           removeChatGptDesktopServers(resolveAdapterHostServerNames(id), targetConfigPath);
         }
       }
@@ -7644,10 +8590,25 @@ var ConnectorMcpServer = class {
       return jsonText({ ok: false, error: `Software "${softwareId}" is not provisioned yet. Run connector_setup first.` }, true);
     }
     if (name === "connector_sync_host") {
-      const host = typeof rawArgs.host === "string" ? rawArgs.host : "all";
+      const host = typeof rawArgs.host === "string" ? rawArgs.host : "detected";
       const dshProfile = typeof rawArgs.dsh_profile === "string" ? rawArgs.dsh_profile : "desktop";
-      const res = this.syncHosts(host, dshProfile);
+      const customPath = typeof rawArgs.custom_path === "string" ? rawArgs.custom_path : void 0;
+      const rawContainer = typeof rawArgs.container_key === "string" ? rawArgs.container_key : "auto";
+      const containerKey = rawContainer === "servers" || rawContainer === "mcpServers" ? rawContainer : "auto";
+      const res = this.syncHosts(host, { dshProfile, customPath, containerKey });
       return jsonText(res, !res.synced);
+    }
+    if (name === "connector_export_mcp_json") {
+      const format = rawArgs.format === "servers" ? "servers" : "mcpServers";
+      const servers = this.collectSyncableHostServers({ includeDisabled: false });
+      const json = buildStandardMcpJson(servers, format);
+      return jsonText({
+        ok: true,
+        count: servers.length,
+        format,
+        servers: servers.map((s) => s.name),
+        json
+      });
     }
     if (name === "connector_list_adapter_tools" || name === "connector_call_adapter_tool") {
       const softwareId = typeof rawArgs.software_id === "string" ? rawArgs.software_id : void 0;
@@ -7900,9 +8861,14 @@ function renderWizardHtml(editionTitle, editionSlug) {
         <div class="sub">\u7EDF\u4E00\u7BA1\u7406 CAD / CAE / EDA \u8F6F\u4EF6\u8FDE\u63A5\uFF0C\u4E00\u952E\u540C\u6B65\u81F3 ChatGPT \u684C\u9762\u7AEF\u3001WorkBuddy \u684C\u9762\u7AEF\u4E0E DeepSeek Harness\uFF08${editionSlug}\uFF09</div>
       </div>
       <div class="bar" style="margin:0">
-        <button class="btn" onclick="syncHost('chatgpt')">\u540C\u6B65\u81F3 ChatGPT \u684C\u9762\u7AEF</button>
-        <button class="btn" onclick="syncHost('workbuddy')">\u540C\u6B65\u81F3 WorkBuddy</button>
-        <button class="btn" onclick="syncHost('dsh')">\u540C\u6B65\u81F3 DeepSeek Harness</button>
+        <button class="btn" onclick="syncHost('detected')">\u4E00\u952E\u540C\u6B65\u6240\u6709\u5DF2\u68C0\u6D4B Agent</button>
+        <button class="btn" onclick="syncHost('chatgpt')">ChatGPT</button>
+        <button class="btn" onclick="syncHost('workbuddy')">WorkBuddy</button>
+        <button class="btn" onclick="syncHost('antigravity')">Antigravity</button>
+        <button class="btn" onclick="syncHost('cursor')">Cursor</button>
+        <button class="btn" onclick="syncHost('vscode')">VS Code</button>
+        <button class="btn" onclick="syncHost('claude-desktop')">Claude Desktop</button>
+        <button class="btn" onclick="syncHost('dsh')">DeepSeek Harness</button>
         <button class="btn primary" onclick="refresh()">\u5237\u65B0\u72B6\u6001</button>
       </div>
     </header>
@@ -8069,20 +9035,28 @@ async function startWizardServer(config, options = {}) {
         }
         if (req.method === "POST" && url.pathname === "/api/sync-host") {
           const body = await readJson(req);
-          const host2 = typeof body.host === "string" ? body.host : "all";
+          const host2 = typeof body.host === "string" ? body.host : "detected";
           const dshProfile = typeof body.dshProfile === "string" ? body.dshProfile : "desktop";
+          const customPath = typeof body.customPath === "string" ? body.customPath : void 0;
           const registry = provisioner.readRegistry();
-          const allowed = new Set(adaptersForEdition(config.edition).map((a) => a.id));
+          const allowedIds = adaptersForEdition(config.edition).map((a) => a.id);
+          const allowed = new Set(allowedIds);
           const servers = Object.values(registry).filter((r) => allowed.has(r.id)).map((r) => ({ name: r.id, command: r.command, args: r.args, cwd: r.cwd, env: r.env, enabled: true }));
           if (servers.length === 0) {
             sendJson(res, 200, { synced: false, message: "\u8BF7\u5148\u81F3\u5C11\u914D\u7F6E\u4E00\u4E2A\u5DE5\u7A0B\u8F6F\u4EF6\u9002\u914D\u5668\u3002" });
             return;
           }
           const targets = {};
-          if (host2 === "chatgpt" || host2 === "all") targets.chatgpt = syncChatGptDesktopConfig(servers);
-          if (host2 === "workbuddy" || host2 === "all") targets.workbuddy = syncWorkBuddyDesktopConfig(servers);
-          if (host2 === "dsh" || host2 === "all") targets.dsh = syncDshProfileConfig(servers, dshProfile);
-          sendJson(res, 200, { synced: true, count: servers.length, targets });
+          if (host2 === "custom" && customPath) {
+            targets.custom = syncCustomMcpJsonFile(customPath, servers, "auto");
+          } else if (isAgentHostId(host2)) {
+            targets[host2] = syncAgentHost(host2, servers, { dshProfile });
+          } else {
+            const detected = detectAgentHosts(allowedIds, { dshProfile }).filter((h) => h.detected).map((h) => h.id);
+            const list = host2 === "detected" ? detected : detected.length > 0 ? detected : ALL_AGENT_HOSTS.slice(0, 3);
+            for (const h of list) targets[h] = syncAgentHost(h, servers, { dshProfile });
+          }
+          sendJson(res, 200, { synced: Object.keys(targets).length > 0, count: servers.length, targets });
           return;
         }
         sendJson(res, 404, { error: "Not found" });
@@ -8207,10 +9181,13 @@ async function main() {
     return;
   }
   if (command === "sync-host") {
-    const host = args[1] ?? "all";
+    const host = args[1] ?? "detected";
     const profile = readFlag(args, "--profile") ?? "desktop";
+    const customPath = readFlag(args, "--file");
     const registry = provisioner.readRegistry();
-    const servers = Object.values(registry).map((r) => ({
+    const allowedIds = adaptersForEdition(edition).map((a) => a.id);
+    const allowed = new Set(allowedIds);
+    const servers = Object.values(registry).filter((r) => allowed.has(r.id)).map((r) => ({
       name: r.id,
       command: r.command,
       args: r.args,
@@ -8219,9 +9196,15 @@ async function main() {
       enabled: true
     }));
     const out = {};
-    if (host === "chatgpt" || host === "all") out.chatgpt = syncChatGptDesktopConfig(servers);
-    if (host === "workbuddy" || host === "all") out.workbuddy = syncWorkBuddyDesktopConfig(servers);
-    if (host === "dsh" || host === "all") out.dsh = syncDshProfileConfig(servers, profile);
+    if (host === "custom" && customPath) {
+      out.custom = syncCustomMcpJsonFile(customPath, servers, "auto");
+    } else if (isAgentHostId(host)) {
+      out[host] = syncAgentHost(host, servers, { dshProfile: profile });
+    } else {
+      const detected = detectAgentHosts(allowedIds, { dshProfile: profile }).filter((h) => h.detected).map((h) => h.id);
+      const list = detected.length > 0 ? detected : ["chatgpt", "workbuddy", "dsh"];
+      for (const h of list) out[h] = syncAgentHost(h, servers, { dshProfile: profile });
+    }
     console.log(JSON.stringify({ ok: true, count: servers.length, targets: out }, null, 2));
     return;
   }
