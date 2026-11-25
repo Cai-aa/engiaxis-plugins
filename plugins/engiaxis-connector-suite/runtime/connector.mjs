@@ -4235,7 +4235,7 @@ function softwareIconsForEdition(edition) {
 }
 
 // packages/mcp-server/src/mcp-app-ui.ts
-var CONNECTOR_VERSION = "1.1.1";
+var CONNECTOR_VERSION = "1.1.2";
 var MCP_APP_MIME_TYPE = "text/html;profile=mcp-app";
 function mcpAppUrisForEdition(edition) {
   return {
@@ -4787,8 +4787,10 @@ function renderMcpAppHtml(edition, surface) {
     .header-controls {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       padding-top: 3px;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
     }
     .search-box {
       position: relative;
@@ -5546,8 +5548,9 @@ function renderMcpAppHtml(edition, surface) {
     .layout-seg {
       display: inline-flex;
       align-items: center;
-      padding: 2px;
-      border-radius: 9px;
+      height: 36px;
+      padding: 3px;
+      border-radius: 10px;
       background: var(--ea-surface);
       border: 1px solid var(--ea-border);
       flex-shrink: 0;
@@ -5555,16 +5558,19 @@ function renderMcpAppHtml(edition, surface) {
     .layout-seg-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 5px;
+      height: 28px;
       border: 0;
       background: transparent;
       color: var(--ea-muted);
-      font-size: 12px;
+      font: inherit;
+      font-size: 12.5px;
       font-weight: 500;
-      padding: 5px 10px;
+      padding: 0 11px;
       border-radius: 7px;
       cursor: pointer;
-      transition: background 0.14s ease, color 0.14s ease;
+      transition: background 0.14s ease, color 0.14s ease, box-shadow 0.14s ease;
       white-space: nowrap;
     }
     .layout-seg-btn:hover { color: var(--ea-text); }
@@ -5625,6 +5631,13 @@ function renderMcpAppHtml(edition, surface) {
     html[data-theme="dark"] .case-chip.cat-cad { color: #60a5fa; }
     html[data-theme="dark"] .case-chip.cat-cae { color: #818cf8; }
     html[data-theme="dark"] .case-chip.cat-eda { color: #34d399; }
+    .filter-sep {
+      width: 1px;
+      height: 14px;
+      background: var(--ea-divider);
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
     .ready-toggle {
       display: inline-flex;
       align-items: center;
@@ -5632,11 +5645,18 @@ function renderMcpAppHtml(edition, surface) {
       border: 1px solid var(--ea-border);
       background: transparent;
       color: var(--ea-muted);
-      font-size: 12px;
+      font: inherit;
+      font-size: 12.5px;
       font-weight: 500;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 999px;
       cursor: pointer;
+      transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease;
+    }
+    .ready-toggle:hover {
+      color: var(--ea-text);
+      border-color: var(--ea-border-strong);
+      background: var(--ea-row-hover);
     }
     .ready-toggle.active {
       border-color: var(--ea-ok);
@@ -6024,10 +6044,10 @@ function renderMcpAppHtml(edition, surface) {
               </div>
               <p class="page-subtitle" id="casesPageSubtitle">\u7CBE\u9009\u771F\u5B9E\u5DE5\u7A0B\u6848\u4F8B\u4E0E\u590D\u73B0\u63D0\u793A\u8BCD\uFF0C\u6388\u6743\u540E\u4E00\u952E\u590D\u5236\u6216\u53D1\u9001\u5230\u5F53\u524D\u5BF9\u8BDD\u81EA\u52A8\u6267\u884C</p>
             </div>
-            <div class="header-actions">
+            <div class="header-controls">
               <div class="search-box">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <input id="caseSearchInput" type="search" placeholder="\u641C\u7D22\u6848\u4F8B\u3001\u8F6F\u4EF6\u6216\u5173\u952E\u8BCD" autocomplete="off" />
+                <input id="caseSearchInput" class="search-input" type="search" placeholder="\u641C\u7D22\u6848\u4F8B\u3001\u8F6F\u4EF6\u6216\u5173\u952E\u8BCD" autocomplete="off" />
               </div>
               <div class="layout-seg" id="caseLayoutSeg" role="group" aria-label="\u6848\u4F8B\u5E03\u5C40\u5207\u6362">
                 <button type="button" class="layout-seg-btn active" data-case-layout="gallery" id="btnCaseLayoutA">
@@ -7122,8 +7142,9 @@ function renderMcpAppHtml(edition, surface) {
               ['eda', isZh ? 'EDA \u8BBE\u8BA1' : 'EDA'],
             ];
             cats.forEach(function (pair) {
-              pills.push('<button type="button" class="pill ' + (caseCatFilter === pair[0] ? 'active' : '') + '" data-case-cat="' + pair[0] + '">' + esc(pair[1]) + '</button>');
+              pills.push('<button type="button" class="filter-pill ' + (caseCatFilter === pair[0] ? 'active' : '') + '" data-case-cat="' + pair[0] + '">' + esc(pair[1]) + '</button>');
             });
+            pills.push('<span class="filter-sep" aria-hidden="true"></span>');
           }
           pills.push('<button type="button" class="ready-toggle ' + (caseReadyOnly ? 'active' : '') + '" data-case-ready-toggle="1">' + esc(t('caseReadyOnly')) + '</button>');
           pillsEl.innerHTML = pills.join('');
