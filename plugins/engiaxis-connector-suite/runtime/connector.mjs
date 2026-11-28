@@ -9,8 +9,8 @@ var EDITION_SPECS = {
     nameEn: "EngiAxis Connector \u2014 CAD Edition",
     nameZh: "EngiAxis \u5DE5\u7A0B\u8FDE\u63A5\u5668 \xB7 CAD \u7248",
     shortLabel: "CAD",
-    descriptionEn: "Connect SolidWorks, CATIA V5, UG / Siemens NX, EPLAN, and planned CAD tools (Creo, Inventor, AutoCAD, Fusion) to AI desktop clients.",
-    descriptionZh: "\u8986\u76D6 SolidWorks\u3001CATIA V5\u3001UG / Siemens NX\u3001EPLAN \u53CA\u89C4\u5212\u4E2D\u7684 Creo\u3001Inventor\u3001AutoCAD\u3001Fusion \u7B49 8 \u6B3E CAD \u5DE5\u7A0B\u8F6F\u4EF6\u3002",
+    descriptionEn: "Connect SolidWorks, CATIA V5, UG / Siemens NX, Creo Parametric, EPLAN, and planned CAD tools (Inventor, AutoCAD, Fusion) to AI desktop clients.",
+    descriptionZh: "\u8986\u76D6 SolidWorks\u3001CATIA V5\u3001UG / Siemens NX\u3001Creo Parametric\u3001EPLAN \u53CA\u89C4\u5212\u4E2D\u7684 Inventor\u3001AutoCAD\u3001Fusion \u7B49 8 \u6B3E CAD \u5DE5\u7A0B\u8F6F\u4EF6\u3002",
     categories: ["cad"]
   },
   cae: {
@@ -89,6 +89,12 @@ function hyperworksRootFromExecutable(executable) {
 function adamsRootFromExecutable(executable) {
   const dir = dirname(executable);
   return /[\\/]common$/iu.test(dir) ? dirname(dir) : dir;
+}
+function creoMajorVersionFromExecutable(executable) {
+  if (!executable)
+    return void 0;
+  const match = /\bCreo[\s_-]*(\d{1,2})(?:\.\d+)*\b/iu.exec(executable);
+  return match?.[1];
 }
 var SOFTWARE_CATALOG = [
   // ── CAD Edition (8) ───────────────────────────────────────────────────────
@@ -193,15 +199,35 @@ var SOFTWARE_CATALOG = [
     subtitleEn: "Parametric solid and mechanism design",
     subtitleZh: "\u53C2\u6570\u5316\u5B9E\u4F53\u4E0E\u673A\u6784\u8BBE\u8BA1",
     category: "cad",
-    integration: "planned",
+    integration: "source",
     runtime: "python",
     platformWindowsOnly: true,
-    sourceUrl: "https://www.ptc.com/en/products/creo/parametric",
-    prerequisitesEn: "Planned CAD integration. Local Creo Parametric installations are auto-detected; one-click MCP provisioning will be enabled in an upcoming update.",
-    prerequisitesZh: "\u89C4\u5212\u4E2D\u7684 CAD \u9002\u914D\u5668\u3002\u5DF2\u652F\u6301\u81EA\u52A8\u68C0\u6D4B\u672C\u673A Creo Parametric \u5B89\u88C5\uFF0C\u4E00\u952E MCP \u63A5\u5165\u5C06\u5728\u540E\u7EED\u7248\u672C\u4E0A\u7EBF\u3002",
-    capabilities: ["Parametric parts", "Assemblies", "Drawings"],
+    sourceUrl: `${CAD_REPO}/Creo`,
+    bridgePort: 9056,
+    prerequisitesEn: "Licensed Windows PTC Creo Parametric (Creo 7\u201313+) with CREOSON running on loopback HTTP port 9056 (optional native Toolkit providers via --provider).",
+    prerequisitesZh: "\u9700\u5B89\u88C5\u6B63\u7248 Windows PTC Creo Parametric\uFF08Creo 7\u201313+\uFF09\u5E76\u542F\u52A8\u672C\u5730 CREOSON \u670D\u52A1\uFF08\u7AEF\u53E3 9056\uFF09\uFF1B\u53EF\u9009\u914D\u7F6E\u539F\u751F Toolkit \u540E\u7AEF\u3002",
+    capabilities: ["Parametric parts & dimensions", "Assemblies & Family Tables", "Drawings & STEP/PDF export", "CREOSON (177 tools) & Windchill"],
     iconFile: null,
-    buildEnv: () => ({})
+    source: {
+      repo: "CAD-Agent-Hub",
+      localRepoAliases: ["CAD-Agent-HUb"],
+      repoSubpath: "MCP/Creo",
+      bundledDir: "creo"
+    },
+    launch: {
+      kind: "python-module",
+      module: "creo_mcp.server",
+      checkFile: "src/creo_mcp/server.py",
+      pythonPathSubdir: "src"
+    },
+    buildArgs: ({ discoveredExecutable }) => {
+      const major = creoMajorVersionFromExecutable(discoveredExecutable);
+      return major ? ["--creo-version", major] : [];
+    },
+    buildEnv: () => ({
+      PYTHONUTF8: "1",
+      PYTHONUNBUFFERED: "1"
+    })
   },
   {
     id: "inventor",
@@ -743,7 +769,7 @@ var HOST_SERVER_ALIASES = {
   solidworks: ["solidworks", "solidworks-mcp", "solidworks-agent"],
   catia: ["catia", "catia-v5", "catia-mcp", "catia-agent"],
   nx: ["nx", "siemens-nx", "ug-nx", "nx-mcp"],
-  creo: ["creo", "creo-parametric", "creo-mcp"],
+  creo: ["creo", "creo-parametric", "creo-mcp", "creo-agent-mcp"],
   inventor: ["inventor", "autodesk-inventor", "inventor-mcp"],
   autocad: ["autocad", "autodesk-autocad", "autocad-mcp"],
   fusion: ["fusion", "autodesk-fusion", "fusion360", "fusion-360", "fusion-mcp"],
@@ -1483,6 +1509,16 @@ var ENV_DISCOVERY_RULES = {
     rootPatterns: [],
     relativePaths: [win32.join("NXBIN", "ugraf.exe"), win32.join("UGII", "ugraf.exe")]
   },
+  creo: {
+    directKeys: ["CREO_EXE", "CREO_PARAMETRIC_EXE"],
+    rootKeys: ["CREO_ROOT", "PTC_CREO_ROOT", "PRO_DIRECTORY"],
+    rootPatterns: [],
+    relativePaths: [
+      win32.join("Parametric", "bin", "parametric.exe"),
+      win32.join("bin", "parametric.exe"),
+      "parametric.exe"
+    ]
+  },
   eplan: {
     directKeys: ["EPLAN_EXE"],
     rootKeys: [],
@@ -1624,7 +1660,7 @@ function standardWindowsCandidates(id, drives = defaultWindowsDrives()) {
       case "nx":
         return subdirectories(win32.join(programs, "Siemens")).map((root) => win32.join(root, "NXBIN", "ugraf.exe"));
       case "creo":
-        return subdirectories(win32.join(programs, "PTC")).map((root) => win32.join(root, "Parametric", "bin", "parametric.exe"));
+        return [win32.join(programs, "PTC"), win32.join(drive, "PTC")].flatMap(subdirectories).sort((a, b) => b.localeCompare(a, void 0, { numeric: true })).map((root) => win32.join(root, "Parametric", "bin", "parametric.exe"));
       case "inventor":
         return subdirectories(win32.join(programs, "Autodesk")).filter((dir) => /inventor/i.test(dir)).map((root) => win32.join(root, "Bin", "Inventor.exe"));
       case "autocad":
@@ -3346,18 +3382,20 @@ var ConnectorProvisioner = class _ConnectorProvisioner {
     }
     const detected = await detectSoftwareExecutable(id, this.config.executablePaths?.[id]);
     const runtimeConfigPath = spec.requiresBridgeTokenConfig ? ensureAdsBridgeConfig(runtime.runtimeDir, this.config.homeDir) : void 0;
+    const envCtx = {
+      homeDir: this.config.homeDir,
+      sourceDir: resolvedSource.sourceDir,
+      ...detected.installed && isAbsolute2(detected.detail) ? { discoveredExecutable: detected.detail } : {},
+      ...runtimeConfigPath ? { runtimeConfigPath } : {}
+    };
     const env = {
-      ...spec.buildEnv({
-        homeDir: this.config.homeDir,
-        sourceDir: resolvedSource.sourceDir,
-        ...detected.installed && isAbsolute2(detected.detail) ? { discoveredExecutable: detected.detail } : {},
-        ...runtimeConfigPath ? { runtimeConfigPath } : {}
-      }),
+      ...spec.buildEnv(envCtx),
       ...resolvedSource.pythonPath ? { PYTHONPATH: resolvedSource.pythonPath } : {}
     };
+    const extraArgs = spec.buildArgs ? spec.buildArgs(envCtx) : [];
     const launch = {
       command: runtime.command,
-      args: resolvedSource.launchArgs,
+      args: [...resolvedSource.launchArgs, ...extraArgs],
       cwd: resolvedSource.sourceDir,
       env
     };
@@ -4215,7 +4253,7 @@ function softwareIconsForEdition(edition) {
 }
 
 // packages/mcp-server/src/mcp-app-ui.ts
-var CONNECTOR_VERSION = "1.1.3";
+var CONNECTOR_VERSION = "1.1.4";
 var MCP_APP_MIME_TYPE = "text/html;profile=mcp-app";
 function mcpAppUrisForEdition(edition) {
   return {

@@ -1,7 +1,7 @@
 {
   "name": "engiaxis-connector-cad",
-  "version": "1.1.3",
-  "description": "Connect SolidWorks, CATIA V5, UG / Siemens NX, EPLAN, and planned CAD tools (Creo, Inventor, AutoCAD, Fusion) to AI desktop clients.",
+  "version": "1.1.4",
+  "description": "Connect SolidWorks, CATIA V5, UG / Siemens NX, Creo Parametric, EPLAN, and planned CAD tools (Inventor, AutoCAD, Fusion) to AI desktop clients.",
   "author": {
     "name": "EngiAxis"
   },
@@ -11,6 +11,8 @@
     "solidworks",
     "catia",
     "siemens-nx",
+    "creo",
+    "eplan",
     "engineering",
     "mcp"
   ],
@@ -25,7 +27,7 @@
   "interface": {
     "displayName": "EngiAxis CAD Connector",
     "shortDescription": "Connect local CAD tools",
-    "longDescription": "Connect SolidWorks, CATIA V5, UG / Siemens NX, EPLAN, and planned CAD tools (Creo, Inventor, AutoCAD, Fusion) to AI desktop clients.",
+    "longDescription": "Connect SolidWorks, CATIA V5, UG / Siemens NX, Creo Parametric, EPLAN, and planned CAD tools (Inventor, AutoCAD, Fusion) to AI desktop clients.",
     "developerName": "EngiAxis",
     "category": "Engineering",
     "capabilities": [
@@ -38,7 +40,7 @@
     "brandColor": "#0EA5E9",
     "defaultPrompt": [
       "Check my EngiAxis CAD Connector license and detected CAD software.",
-      "Configure SolidWorks, CATIA V5, or Siemens NX using the setup wizard.",
+      "Configure SolidWorks, CATIA V5, Siemens NX, Creo Parametric, or EPLAN using the setup wizard.",
       "Verify my active CAD adapter connection."
     ]
   }
